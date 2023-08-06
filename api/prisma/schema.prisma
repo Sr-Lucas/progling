@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id              String            @id @default(uuid())
+  email           String            @unique
+  name            String?
+  password        String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  StudentProgress StudentProgress[]
+}
+
+model ProgrammingLanguage {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  modules     Module[]
+}
+
+model Module {
+  id                    String              @id @default(uuid())
+  name                  String
+  description           String
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+  ProgrammingLanguage   ProgrammingLanguage @relation(fields: [programmingLanguageId], references: [id])
+  programmingLanguageId String
+  levels                Level[]
+}
+
+model Level {
+  id              String            @id @default(uuid())
+  name            String
+  description     String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Module          Module?           @relation(fields: [moduleId], references: [id])
+  moduleId        String?
+  miniGames       MiniGame[]
+  StudentProgress StudentProgress[]
+}
+
+model MiniGame {
+  id                       String                  @id @default(uuid())
+  type                     String
+  createdAt                DateTime                @default(now())
+  updatedAt                DateTime                @updatedAt
+  Level                    Level                   @relation(fields: [levelId], references: [id])
+  TrueFalseMiniGame        TrueFalseMiniGame?      @relation(fields: [trueFalseMiniGameId], references: [id])
+  CodeCompletionMiniGame   CodeCompletionMiniGame? @relation(fields: [codeCompletionMiniGameId], references: [id])
+  CodeOrderingMiniGame     CodeOrderingMiniGame?   @relation(fields: [codeOrderingMiniGameId], references: [id])
+  levelId                  String
+  trueFalseMiniGameId      String?
+  codeCompletionMiniGameId String?
+  codeOrderingMiniGameId   String?
+  StudentProgress          StudentProgress[]
+}
+
+model TrueFalseMiniGame {
+  id            String     @id @default(uuid())
+  question      String
+  correctAnswer Boolean
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  MiniGame      MiniGame[]
+}
+
+model CodeCompletionMiniGame {
+  id        String                         @id @default(uuid())
+  code      String
+  options   CodeCompletionMiniGameOption[]
+  createdAt DateTime                       @default(now())
+  updatedAt DateTime                       @updatedAt
+  MiniGame  MiniGame[]
+}
+
+model CodeOrderingMiniGame {
+  id        String                       @id @default(uuid())
+  options   CodeOrderingMiniGameOption[]
+  createdAt DateTime                     @default(now())
+  updatedAt DateTime                     @updatedAt
+  MiniGame  MiniGame[]
+}
+
+model CodeCompletionMiniGameOption {
+  id                       String                 @id @default(uuid())
+  content                  String
+  isCorrect                Boolean
+  createdAt                DateTime               @default(now())
+  updatedAt                DateTime               @updatedAt
+  CodeCompletionMiniGame   CodeCompletionMiniGame @relation(fields: [codeCompletionMiniGameId], references: [id])
+  codeCompletionMiniGameId String
+}
+
+model CodeOrderingMiniGameOption {
+  id                     String               @id @default(uuid())
+  content                String
+  order                  Int
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+  CodeOrderingMiniGame   CodeOrderingMiniGame @relation(fields: [codeOrderingMiniGameId], references: [id])
+  codeOrderingMiniGameId String
+}
+
+model StudentProgress {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Student     Student?  @relation(fields: [studentId], references: [id])
+  studentId   String?
+  Level       Level?    @relation(fields: [levelId], references: [id])
+  levelId     String?
+  MiniGames   MiniGame? @relation(fields: [miniGamesId], references: [id])
+  miniGamesId String?
+}

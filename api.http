@@ -1,0 +1,19 @@
+GET http://localhost:3000/
+
+###
+GET http://localhost:3000/programming-languages
+
+###
+GET http://localhost:3000/programming-languages/7506837e-3f60-4b11-99a0-98f131854999
+
+###
+GET http://localhost:3000/modules
+
+###
+GET http://localhost:3000/modules/1
+
+###
+GET http://localhost:3000/programming-languages/7506837e-3f60-4b11-99a0-98f131854999/modules
+
+###
+GET http://localhost:3000/levels/1

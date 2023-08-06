@@ -1,0 +1,31 @@
+import { MiniGame, MiniGameEnum } from './minigame.entity';
+
+export class TrueFalseMiniGame extends MiniGame {
+  constructor(
+    private _question: string,
+    private _correctAnswer: boolean,
+    id?: string,
+    createdAt?: Date,
+    updatedAt?: Date,
+  ) {
+    super(MiniGameEnum.TRUE_FALSE, id, createdAt, updatedAt);
+  }
+
+  get question(): string {
+    return this._question;
+  }
+
+  get correctAnswer(): boolean {
+    return this._correctAnswer;
+  }
+
+  toJSON(): any {
+    return {
+      id: this.id,
+      question: this.question,
+      correctAnswer: this.correctAnswer,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
+  }
+}

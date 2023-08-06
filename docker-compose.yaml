@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    image: lucassantos/api:latest
+    container_name: progling-api
+    tty: true
+    networks:
+      - progling-net
+    volumes:
+      - ./api:/usr/src/app
+    depends_on:
+      - db
+  
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/.docker/database:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=proglingdb
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_USER=root
+    networks: 
+      - progling-net
+  
+  nginx:
+    build: 
+      context: nginx
+    image: lucassantos/nginx
+    container_name: nginx
+    tty: true
+    networks:
+      - progling-net
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 3000:80
+    depends_on:
+      - api
+
+networks:
+  progling-net:
+    driver: bridge
