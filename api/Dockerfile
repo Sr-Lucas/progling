@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y wget \
 
 COPY tsconfig*.json ./
 COPY package*.json ./
+COPY .env ./
+COPY init.sh ./
 
 RUN npm install -g pnpm
 

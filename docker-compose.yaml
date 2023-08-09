@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     image: lucassantos/api:latest
     container_name: progling-api
+    # entrypoint: init.sh
     tty: true
     networks:
       - progling-net
@@ -16,7 +17,7 @@ services:
       - db
   
   db:
-    image: mysql:5.7
+    image: mysql
     command: --innodb-use-native-aio=0
     container_name: db
     restart: always
