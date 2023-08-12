@@ -12,6 +12,7 @@ export default function TabRoutesLayout() {
         name="index"
         options={{
           title: 'Início',
+          tabBarStyle: {},
           tabBarIcon: (props) => {
             return (
               <MaterialIcons

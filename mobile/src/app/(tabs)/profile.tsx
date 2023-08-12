@@ -1,5 +1,5 @@
 import { Text, View, StatusBar, StyleSheet } from 'react-native';
-import Button from '@/components/Button';
+import Button from '@/components/shared/Button';
 
 export default function Profile() {
   return (
