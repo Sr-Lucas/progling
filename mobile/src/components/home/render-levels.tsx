@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 import { Level } from './level';
 import { Module } from './module';
+import { Link, useNavigation } from 'expo-router';
 
 type Props = {
   levels: {
@@ -11,6 +12,8 @@ type Props = {
 };
 
 export function RenderLevels({ levels }: Props) {
+  const navigation = useNavigation();
+
   const renderLevels = () => {
     const moduleH = 60;
     const firstModuleMT = moduleH + 100;
@@ -56,11 +59,13 @@ export function RenderLevels({ levels }: Props) {
             marginTop: mt,
           }}
         >
-          <Level
-            isCurrent={e.state === 'doing'}
-            isDone={e.state === 'done'}
-            showLine={!isLastElement}
-          />
+          <Link href={'/levels/17'}>
+            <Level
+              isCurrent={e.state === 'doing'}
+              isDone={e.state === 'done'}
+              showLine={!isLastElement}
+            />
+          </Link>
         </View>
       );
     });

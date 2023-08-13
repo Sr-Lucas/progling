@@ -1,4 +1,4 @@
-import { Slot } from 'expo-router';
+import { Slot, Stack } from 'expo-router';
 import '../../global.css';
 import { useFonts } from 'expo-font';
 import AppBar from '@/components/shared/AppBar';
@@ -16,10 +16,5 @@ export default function () {
 
   if (!fontsLoaded) return <></>;
 
-  return (
-    <>
-      <AppBar />
-      <Slot />
-    </>
-  );
+  return <Slot />;
 }
