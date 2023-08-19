@@ -15,7 +15,11 @@ export class ModuleRepository implements IModuleRepository {
       },
       include: {
         levels: true,
-        ProgrammingLanguage: true,
+        ProgrammingLanguage: {
+          include: {
+            image: true,
+          },
+        },
       },
     });
 
@@ -26,7 +30,11 @@ export class ModuleRepository implements IModuleRepository {
     const modules = await this.prisma.module.findMany({
       include: {
         levels: true,
-        ProgrammingLanguage: true,
+        ProgrammingLanguage: {
+          include: {
+            image: true,
+          },
+        },
       },
     });
 
@@ -40,7 +48,11 @@ export class ModuleRepository implements IModuleRepository {
       },
       include: {
         levels: true,
-        ProgrammingLanguage: true,
+        ProgrammingLanguage: {
+          include: {
+            image: true,
+          },
+        },
       },
     });
 

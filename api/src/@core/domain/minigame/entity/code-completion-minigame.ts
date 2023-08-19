@@ -1,4 +1,3 @@
-import { Level } from '@domain/level/entity/level.entity';
 import { MiniGame, MiniGameEnum } from './minigame.entity';
 import { CodeCompletionMiniGameOption } from '../object-value/code-completion-minigame-option';
 

@@ -1,6 +1,7 @@
 import { Tabs } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
 import AppBar from '@/components/shared/AppBar';
+import { View } from 'react-native';
 
 export default function TabRoutesLayout() {
   return (
@@ -9,6 +10,8 @@ export default function TabRoutesLayout() {
       <Tabs
         screenOptions={{
           headerShown: false,
+          tabBarActiveTintColor: 'black',
+          tabBarInactiveTintColor: 'gray',
         }}
       >
         <Tabs.Screen
@@ -21,7 +24,7 @@ export default function TabRoutesLayout() {
                 <MaterialIcons
                   name="home"
                   size={props.size}
-                  color={props.focused ? 'black' : props.color}
+                  color={props.color}
                 />
               );
             },
@@ -36,7 +39,7 @@ export default function TabRoutesLayout() {
                 <MaterialIcons
                   name="person"
                   size={props.size}
-                  color={props.focused ? 'black' : props.color}
+                  color={props.color}
                 />
               );
             },

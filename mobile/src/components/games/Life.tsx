@@ -1,5 +1,5 @@
+import { Colors } from '@/core/constants/colors';
 import Svg, { Path } from 'react-native-svg';
-import { Colors } from '@/core/colors';
 
 type Props = {
   hearts: number;

@@ -1,9 +1,11 @@
 import { Entity } from '@domain/@shared/entity/entity.abstract';
+import { Image } from '@domain/image/entity/image.entity';
 
 export class ProgrammingLanguage extends Entity {
   constructor(
     private _name: string,
     private _description: string,
+    private _image: Image,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -27,11 +29,16 @@ export class ProgrammingLanguage extends Entity {
     this._description = description;
   }
 
+  get imageUrl(): string {
+    return this._image.url;
+  }
+
   toJSON(): any {
     return {
       id: this.id,
       name: this.name,
       description: this.description,
+      imageUrl: this.imageUrl,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };

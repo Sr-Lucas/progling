@@ -1,0 +1,3 @@
+export const Envs = {
+  BASE_URL: process.env.EXPO_PUBLIC_BASE_URL,
+};

@@ -1,10 +1,10 @@
 import { Text } from '@/components/shared/Text';
-import { Images } from '@/core/images';
 import { clsx } from 'clsx';
 import { Link, useGlobalSearchParams, router } from 'expo-router';
 import React from 'react';
 import { View, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { Images } from '@/core/constants/images';
 
 export default function LevelView() {
   const { id } = useGlobalSearchParams();

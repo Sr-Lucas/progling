@@ -1,4 +1,14 @@
 -- CreateTable
+CREATE TABLE `Image` (
+    `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Student` (
     `id` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
@@ -18,6 +28,7 @@ CREATE TABLE `ProgrammingLanguage` (
     `description` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `imageId` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -125,6 +136,9 @@ CREATE TABLE `StudentProgress` (
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `ProgrammingLanguage` ADD CONSTRAINT `ProgrammingLanguage_imageId_fkey` FOREIGN KEY (`imageId`) REFERENCES `Image`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Module` ADD CONSTRAINT `Module_programmingLanguageId_fkey` FOREIGN KEY (`programmingLanguageId`) REFERENCES `ProgrammingLanguage`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

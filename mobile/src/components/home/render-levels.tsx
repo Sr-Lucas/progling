@@ -1,71 +1,54 @@
 import { View } from 'react-native';
 import { Level } from './level';
-import { Module } from './module';
 import { Link, useNavigation } from 'expo-router';
+import { Module } from '@/core/types/module.types';
+import { Module as ModuleC } from './module';
 
 type Props = {
-  levels: {
-    isModule: boolean;
-    state: string;
-    title: string;
-  }[];
+  modules: Module[];
 };
 
-export function RenderLevels({ levels }: Props) {
-  const navigation = useNavigation();
-
+export function RenderLevels({ modules }: Props) {
   const renderLevels = () => {
+    const firstModuleMT = 180;
+
     const moduleH = 60;
-    const firstModuleMT = moduleH + 100;
+    const moduleMT = moduleH + 6;
     const levelH = 30;
     const levelMT = levelH + 6;
-    const moduleMT = moduleH + 18;
 
-    return levels.map((e, index) => {
-      let mt = 0;
+    return modules.map((module, index) => {
+      const levels = module.levels.map((level, index) => {
+        const isLast = index === module.levels.length - 1;
 
-      if (index === 0 && e.isModule) {
-        mt = firstModuleMT;
-      } else if (e.isModule) {
-        mt = moduleMT;
-      } else if (levels[index - 1].isModule) {
-        mt = levelH;
-      } else {
-        mt = levelMT;
-      }
-
-      const isLastElement = index === levels.length - 1;
-
-      if (e.isModule) {
         return (
           <View
             key={index}
             className="flex items-center"
             style={{
-              marginTop: mt,
-              marginBottom: 40,
+              marginTop: levelMT,
             }}
           >
-            <Module status={e.state as any} showLine={!isLastElement} />
+            <Link href={`/levels/${level.id}`}>
+              <Level isCurrent={false} isDone={false} showLine={!isLast} />
+            </Link>
           </View>
         );
-      }
+      });
+
+      const moduleHasLevels = module.levels.length > 0;
 
       return (
         <View
           key={index}
           className="flex items-center"
           style={{
-            marginTop: mt,
+            marginTop: index === 0 ? firstModuleMT : moduleMT,
           }}
         >
-          <Link href={'/levels/17'}>
-            <Level
-              isCurrent={e.state === 'doing'}
-              isDone={e.state === 'done'}
-              showLine={!isLastElement}
-            />
-          </Link>
+          <ModuleC status={'blocked'} showLine={moduleHasLevels} />
+
+          {levels}
         </View>
       );
     });

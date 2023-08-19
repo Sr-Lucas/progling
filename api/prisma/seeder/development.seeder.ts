@@ -9,10 +9,21 @@ import {
   PrismaClient,
   ProgrammingLanguage,
   TrueFalseMiniGame,
+  Image,
 } from '@prisma/client';
 
 export class SeedDevelopment {
   constructor(private readonly prisma: PrismaClient) {}
+
+  private _images: Image[] = [
+    {
+      id: '1',
+      name: 'c1bed7c2-8ba9-4b57-976d-a868c683d6a6.png',
+      storeType: 'local',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ];
 
   private _programmingLanguages: ProgrammingLanguage[] = [
     {
@@ -23,13 +34,13 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       // generate a uuid
       id: '7506837e-3f60-4b11-99a0-98f131854999',
-      // imageUrl: 'https://cdn.auth0.com/blog/es6rundown/logo.png',
+      imageId: this._images[0].id,
     },
     {
       name: 'TypeScript',
       description:
         'TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.',
-      // imageUrl: 'https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png',
+      imageId: this._images[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
       id: '0df520f7-6124-4d39-ae65-38f711e2a91f',
@@ -38,7 +49,7 @@ export class SeedDevelopment {
       name: 'Python',
       description:
         'Python is a interpreted high-level programming language for general-purpose programming.',
-      // imageUrl: 'https://www.python.org/static/community_logos/python-logo-master-v3-TM.png',
+      imageId: this._images[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
       id: 'e9a47ab3-5588-4c21-ad3e-aeff0e6fb6f3',
@@ -47,7 +58,7 @@ export class SeedDevelopment {
       name: 'Java',
       description:
         'Java is a class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.',
-      // imageUrl: 'https://www.oracle.com/a/ocom/img/cb71-java-logo.png',
+      imageId: this._images[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
       id: '701cdf3a-34d9-4c85-a649-5dc7af9afc72',
@@ -56,7 +67,7 @@ export class SeedDevelopment {
       name: 'C#',
       description:
         'C# is a general-purpose, multi-paradigm programming language encompassing static typing, strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented, and component-oriented programming disciplines.',
-      // imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/C_Sharp_wordmark.svg/1200px-C_Sharp_wordmark.svg.png',
+      imageId: this._images[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
       id: 'e8d2a075-fd08-44a4-a5c8-0144c72aaf37',
@@ -65,7 +76,7 @@ export class SeedDevelopment {
       name: 'PHP',
       description:
         'PHP is a general-purpose scripting language geared towards web development.',
-      // imageUrl: 'https://www.php.net/images/logos/new-php-logo.svg',
+      imageId: this._images[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
       id: '02881c9b-cae1-4066-9551-885c97f68623',
@@ -74,7 +85,7 @@ export class SeedDevelopment {
       name: 'Go',
       description:
         'Go is a statically typed, compiled programming language designed at Google by Robert Griesemer, Rob Pike, and Ken Thompson.',
-      // imageUrl: 'https://golang.org/lib/godoc/images/go-logo-blue.svg',
+      imageId: this._images[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
       id: '19525d04-9be3-470e-acc3-63d24094f4f8',
@@ -83,7 +94,7 @@ export class SeedDevelopment {
       name: 'Ruby',
       description:
         'Ruby is an interpreted, high-level, general-purpose programming language.',
-      // imageUrl: 'https://www.ruby-lang.org/images/header-ruby-logo.png',
+      imageId: this._images[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
       id: 'f9f0f115-92e9-42ae-9522-594eeaf705d6',
@@ -92,7 +103,7 @@ export class SeedDevelopment {
       name: 'Rust',
       description:
         'Rust is a multi-paradigm, compiled programming language designed for performance and safety, especially safe concurrency.',
-      // imageUrl: 'https://www.rust-lang.org/logos/rust-logo-512x512.png',
+      imageId: this._images[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
       id: '2d8c9b5d-d0c0-417a-98c2-be432548ce92',
@@ -336,6 +347,12 @@ export class SeedDevelopment {
 
   async execute(): Promise<void> {
     console.log('Seeding database... [DEV]');
+
+    // CREATE images
+    await this.prisma.image.createMany({
+      data: this._images,
+      skipDuplicates: true,
+    });
 
     // CREATE programmingLanguages
     await this.prisma.programmingLanguage.createMany({

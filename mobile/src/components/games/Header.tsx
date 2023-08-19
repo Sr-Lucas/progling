@@ -1,4 +1,4 @@
-import { Images } from '@/core/images';
+import { Images } from '@/core/constants/images';
 import { View, Image } from 'react-native';
 import { Life } from './Life';
 

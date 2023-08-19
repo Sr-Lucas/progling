@@ -1,8 +1,16 @@
+import { ImageFactory } from '@domain/image/factory/image.factory';
 import { ProgrammingLanguage } from '../entity/programming-language.entity';
 
 type ProgrammingLanguageType = {
   id: string;
   name: string;
+  image: {
+    id: string;
+    name: string;
+    storeType: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
   description: string;
   createdAt: Date;
   updatedAt: Date;
@@ -17,6 +25,7 @@ export class ProgrammingLanguageFactory {
     return new ProgrammingLanguage(
       programmingLanguage.name,
       programmingLanguage.description,
+      ImageFactory.convertOne(programmingLanguage.image)!,
       programmingLanguage.id,
       programmingLanguage.createdAt,
       programmingLanguage.updatedAt,

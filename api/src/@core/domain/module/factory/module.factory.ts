@@ -1,6 +1,7 @@
 import { Level } from '@domain/level/entity/level.entity';
 import { ProgrammingLanguage } from '@domain/programming-language/entity/programming-language.entity';
 import { Module } from '../entity/module.entity';
+import { ImageFactory } from '@domain/image/factory/image.factory';
 
 type PrismaModuleType = {
   id: string;
@@ -18,6 +19,13 @@ type PrismaModuleType = {
   ProgrammingLanguage: {
     id: string;
     name: string;
+    image: {
+      id: string;
+      name: string;
+      storeType: string;
+      createdAt: Date;
+      updatedAt: Date;
+    };
     description: string;
     createdAt: Date;
     updatedAt: Date;
@@ -45,6 +53,7 @@ export class ModuleFactory {
     const programmingLanguage = new ProgrammingLanguage(
       module.ProgrammingLanguage.name,
       module.ProgrammingLanguage.description,
+      ImageFactory.convertOne(module.ProgrammingLanguage.image)!,
       module.ProgrammingLanguage.id,
       module.ProgrammingLanguage.createdAt,
       module.ProgrammingLanguage.updatedAt,

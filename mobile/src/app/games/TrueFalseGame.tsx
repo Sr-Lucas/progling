@@ -1,18 +1,9 @@
 import { GameHeader } from '@/components/games/Header';
-import { Life } from '@/components/games/Life';
 import { Text } from '@/components/shared/Text';
-import { Colors } from '@/core/colors';
-import { Images } from '@/core/images';
-import {
-  SafeAreaView,
-  Image,
-  View,
-  Touchable,
-  TouchableOpacity,
-} from 'react-native';
-import Svg, { Path, Defs } from 'react-native-svg';
+
+import { SafeAreaView, Image, View, TouchableOpacity } from 'react-native';
 import colors from 'tailwindcss/colors';
-import { Feather } from '@expo/vector-icons';
+import { Images } from '@/core/constants/images';
 
 export default function TrueFalseGame() {
   return (

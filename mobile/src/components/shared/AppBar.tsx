@@ -1,6 +1,6 @@
 import { View, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Images } from '@/core/images';
+import { Images } from '@/core/constants/images';
 import { Text } from '@/components/shared/Text';
 
 export default function AppBar() {

@@ -11,6 +11,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Image {
+  id                  String                @id @default(uuid())
+  name                String
+  storeType           String                @default("local")
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  ProgrammingLanguage ProgrammingLanguage[]
+}
+
 model Student {
   id              String            @id @default(uuid())
   email           String            @unique
@@ -25,9 +34,11 @@ model ProgrammingLanguage {
   id          String   @id @default(uuid())
   name        String
   description String
+  image       Image    @relation(fields: [imageId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   modules     Module[]
+  imageId     String
 }
 
 model Module {

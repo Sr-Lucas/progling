@@ -1,4 +1,4 @@
-import { Images } from '@/core/images';
+import { Images } from '@/core/constants/images';
 import { Image } from 'react-native';
 import clsx from 'clsx';
 import { View } from 'react-native';

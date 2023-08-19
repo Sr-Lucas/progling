@@ -10,7 +10,11 @@ export class ProgrammingLanguageRepository
 
   async findAll(): Promise<ProgrammingLanguage[]> {
     const programmingLanguages = await this.prisma.programmingLanguage.findMany(
-      {},
+      {
+        include: {
+          image: true,
+        },
+      },
     );
 
     return ProgrammingLanguageFactory.convertMany(programmingLanguages);
@@ -21,6 +25,9 @@ export class ProgrammingLanguageRepository
       await this.prisma.programmingLanguage.findUnique({
         where: {
           id,
+        },
+        include: {
+          image: true,
         },
       });
 
