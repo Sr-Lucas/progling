@@ -39,14 +39,12 @@ export function RenderLevels({ modules }: Props) {
               marginTop: levelMT,
             }}
           >
-            {/* <Link href={`/levels/${level.id}`}> */}
             <LevelC
               isCurrent={false}
               isDone={false}
               showLine={!isLast}
               onTap={() => navigateToLevel(level, module)}
             />
-            {/* </Link> */}
           </View>
         );
       });
