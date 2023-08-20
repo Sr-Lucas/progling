@@ -1,13 +1,21 @@
 import { Text } from '@/components/shared/Text';
 import { clsx } from 'clsx';
 import { Link, useGlobalSearchParams, router } from 'expo-router';
-import React from 'react';
-import { View, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { Image } from 'expo-image';
+import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Images } from '@/core/constants/images';
+import { useLevelStore } from '@/core/store/levels/level.store';
 
 export default function LevelView() {
+  const { level, module, getLevelById } = useLevelStore();
+
   const { id } = useGlobalSearchParams();
+
+  useEffect(() => {
+    getLevelById(id as string);
+  }, []);
 
   return (
     <SafeAreaView className="flex items-center h-full">
@@ -16,22 +24,15 @@ export default function LevelView() {
         <TouchableOpacity className="mr-6" onPressOut={() => router.back()}>
           <Feather name="arrow-left" size={18} />
         </TouchableOpacity>
-        <Text classNameP="text-4xl mr-8">Javascript</Text>
+        <Text classNameP="text-4xl mr-8 text-center">{module.name}</Text>
       </View>
       <View className="h-14" />
       <Image
-        source={Images.js}
-        width={170}
-        height={170}
+        source={module.programmingLanguage.imageUrl}
         className="w-[170px] h-[170px]"
       />
       <Text classNameP="text-md text-justify px-5 my-auto pb-16">
-        JavaScript permite criar páginas web interativas, desenvolver
-        aplicativos tanto para web quanto para dispositivos móveis e construir
-        APIs para facilitar a comunicação entre diferentes sistemas e serviços.
-        {'\n'}
-        {'\n'}É uma linguagem versátil e amplamente utilizada no desenvolvimento
-        de soluções digitais modernas.
+        {level.description}
       </Text>
       <Link href="/games/TrueFalseGame" asChild>
         <TouchableOpacity

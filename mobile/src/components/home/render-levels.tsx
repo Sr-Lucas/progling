@@ -1,14 +1,24 @@
 import { View } from 'react-native';
-import { Level } from './level';
-import { Link, useNavigation } from 'expo-router';
+import { Level as LevelC } from './level';
+import { Link } from 'expo-router';
+import { router } from 'expo-router';
 import { Module } from '@/core/types/module.types';
 import { Module as ModuleC } from './module';
+import { useLevelStore } from '@/core/store/levels/level.store';
+import { Level } from '@/core/types/level.types';
 
 type Props = {
   modules: Module[];
 };
 
 export function RenderLevels({ modules }: Props) {
+  const { setModule } = useLevelStore();
+
+  const navigateToLevel = (level: Level, module: Module) => {
+    setModule(module);
+    router.push(`/levels/${level.id}`);
+  };
+
   const renderLevels = () => {
     const firstModuleMT = 180;
 
@@ -29,9 +39,14 @@ export function RenderLevels({ modules }: Props) {
               marginTop: levelMT,
             }}
           >
-            <Link href={`/levels/${level.id}`}>
-              <Level isCurrent={false} isDone={false} showLine={!isLast} />
-            </Link>
+            {/* <Link href={`/levels/${level.id}`}> */}
+            <LevelC
+              isCurrent={false}
+              isDone={false}
+              showLine={!isLast}
+              onTap={() => navigateToLevel(level, module)}
+            />
+            {/* </Link> */}
           </View>
         );
       });

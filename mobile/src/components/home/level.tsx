@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { clsx } from 'clsx';
 import Svg, { Line } from 'react-native-svg';
+import { useLocalSearchParams } from 'expo-router';
 
 type Props = {
   onTap?: () => void;

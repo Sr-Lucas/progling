@@ -25,6 +25,7 @@ export class CodeOrderingMiniGame extends MiniGame {
     return {
       id: this.id,
       options: this.options.map((option) => option.toJSON()),
+      type: MiniGameEnum.CODE_ORDERING,
       correctOrder: this.correctOrder,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,

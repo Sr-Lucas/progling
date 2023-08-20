@@ -38,7 +38,7 @@ export class Level extends Entity {
       id: this.id,
       name: this.name,
       description: this.description,
-      miniGames: this.miniGames,
+      miniGames: this.miniGames.map((miniGame) => miniGame.toJSON()),
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };
