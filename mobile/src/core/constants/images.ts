@@ -4,4 +4,4 @@ export const Images = {
   js: require('@/../assets/images/pngs/js.png'),
   check: require('@/../assets/images/pngs/check-small.png'),
   cross: require('@/../assets/images/pngs/cross-small.png'),
-}
+};
