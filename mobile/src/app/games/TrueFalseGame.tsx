@@ -116,6 +116,7 @@ export default function TrueFalseGame() {
 
           <TouchableOpacity
             className="rounded-full w-full h-9 flex items-center justify-center"
+            disabled={userAnswer === null}
             style={{
               backgroundColor: isSubmitted
                 ? currentGame?.correctAnswer === userAnswer

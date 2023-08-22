@@ -1,7 +1,6 @@
-import { Slot, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 import '../../global.css';
 import { useFonts } from 'expo-font';
-import AppBar from '@/components/shared/AppBar';
 
 export default function () {
   const [fontsLoaded] = useFonts({
@@ -16,5 +15,11 @@ export default function () {
 
   if (!fontsLoaded) return <></>;
 
-  return <Slot />;
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+      }}
+    />
+  );
 }
