@@ -41,7 +41,7 @@ export class Module extends Entity {
 
   get moduleProgress(): number {
     return this.levels.reduce((acc, level) => {
-      if (level.getStudentLevelProgress() > 0) {
+      if ((level.miniGames?.length ?? 0) > 0) {
         return acc + 1;
       }
 
@@ -56,7 +56,7 @@ export class Module extends Entity {
       doneLevels: this.moduleProgress,
       numberOfLevels: this.levels.length,
       description: this.description,
-      levels: this.levels,
+      levels: this.levels.map((level) => level.toJSON()),
       programmingLanguage: this.programmingLanguage,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,

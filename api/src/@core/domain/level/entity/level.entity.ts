@@ -1,10 +1,7 @@
 import { Entity } from '@domain/@shared/entity/entity.abstract';
 import { MiniGame } from '@domain/minigame/entity/minigame.entity';
-import { StudentLevelProgress } from '@domain/student/entity/student-level-progress.entity';
 
 export class Level extends Entity {
-  private _studentLevelProgress?: StudentLevelProgress;
-
   constructor(
     private _name: string,
     private _description: string,
@@ -36,12 +33,14 @@ export class Level extends Entity {
     return this._miniGames ?? [];
   }
 
-  set studentLevelProgress(studentLevelProgress: StudentLevelProgress) {
-    this._studentLevelProgress = studentLevelProgress;
-  }
+  calculateLevelProgress(miniGames: MiniGame[]): number {
+    return miniGames.reduce((acc, miniGame) => {
+      if (miniGame.studentAnswers) {
+        return acc + 1;
+      }
 
-  getStudentLevelProgress(): number {
-    return this._studentLevelProgress?.getLevelProgress(this.miniGames) ?? 0;
+      return acc;
+    }, 0);
   }
 
   toJSON(): any {
@@ -57,7 +56,7 @@ export class Level extends Entity {
       id: this.id,
       name: this.name,
       description: this.description,
-      levelProgress: this.getStudentLevelProgress(),
+      levelProgress: this.calculateLevelProgress(this._miniGames ?? []) ?? 0,
       miniGames: miniGames,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,

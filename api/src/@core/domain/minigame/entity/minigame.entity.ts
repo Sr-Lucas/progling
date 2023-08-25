@@ -2,7 +2,7 @@ import { Entity } from '@domain/@shared/entity/entity.abstract';
 import { CodeOrderingMiniGame } from './code-ordering-minigame';
 import { CodeCompletionMiniGame } from './code-completion-minigame';
 import { TrueFalseMiniGame } from './true-false-minigame';
-import { StudentProgress } from '@domain/student/entity/student-progress.entity';
+import { StudentAnswer } from '@domain/student/entity/student-progress.entity';
 
 export enum MiniGameEnum {
   TRUE_FALSE = 'TRUE_FALSE',
@@ -15,7 +15,7 @@ export class MiniGame extends Entity {
   private _codeOrdering: CodeOrderingMiniGame;
   private _trueFalse: TrueFalseMiniGame;
 
-  private _studentProgress?: StudentProgress;
+  private _studentAnswers?: StudentAnswer[] = [];
 
   constructor(
     private _type: MiniGameEnum,
@@ -54,12 +54,12 @@ export class MiniGame extends Entity {
     return this._codeOrdering;
   }
 
-  set studentProgress(studentProgress: StudentProgress) {
-    this._studentProgress = studentProgress;
+  set studentAnswers(studentProgress: StudentAnswer[]) {
+    this._studentAnswers = studentProgress;
   }
 
-  get studentProgress(): StudentProgress | undefined {
-    return this._studentProgress;
+  get studentAnswers(): StudentAnswer[] | undefined {
+    return this._studentAnswers;
   }
 
   get hasGame(): boolean {

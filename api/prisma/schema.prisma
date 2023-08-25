@@ -21,14 +21,13 @@ model Image {
 }
 
 model Student {
-  id              String                 @id @default(uuid())
-  email           String                 @unique
-  name            String?
-  password        String
-  createdAt       DateTime               @default(now())
-  updatedAt       DateTime               @updatedAt
-  gameAnswers     StudentAnswer[]
-  levelProgresses StudentLevelProgress[]
+  id          String          @id @default(uuid())
+  email       String          @unique
+  name        String?
+  password    String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  gameAnswers StudentAnswer[]
 }
 
 model ProgrammingLanguage {
@@ -54,39 +53,30 @@ model Module {
   levels                Level[]
 }
 
-model StudentLevelProgress {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  student   Student  @relation(fields: [studentId], references: [id])
-  level     Level    @relation(fields: [levelId], references: [id])
-  studentId String
-  levelId   String
-}
-
 model Level {
-  id                   String                 @id @default(uuid())
-  name                 String
-  description          String
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  orderNumber          Int                    @default(0)
-  module               Module                 @relation(fields: [moduleId], references: [id])
-  miniGames            MiniGame[]
-  moduleId             String
-  studentLevelProgress StudentLevelProgress[]
+  id          String     @id @default(uuid())
+  name        String
+  description String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  orderNumber Int        @default(0)
+  module      Module     @relation(fields: [moduleId], references: [id])
+  miniGames   MiniGame[]
+  moduleId    String
 }
 
 model StudentAnswer {
-  id                             String                          @id @default(uuid())
-  createdAt                      DateTime                        @default(now())
-  updatedAt                      DateTime                        @updatedAt
-  correct                        Boolean
-  studentId                      String
-  student                        Student                         @relation(fields: [studentId], references: [id])
-  miniGame                       MiniGame                        @relation(fields: [miniGameId], references: [id])
-  miniGameId                     String
-  trueFalseMiniGameStudentAnswer TrueFalseMiniGameStudentAnswer?
+  id                                  String                               @id @default(uuid())
+  createdAt                           DateTime                             @default(now())
+  updatedAt                           DateTime                             @updatedAt
+  correct                             Boolean
+  studentId                           String
+  student                             Student                              @relation(fields: [studentId], references: [id])
+  miniGame                            MiniGame                             @relation(fields: [miniGameId], references: [id])
+  miniGameId                          String
+  trueFalseMiniGameStudentAnswer      TrueFalseMiniGameStudentAnswer?
+  codeCompletionMiniGameStudentAnswer CodeCompletionMiniGameStudentAnswer?
+  codeOrderingMiniGameStudentAnswer   CodeOrderingMiniGameStudentAnswer?
 }
 
 model TrueFalseMiniGameStudentAnswer {
@@ -96,6 +86,34 @@ model TrueFalseMiniGameStudentAnswer {
   studentAnswer   StudentAnswer @relation(fields: [studentAnswerId], references: [id])
   studentAnswerId String        @unique
   answer          Boolean
+}
+
+model CodeCompletionMiniGameStudentAnswer {
+  id              String        @id @default(uuid())
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  studentAnswer   StudentAnswer @relation(fields: [studentAnswerId], references: [id])
+  studentAnswerId String        @unique
+  answer          String
+}
+
+model CodeOrderingMiniGameStudentAnswer {
+  id              String                                    @id @default(uuid())
+  createdAt       DateTime                                  @default(now())
+  updatedAt       DateTime                                  @updatedAt
+  studentAnswer   StudentAnswer                             @relation(fields: [studentAnswerId], references: [id])
+  studentAnswerId String                                    @unique
+  answer          CodeOrderingMiniGameStudentAnswerOption[]
+}
+
+model CodeOrderingMiniGameStudentAnswerOption {
+  id                                  String                             @id @default(uuid())
+  createdAt                           DateTime                           @default(now())
+  updatedAt                           DateTime                           @updatedAt
+  studentAnswerId                     String                             @unique
+  orderAnswer                         Int
+  codeOrderingMiniGameStudentAnswer   CodeOrderingMiniGameStudentAnswer? @relation(fields: [codeOrderingMiniGameStudentAnswerId], references: [id])
+  codeOrderingMiniGameStudentAnswerId String?
 }
 
 model MiniGame {

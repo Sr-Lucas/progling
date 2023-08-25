@@ -1,10 +1,13 @@
+import {
+  StudentAnswerFactory,
+  StudentAnswerType,
+} from '@domain/student/factory/student-answer.factory';
 import { CodeCompletionMiniGame } from '../entity/code-completion-minigame';
 import { CodeOrderingMiniGame } from '../entity/code-ordering-minigame';
 import { MiniGame, MiniGameEnum } from '../entity/minigame.entity';
 import { TrueFalseMiniGame } from '../entity/true-false-minigame';
 import { CodeCompletionMiniGameOption } from '../object-value/code-completion-minigame-option';
 import { CodeOrderingMiniGameOption } from '../object-value/code-ordering-minigame-option';
-import { StudentProgressFactory } from '@domain/student/factory/student-progress.factory';
 
 export type MiniGameType = {
   id: string;
@@ -43,14 +46,7 @@ export type MiniGameType = {
       order: number;
     }[];
   } | null;
-  studentAnswer?: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    studentId: string;
-    miniGameId: string;
-    correct: boolean;
-  }[];
+  studentAnswers?: StudentAnswerType[];
 };
 
 export class MiniGameFactory {
@@ -75,10 +71,10 @@ export class MiniGameFactory {
         miniGame.trueFalseMiniGame.updatedAt,
       );
 
-      if (miniGame.studentAnswer && miniGame.studentAnswer.length > 0) {
-        trueFalseGame.studentProgress = StudentProgressFactory.convertOne(
-          miniGame.studentAnswer.at(0),
-        )!;
+      if (miniGame.studentAnswers && miniGame.studentAnswers.length > 0) {
+        trueFalseGame.studentAnswers = StudentAnswerFactory.convertMany(
+          miniGame.studentAnswers,
+        );
       }
 
       miniGameO.trueFalse = trueFalseGame;
@@ -112,9 +108,9 @@ export class MiniGameFactory {
         miniGame.codeCompletionMiniGame.updatedAt,
       );
 
-      if (miniGame.studentAnswer && miniGame.studentAnswer.length > 0) {
-        codeCompletion.studentProgress = StudentProgressFactory.convertOne(
-          miniGame.studentAnswer.at(0),
+      if (miniGame.studentAnswers && miniGame.studentAnswers.length > 0) {
+        codeCompletion.studentAnswers = StudentAnswerFactory.convertMany(
+          miniGame.studentAnswers,
         )!;
       }
 
@@ -140,9 +136,10 @@ export class MiniGameFactory {
         miniGame.codeOrderingMiniGame.updatedAt,
       );
 
-      if (miniGame.studentAnswer && miniGame.studentAnswer.length > 0) {
-        codeOrderingMiniGame.studentProgress =
-          StudentProgressFactory.convertOne(miniGame.studentAnswer.at(0))!;
+      if (miniGame.studentAnswers && miniGame.studentAnswers.length > 0) {
+        codeOrderingMiniGame.studentAnswers = StudentAnswerFactory.convertMany(
+          miniGame.studentAnswers,
+        )!;
       }
 
       miniGameO = new MiniGame(
@@ -163,9 +160,9 @@ export class MiniGameFactory {
       );
     }
 
-    if (miniGame.studentAnswer && miniGame.studentAnswer.length > 0) {
-      miniGameO.studentProgress = StudentProgressFactory.convertOne(
-        miniGame.studentAnswer.at(0),
+    if (miniGame.studentAnswers && miniGame.studentAnswers.length > 0) {
+      miniGameO.studentAnswers = StudentAnswerFactory.convertMany(
+        miniGame.studentAnswers,
       )!;
     }
 

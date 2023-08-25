@@ -23,7 +23,9 @@ export class TrueFalseMiniGame extends MiniGame {
     return {
       id: this.id,
       question: this.question,
-      studentProgress: this.studentProgress?.toJSON(),
+      studentAnswer: this.studentAnswers?.map((studentAnswer) =>
+        studentAnswer.toJSON(),
+      ),
       type: MiniGameEnum.TRUE_FALSE,
       correctAnswer: this.correctAnswer,
       createdAt: this.createdAt,

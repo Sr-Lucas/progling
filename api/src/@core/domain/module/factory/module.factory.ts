@@ -2,7 +2,6 @@ import { Level } from '@domain/level/entity/level.entity';
 import { ProgrammingLanguage } from '@domain/programming-language/entity/programming-language.entity';
 import { Module } from '../entity/module.entity';
 import { ImageFactory } from '@domain/image/factory/image.factory';
-import { StudentLevelProgressFactory } from '@domain/student/factory/student-level-progress.factory';
 import { MiniGameFactory } from '@domain/minigame/factory/mini-game.factory';
 import { LevelType } from '@domain/level/factory/level.factory';
 
@@ -44,17 +43,6 @@ export class ModuleFactory {
         level.updatedAt,
         MiniGameFactory.convertMany(level.miniGames ?? []),
       );
-
-      if (
-        level.studentLevelProgress &&
-        level.studentLevelProgress.length === 1
-      ) {
-        lvl.studentLevelProgress = StudentLevelProgressFactory.convertOne(
-          level.studentLevelProgress[0],
-        );
-      } else if ((level.studentLevelProgress?.length ?? 0) > 1) {
-        throw new Error('Level has more than one StudentLevelProgress');
-      }
 
       return lvl;
     });

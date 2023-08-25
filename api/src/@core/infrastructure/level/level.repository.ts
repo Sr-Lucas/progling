@@ -19,7 +19,6 @@ export class LevelRepository implements ILevelRepository {
         id,
       },
       include: {
-        studentLevelProgress: true,
         miniGames: {
           where: {
             studentAnswers: {
@@ -29,7 +28,17 @@ export class LevelRepository implements ILevelRepository {
             },
           },
           include: {
-            studentAnswers: true,
+            studentAnswers: {
+              include: {
+                codeCompletionMiniGameStudentAnswer: true,
+                codeOrderingMiniGameStudentAnswer: {
+                  include: {
+                    answer: true,
+                  },
+                },
+                trueFalseMiniGameStudentAnswer: true,
+              },
+            },
             trueFalseMiniGame: true,
             codeCompletionMiniGame: {
               include: {

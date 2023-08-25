@@ -3,7 +3,6 @@ import {
   MiniGameType,
 } from '@domain/minigame/factory/mini-game.factory';
 import { Level } from '../entity/level.entity';
-import { StudentLevelProgressFactory } from '@domain/student/factory/student-level-progress.factory';
 
 export type LevelType = {
   id: string;
@@ -37,12 +36,6 @@ export class LevelFactory {
       level.updatedAt,
       miniGames,
     );
-
-    if (level.studentLevelProgress && level.studentLevelProgress.length > 0) {
-      lvl.studentLevelProgress = StudentLevelProgressFactory.convertOne(
-        level.studentLevelProgress[0],
-      );
-    }
 
     return lvl;
   }

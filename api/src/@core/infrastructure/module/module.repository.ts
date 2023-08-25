@@ -38,11 +38,6 @@ export class ModuleRepository implements IModuleRepository {
                 },
               },
             },
-            studentLevelProgress: {
-              where: {
-                studentId: userId,
-              },
-            },
           },
         },
         programmingLanguage: {
@@ -71,11 +66,6 @@ export class ModuleRepository implements IModuleRepository {
                     studentId: userId,
                   },
                 },
-              },
-            },
-            studentLevelProgress: {
-              where: {
-                studentId: userId,
               },
             },
           },
@@ -109,11 +99,6 @@ export class ModuleRepository implements IModuleRepository {
                     studentId: userId,
                   },
                 },
-              },
-            },
-            studentLevelProgress: {
-              where: {
-                studentId: userId,
               },
             },
           },

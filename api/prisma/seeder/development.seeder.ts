@@ -12,7 +12,6 @@ import {
   Image,
   Student,
   StudentAnswer,
-  StudentLevelProgress,
 } from '@prisma/client';
 
 export class SeedDevelopment {
@@ -35,16 +34,6 @@ export class SeedDevelopment {
       studentId: '1',
       miniGameId: '1',
       correct: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ];
-
-  private _studentLevelProgress: StudentLevelProgress[] = [
-    {
-      id: '1',
-      studentId: '1',
-      levelId: '1',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -466,12 +455,6 @@ export class SeedDevelopment {
     // CREATE studentProgress
     await this.prisma.studentAnswer.createMany({
       data: this._studentProgress,
-      skipDuplicates: true,
-    });
-
-    // CREATE studentLevelProgress
-    await this.prisma.studentLevelProgress.createMany({
-      data: this._studentLevelProgress,
       skipDuplicates: true,
     });
 
