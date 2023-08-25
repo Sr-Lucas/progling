@@ -21,13 +21,14 @@ model Image {
 }
 
 model Student {
-  id              String            @id @default(uuid())
-  email           String            @unique
-  name            String?
-  password        String
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  StudentProgress StudentProgress[]
+  id                   String                 @id @default(uuid())
+  email                String                 @unique
+  name                 String?
+  password             String
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  StudentProgress      StudentProgress[]
+  StudentLevelProgress StudentLevelProgress[]
 }
 
 model ProgrammingLanguage {
@@ -50,18 +51,41 @@ model Module {
   ProgrammingLanguage   ProgrammingLanguage @relation(fields: [programmingLanguageId], references: [id])
   programmingLanguageId String
   levels                Level[]
+  orderNumber           Int                 @default(0)
+}
+
+model StudentLevelProgress {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Student   Student  @relation(fields: [studentId], references: [id])
+  Level     Level    @relation(fields: [levelId], references: [id])
+  studentId String
+  levelId   String
 }
 
 model Level {
-  id              String            @id @default(uuid())
-  name            String
-  description     String
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  Module          Module?           @relation(fields: [moduleId], references: [id])
-  moduleId        String?
-  miniGames       MiniGame[]
-  StudentProgress StudentProgress[]
+  id                   String                 @id @default(uuid())
+  name                 String
+  description          String
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  Module               Module?                @relation(fields: [moduleId], references: [id])
+  moduleId             String?
+  miniGames            MiniGame[]
+  orderNumber          Int                    @default(0)
+  StudentLevelProgress StudentLevelProgress[]
+}
+
+model StudentProgress {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  correct    Boolean
+  studentId  String
+  Student    Student  @relation(fields: [studentId], references: [id])
+  MiniGame   MiniGame @relation(fields: [miniGameId], references: [id])
+  miniGameId String
 }
 
 model MiniGame {
@@ -70,14 +94,15 @@ model MiniGame {
   createdAt                DateTime                @default(now())
   updatedAt                DateTime                @updatedAt
   Level                    Level                   @relation(fields: [levelId], references: [id])
+  levelId                  String
   TrueFalseMiniGame        TrueFalseMiniGame?      @relation(fields: [trueFalseMiniGameId], references: [id])
   CodeCompletionMiniGame   CodeCompletionMiniGame? @relation(fields: [codeCompletionMiniGameId], references: [id])
   CodeOrderingMiniGame     CodeOrderingMiniGame?   @relation(fields: [codeOrderingMiniGameId], references: [id])
-  levelId                  String
   trueFalseMiniGameId      String?
   codeCompletionMiniGameId String?
   codeOrderingMiniGameId   String?
   StudentProgress          StudentProgress[]
+  orderNumber              Int                     @default(0)
 }
 
 model TrueFalseMiniGame {
@@ -124,16 +149,4 @@ model CodeOrderingMiniGameOption {
   updatedAt              DateTime             @updatedAt
   CodeOrderingMiniGame   CodeOrderingMiniGame @relation(fields: [codeOrderingMiniGameId], references: [id])
   codeOrderingMiniGameId String
-}
-
-model StudentProgress {
-  id          String    @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  Student     Student?  @relation(fields: [studentId], references: [id])
-  studentId   String?
-  Level       Level?    @relation(fields: [levelId], references: [id])
-  levelId     String?
-  MiniGames   MiniGame? @relation(fields: [miniGamesId], references: [id])
-  miniGamesId String?
 }

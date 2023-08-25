@@ -1,3 +1,7 @@
+import {
+  FindAllByProgrammingLanguageDTO,
+  FindByIdDTO,
+} from '@domain/module/dto/find-all-by-programming-language.dto';
 import { Module } from '@domain/module/entity/module.entity';
 import { ModuleFactory } from '@domain/module/factory/module.factory';
 import { IModuleRepository } from '@domain/module/repository/module.repository.interface';
@@ -6,15 +10,41 @@ import { PrismaService } from 'src/services/prisma.service';
 export class ModuleRepository implements IModuleRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAllByProgrammingLanguageId(id: string): Promise<Module[]> {
+  async findAllByProgrammingLanguageId({
+    programmingLanguageId,
+    userId,
+  }: FindAllByProgrammingLanguageDTO): Promise<Module[]> {
     const modules = await this.prisma.module.findMany({
+      orderBy: {
+        orderNumber: 'asc',
+      },
       where: {
         ProgrammingLanguage: {
-          id,
+          id: programmingLanguageId,
         },
       },
       include: {
-        levels: true,
+        levels: {
+          include: {
+            miniGames: {
+              include: {
+                StudentProgress: true,
+              },
+              where: {
+                StudentProgress: {
+                  some: {
+                    studentId: userId,
+                  },
+                },
+              },
+            },
+            StudentLevelProgress: {
+              where: {
+                studentId: userId,
+              },
+            },
+          },
+        },
         ProgrammingLanguage: {
           include: {
             image: true,
@@ -26,10 +56,30 @@ export class ModuleRepository implements IModuleRepository {
     return ModuleFactory.convertMany(modules);
   }
 
-  async findAll(): Promise<Module[]> {
+  async findAll(userId: string): Promise<Module[]> {
     const modules = await this.prisma.module.findMany({
       include: {
-        levels: true,
+        levels: {
+          include: {
+            miniGames: {
+              include: {
+                StudentProgress: true,
+              },
+              where: {
+                StudentProgress: {
+                  some: {
+                    studentId: userId,
+                  },
+                },
+              },
+            },
+            StudentLevelProgress: {
+              where: {
+                studentId: userId,
+              },
+            },
+          },
+        },
         ProgrammingLanguage: {
           include: {
             image: true,
@@ -41,13 +91,33 @@ export class ModuleRepository implements IModuleRepository {
     return ModuleFactory.convertMany(modules);
   }
 
-  async findById(id: string): Promise<Module | null> {
+  async findById({ id, userId }: FindByIdDTO): Promise<Module | null> {
     const module = await this.prisma.module.findUnique({
       where: {
         id,
       },
       include: {
-        levels: true,
+        levels: {
+          include: {
+            miniGames: {
+              include: {
+                StudentProgress: true,
+              },
+              where: {
+                StudentProgress: {
+                  some: {
+                    studentId: userId,
+                  },
+                },
+              },
+            },
+            StudentLevelProgress: {
+              where: {
+                studentId: userId,
+              },
+            },
+          },
+        },
         ProgrammingLanguage: {
           include: {
             image: true,

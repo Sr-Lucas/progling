@@ -5,6 +5,6 @@ export class FindAllModulesUseCase {
   constructor(private readonly moduleRepository: IModuleRepository) {}
 
   async execute(): Promise<Module[]> {
-    return this.moduleRepository.findAll();
+    return this.moduleRepository.findAll('1');
   }
 }

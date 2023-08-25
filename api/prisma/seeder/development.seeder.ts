@@ -10,10 +10,45 @@ import {
   ProgrammingLanguage,
   TrueFalseMiniGame,
   Image,
+  Student,
+  StudentProgress,
+  StudentLevelProgress,
 } from '@prisma/client';
 
 export class SeedDevelopment {
   constructor(private readonly prisma: PrismaClient) {}
+
+  private _students: Student[] = [
+    {
+      id: '1',
+      email: 'john@doe.com',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      name: 'John Doe',
+      password: '$2b$10$',
+    },
+  ];
+
+  private _studentProgress: StudentProgress[] = [
+    {
+      id: '1',
+      studentId: '1',
+      miniGameId: '1',
+      correct: true,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ];
+
+  private _studentLevelProgress: StudentLevelProgress[] = [
+    {
+      id: '1',
+      studentId: '1',
+      levelId: '1',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ];
 
   private _images: Image[] = [
     {
@@ -119,6 +154,7 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       id: '1',
       programmingLanguageId: this._programmingLanguages[0].id,
+      orderNumber: 0,
     },
     {
       name: 'Introduction to TypeScript',
@@ -128,6 +164,7 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       id: '2',
       programmingLanguageId: this._programmingLanguages[1].id,
+      orderNumber: 0,
     },
     {
       name: 'Introduction to Python',
@@ -137,6 +174,7 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       id: '3',
       programmingLanguageId: this._programmingLanguages[2].id,
+      orderNumber: 0,
     },
     {
       name: 'Introduction to Java',
@@ -146,6 +184,7 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       id: '4',
       programmingLanguageId: this._programmingLanguages[3].id,
+      orderNumber: 0,
     },
     {
       name: 'Introduction to C#',
@@ -155,6 +194,7 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       id: '5',
       programmingLanguageId: this._programmingLanguages[4].id,
+      orderNumber: 0,
     },
     {
       name: 'Introduction to PHP',
@@ -164,6 +204,7 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       id: '6',
       programmingLanguageId: this._programmingLanguages[5].id,
+      orderNumber: 0,
     },
     {
       name: 'Introduction to Go',
@@ -173,6 +214,7 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       id: '7',
       programmingLanguageId: this._programmingLanguages[6].id,
+      orderNumber: 0,
     },
     {
       name: 'Introduction to Ruby',
@@ -182,36 +224,40 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       id: '8',
       programmingLanguageId: this._programmingLanguages[7].id,
+      orderNumber: 0,
     },
   ];
 
   private _levels: Level[] = [
     {
-      name: 'Beginner',
+      name: 'Beginner JS',
       description:
         'This level is for people who have never programmed before or have very little experience with programming.',
       createdAt: new Date(),
       updatedAt: new Date(),
       id: '1',
       moduleId: this._modules[0].id,
+      orderNumber: 0,
     },
     {
-      name: 'Intermediate',
+      name: 'Intermediate JS',
       description:
         'This level is for people who have some experience with programming but are not yet comfortable with it.',
       createdAt: new Date(),
       updatedAt: new Date(),
       id: '2',
       moduleId: this._modules[0].id,
+      orderNumber: 1,
     },
     {
-      name: 'Advanced',
+      name: 'Advanced JS',
       description:
         'This level is for people who have a lot of experience with programming and are comfortable with it.',
       createdAt: new Date(),
       updatedAt: new Date(),
       id: '3',
       moduleId: this._modules[0].id,
+      orderNumber: 2,
     },
   ];
 
@@ -225,6 +271,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      orderNumber: 0,
     },
     {
       id: '2',
@@ -235,6 +282,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      orderNumber: 1,
     },
     {
       id: '3',
@@ -245,6 +293,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      orderNumber: 2,
     },
   ];
 
@@ -372,12 +421,6 @@ export class SeedDevelopment {
       skipDuplicates: true,
     });
 
-    // CREATE minigames
-    await this.prisma.miniGame.createMany({
-      data: this._minigames,
-      skipDuplicates: true,
-    });
-
     // CREATE trueFalseMiniGames
     await this.prisma.trueFalseMiniGame.createMany({
       data: this._trueFalseMiniGames,
@@ -405,6 +448,30 @@ export class SeedDevelopment {
     // CREATE codeOrderingMiniGameOptions
     await this.prisma.codeOrderingMiniGameOption.createMany({
       data: this._codeOrderingMiniGameOptions,
+      skipDuplicates: true,
+    });
+
+    // CREATE minigames
+    await this.prisma.miniGame.createMany({
+      data: this._minigames,
+      skipDuplicates: true,
+    });
+
+    // CREATE students
+    await this.prisma.student.createMany({
+      data: this._students,
+      skipDuplicates: true,
+    });
+
+    // CREATE studentProgress
+    await this.prisma.studentProgress.createMany({
+      data: this._studentProgress,
+      skipDuplicates: true,
+    });
+
+    // CREATE studentLevelProgress
+    await this.prisma.studentLevelProgress.createMany({
+      data: this._studentLevelProgress,
       skipDuplicates: true,
     });
 

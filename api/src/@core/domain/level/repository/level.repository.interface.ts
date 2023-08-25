@@ -1,6 +1,7 @@
+import { FindByIdDTO } from '../dto/level.dto';
 import { Level } from '../entity/level.entity';
 
 export interface ILevelRepository {
   findAll(): Promise<Level[]>;
-  findById(id: string): Promise<Level | null>;
+  findById({}: FindByIdDTO): Promise<Level | null>;
 }

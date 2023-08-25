@@ -122,7 +122,7 @@ export default function TrueFalseGame() {
                 ? currentGame?.correctAnswer === userAnswer
                   ? Colors.systemColor.success
                   : Colors.systemColor.danger
-                : Colors.gray[300],
+                : Colors.gray[userAnswer === null ? 300 : 600],
             }}
             onPressOut={() => continuePressed()}
           >

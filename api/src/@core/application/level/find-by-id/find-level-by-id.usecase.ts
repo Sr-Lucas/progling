@@ -4,7 +4,10 @@ export class FindLevelByIdUseCase {
   constructor(private readonly levelRepository: ILevelRepository) {}
 
   async execute(id: string) {
-    const level = await this.levelRepository.findById(id);
+    const level = await this.levelRepository.findById({
+      id,
+      userId: '1',
+    });
 
     if (!level) {
       throw 'Level not found';

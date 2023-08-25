@@ -1,8 +1,8 @@
 import { Entity } from '@domain/@shared/entity/entity.abstract';
-import { Level } from '@domain/level/entity/level.entity';
 import { CodeOrderingMiniGame } from './code-ordering-minigame';
 import { CodeCompletionMiniGame } from './code-completion-minigame';
 import { TrueFalseMiniGame } from './true-false-minigame';
+import { StudentProgress } from '@domain/student/entity/student-progress.entity';
 
 export enum MiniGameEnum {
   TRUE_FALSE = 'TRUE_FALSE',
@@ -14,6 +14,8 @@ export class MiniGame extends Entity {
   private _codeCompletion: CodeCompletionMiniGame;
   private _codeOrdering: CodeOrderingMiniGame;
   private _trueFalse: TrueFalseMiniGame;
+
+  private _studentProgress?: StudentProgress;
 
   constructor(
     private _type: MiniGameEnum,
@@ -39,7 +41,8 @@ export class MiniGame extends Entity {
   get type():
     | CodeCompletionMiniGame
     | CodeOrderingMiniGame
-    | TrueFalseMiniGame {
+    | TrueFalseMiniGame
+    | null {
     if (this._type === MiniGameEnum.TRUE_FALSE) {
       return this._trueFalse;
     }
@@ -51,7 +54,19 @@ export class MiniGame extends Entity {
     return this._codeOrdering;
   }
 
+  set studentProgress(studentProgress: StudentProgress) {
+    this._studentProgress = studentProgress;
+  }
+
+  get studentProgress(): StudentProgress | undefined {
+    return this._studentProgress;
+  }
+
+  get hasGame(): boolean {
+    return !!this.type;
+  }
+
   toJSON(): any {
-    return this.type.toJSON();
+    return this.type?.toJSON() ?? undefined;
   }
 }

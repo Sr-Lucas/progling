@@ -2,6 +2,9 @@ import { Level } from '@domain/level/entity/level.entity';
 import { ProgrammingLanguage } from '@domain/programming-language/entity/programming-language.entity';
 import { Module } from '../entity/module.entity';
 import { ImageFactory } from '@domain/image/factory/image.factory';
+import { StudentLevelProgressFactory } from '@domain/student/factory/student-level-progress.factory';
+import { MiniGameFactory } from '@domain/minigame/factory/mini-game.factory';
+import { LevelType } from '@domain/level/factory/level.factory';
 
 type PrismaModuleType = {
   id: string;
@@ -9,13 +12,7 @@ type PrismaModuleType = {
   description: string;
   createdAt: Date;
   updatedAt: Date;
-  levels: {
-    id: string;
-    name: string;
-    description: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
+  levels: LevelType[];
   ProgrammingLanguage: {
     id: string;
     name: string;
@@ -38,17 +35,29 @@ export class ModuleFactory {
       return null;
     }
 
-    const levels: Level[] = module.levels.map(
-      (level) =>
-        new Level(
-          level.name,
-          level.description,
-          level.id,
-          level.createdAt,
-          level.updatedAt,
-          [],
-        ),
-    );
+    const levels: Level[] = module.levels.map((level) => {
+      const lvl = new Level(
+        level.name,
+        level.description,
+        level.id,
+        level.createdAt,
+        level.updatedAt,
+        MiniGameFactory.convertMany(level.miniGames ?? []),
+      );
+
+      if (
+        level.StudentLevelProgress &&
+        level.StudentLevelProgress.length === 1
+      ) {
+        lvl.studentLevelProgress = StudentLevelProgressFactory.convertOne(
+          level.StudentLevelProgress[0],
+        );
+      } else if ((level.StudentLevelProgress?.length ?? 0) > 1) {
+        throw new Error('Level has more than one StudentLevelProgress');
+      }
+
+      return lvl;
+    });
 
     const programmingLanguage = new ProgrammingLanguage(
       module.ProgrammingLanguage.name,

@@ -16,6 +16,9 @@ export class FindModulesByProgrammingLanguageIdUseCase {
       throw 'Programming language not found';
     }
 
-    return this.moduleRepository.findAllByProgrammingLanguageId(id);
+    return this.moduleRepository.findAllByProgrammingLanguageId({
+      programmingLanguageId: id,
+      userId: '1',
+    });
   }
 }

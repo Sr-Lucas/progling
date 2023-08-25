@@ -1,3 +1,4 @@
+import { FindByIdDTO } from '@domain/level/dto/level.dto';
 import { Level } from '@domain/level/entity/level.entity';
 import { LevelFactory } from '@domain/level/factory/level.factory';
 import { ILevelRepository } from '@domain/level/repository/level.repository.interface';
@@ -12,14 +13,23 @@ export class LevelRepository implements ILevelRepository {
     return LevelFactory.convertMany(levels);
   }
 
-  async findById(id: string): Promise<Level | null> {
+  async findById({ id, userId }: FindByIdDTO): Promise<Level | null> {
     const level = await this.prisma.level.findUnique({
       where: {
         id,
       },
       include: {
+        StudentLevelProgress: true,
         miniGames: {
+          where: {
+            StudentProgress: {
+              some: {
+                studentId: userId,
+              },
+            },
+          },
           include: {
+            StudentProgress: true,
             TrueFalseMiniGame: true,
             CodeCompletionMiniGame: {
               include: {

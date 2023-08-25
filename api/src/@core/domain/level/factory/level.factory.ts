@@ -3,14 +3,22 @@ import {
   MiniGameType,
 } from '@domain/minigame/factory/mini-game.factory';
 import { Level } from '../entity/level.entity';
+import { StudentLevelProgressFactory } from '@domain/student/factory/student-level-progress.factory';
 
-type LevelType = {
+export type LevelType = {
   id: string;
   name: string;
   description: string;
+  miniGames?: MiniGameType[];
+  StudentLevelProgress?: {
+    id: string;
+    studentId: string;
+    levelId: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
   createdAt: Date;
   updatedAt: Date;
-  miniGames?: MiniGameType[];
 };
 
 export class LevelFactory {
@@ -21,7 +29,7 @@ export class LevelFactory {
       ? MiniGameFactory.convertMany(level.miniGames)
       : [];
 
-    return new Level(
+    const lvl = new Level(
       level.name,
       level.description,
       level.id,
@@ -29,6 +37,14 @@ export class LevelFactory {
       level.updatedAt,
       miniGames,
     );
+
+    if (level.StudentLevelProgress && level.StudentLevelProgress.length > 0) {
+      lvl.studentLevelProgress = StudentLevelProgressFactory.convertOne(
+        level.StudentLevelProgress[0],
+      );
+    }
+
+    return lvl;
   }
 
   static convertMany(levels: LevelType[]): Level[] {

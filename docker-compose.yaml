@@ -8,6 +8,9 @@ services:
     image: lucassantos/api:latest
     container_name: progling-api
     # entrypoint: init.sh
+    command: ["pnpm", "start:debug"] # debug
+    ports:
+      - 9229:9229 # debug
     tty: true
     networks:
       - progling-net

@@ -39,10 +39,22 @@ export class Module extends Entity {
     return this._programmingLanguage;
   }
 
+  get moduleProgress(): number {
+    return this.levels.reduce((acc, level) => {
+      if (level.getStudentLevelProgress() > 0) {
+        return acc + 1;
+      }
+
+      return acc;
+    }, 0);
+  }
+
   toJSON(): any {
     return {
       id: this.id,
       name: this.name,
+      doneLevels: this.moduleProgress,
+      numberOfLevels: this.levels.length,
       description: this.description,
       levels: this.levels,
       programmingLanguage: this.programmingLanguage,
