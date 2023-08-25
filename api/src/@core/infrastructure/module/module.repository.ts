@@ -19,7 +19,7 @@ export class ModuleRepository implements IModuleRepository {
         orderNumber: 'asc',
       },
       where: {
-        ProgrammingLanguage: {
+        programmingLanguage: {
           id: programmingLanguageId,
         },
       },
@@ -28,24 +28,24 @@ export class ModuleRepository implements IModuleRepository {
           include: {
             miniGames: {
               include: {
-                StudentProgress: true,
+                studentAnswers: true,
               },
               where: {
-                StudentProgress: {
+                studentAnswers: {
                   some: {
                     studentId: userId,
                   },
                 },
               },
             },
-            StudentLevelProgress: {
+            studentLevelProgress: {
               where: {
                 studentId: userId,
               },
             },
           },
         },
-        ProgrammingLanguage: {
+        programmingLanguage: {
           include: {
             image: true,
           },
@@ -63,24 +63,24 @@ export class ModuleRepository implements IModuleRepository {
           include: {
             miniGames: {
               include: {
-                StudentProgress: true,
+                studentAnswers: true,
               },
               where: {
-                StudentProgress: {
+                studentAnswers: {
                   some: {
                     studentId: userId,
                   },
                 },
               },
             },
-            StudentLevelProgress: {
+            studentLevelProgress: {
               where: {
                 studentId: userId,
               },
             },
           },
         },
-        ProgrammingLanguage: {
+        programmingLanguage: {
           include: {
             image: true,
           },
@@ -101,24 +101,24 @@ export class ModuleRepository implements IModuleRepository {
           include: {
             miniGames: {
               include: {
-                StudentProgress: true,
+                studentAnswers: true,
               },
               where: {
-                StudentProgress: {
+                studentAnswers: {
                   some: {
                     studentId: userId,
                   },
                 },
               },
             },
-            StudentLevelProgress: {
+            studentLevelProgress: {
               where: {
                 studentId: userId,
               },
             },
           },
         },
-        ProgrammingLanguage: {
+        programmingLanguage: {
           include: {
             image: true,
           },

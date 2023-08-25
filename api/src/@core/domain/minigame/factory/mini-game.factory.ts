@@ -1,4 +1,3 @@
-import { StudentProgress } from '@prisma/client';
 import { CodeCompletionMiniGame } from '../entity/code-completion-minigame';
 import { CodeOrderingMiniGame } from '../entity/code-ordering-minigame';
 import { MiniGame, MiniGameEnum } from '../entity/minigame.entity';
@@ -12,14 +11,14 @@ export type MiniGameType = {
   createdAt: Date;
   updatedAt: Date;
   type: string;
-  TrueFalseMiniGame?: {
+  trueFalseMiniGame?: {
     id: string;
     createdAt: Date;
     updatedAt: Date;
     question: string;
     correctAnswer: boolean;
   } | null;
-  CodeCompletionMiniGame?: {
+  codeCompletionMiniGame?: {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -32,7 +31,7 @@ export type MiniGameType = {
       isCorrect: boolean;
     }[];
   } | null;
-  CodeOrderingMiniGame?: {
+  codeOrderingMiniGame?: {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -44,7 +43,7 @@ export type MiniGameType = {
       order: number;
     }[];
   } | null;
-  StudentProgress?: {
+  studentAnswer?: {
     id: string;
     createdAt: Date;
     updatedAt: Date;
@@ -60,7 +59,7 @@ export class MiniGameFactory {
 
     let miniGameO: MiniGame | null = null;
 
-    if (miniGame.TrueFalseMiniGame) {
+    if (miniGame.trueFalseMiniGame) {
       miniGameO = new MiniGame(
         MiniGameEnum.TRUE_FALSE,
         miniGame.id,
@@ -69,23 +68,23 @@ export class MiniGameFactory {
       );
 
       const trueFalseGame = new TrueFalseMiniGame(
-        miniGame.TrueFalseMiniGame.question,
-        miniGame.TrueFalseMiniGame.correctAnswer,
-        miniGame.TrueFalseMiniGame.id,
-        miniGame.TrueFalseMiniGame.createdAt,
-        miniGame.TrueFalseMiniGame.updatedAt,
+        miniGame.trueFalseMiniGame.question,
+        miniGame.trueFalseMiniGame.correctAnswer,
+        miniGame.trueFalseMiniGame.id,
+        miniGame.trueFalseMiniGame.createdAt,
+        miniGame.trueFalseMiniGame.updatedAt,
       );
 
-      if (miniGame.StudentProgress && miniGame.StudentProgress.length > 0) {
+      if (miniGame.studentAnswer && miniGame.studentAnswer.length > 0) {
         trueFalseGame.studentProgress = StudentProgressFactory.convertOne(
-          miniGame.StudentProgress.at(0),
+          miniGame.studentAnswer.at(0),
         )!;
       }
 
       miniGameO.trueFalse = trueFalseGame;
     }
 
-    if (miniGame.CodeCompletionMiniGame) {
+    if (miniGame.codeCompletionMiniGame) {
       miniGameO = new MiniGame(
         MiniGameEnum.CODE_COMPLETION,
         miniGame.id,
@@ -94,7 +93,7 @@ export class MiniGameFactory {
       );
 
       const options: CodeCompletionMiniGameOption[] =
-        miniGame.CodeCompletionMiniGame.options.map(
+        miniGame.codeCompletionMiniGame.options.map(
           (option) =>
             new CodeCompletionMiniGameOption(
               option.content,
@@ -106,45 +105,44 @@ export class MiniGameFactory {
         );
 
       const codeCompletion = new CodeCompletionMiniGame(
-        miniGame.CodeCompletionMiniGame.code,
+        miniGame.codeCompletionMiniGame.code,
         options,
-        miniGame.CodeCompletionMiniGame.id,
-        miniGame.CodeCompletionMiniGame.createdAt,
-        miniGame.CodeCompletionMiniGame.updatedAt,
+        miniGame.codeCompletionMiniGame.id,
+        miniGame.codeCompletionMiniGame.createdAt,
+        miniGame.codeCompletionMiniGame.updatedAt,
       );
 
-      if (miniGame.StudentProgress && miniGame.StudentProgress.length > 0) {
+      if (miniGame.studentAnswer && miniGame.studentAnswer.length > 0) {
         codeCompletion.studentProgress = StudentProgressFactory.convertOne(
-          miniGame.StudentProgress.at(0),
+          miniGame.studentAnswer.at(0),
         )!;
       }
 
       miniGameO.codeCompletion = codeCompletion;
     }
 
-    if (miniGame.CodeOrderingMiniGame) {
-      const options: CodeOrderingMiniGameOption[] =
-        miniGame.CodeOrderingMiniGame.options.map(
-          (option) =>
-            new CodeOrderingMiniGameOption(
-              option.content,
-              option.order,
-              option.id,
-              option.createdAt,
-              option.updatedAt,
-            ),
-        );
+    if (miniGame.codeOrderingMiniGame) {
+      const options = miniGame.codeOrderingMiniGame.options.map(
+        (option) =>
+          new CodeOrderingMiniGameOption(
+            option.content,
+            option.order,
+            option.id,
+            option.createdAt,
+            option.updatedAt,
+          ),
+      );
 
       const codeOrderingMiniGame = new CodeOrderingMiniGame(
         options,
-        miniGame.CodeOrderingMiniGame.id,
-        miniGame.CodeOrderingMiniGame.createdAt,
-        miniGame.CodeOrderingMiniGame.updatedAt,
+        miniGame.codeOrderingMiniGame.id,
+        miniGame.codeOrderingMiniGame.createdAt,
+        miniGame.codeOrderingMiniGame.updatedAt,
       );
 
-      if (miniGame.StudentProgress && miniGame.StudentProgress.length > 0) {
+      if (miniGame.studentAnswer && miniGame.studentAnswer.length > 0) {
         codeOrderingMiniGame.studentProgress =
-          StudentProgressFactory.convertOne(miniGame.StudentProgress.at(0))!;
+          StudentProgressFactory.convertOne(miniGame.studentAnswer.at(0))!;
       }
 
       miniGameO = new MiniGame(
@@ -165,9 +163,9 @@ export class MiniGameFactory {
       );
     }
 
-    if (miniGame.StudentProgress && miniGame.StudentProgress.length > 0) {
+    if (miniGame.studentAnswer && miniGame.studentAnswer.length > 0) {
       miniGameO.studentProgress = StudentProgressFactory.convertOne(
-        miniGame.StudentProgress.at(0),
+        miniGame.studentAnswer.at(0),
       )!;
     }
 

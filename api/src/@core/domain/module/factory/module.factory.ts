@@ -13,7 +13,7 @@ type PrismaModuleType = {
   createdAt: Date;
   updatedAt: Date;
   levels: LevelType[];
-  ProgrammingLanguage: {
+  programmingLanguage: {
     id: string;
     name: string;
     image: {
@@ -46,13 +46,13 @@ export class ModuleFactory {
       );
 
       if (
-        level.StudentLevelProgress &&
-        level.StudentLevelProgress.length === 1
+        level.studentLevelProgress &&
+        level.studentLevelProgress.length === 1
       ) {
         lvl.studentLevelProgress = StudentLevelProgressFactory.convertOne(
-          level.StudentLevelProgress[0],
+          level.studentLevelProgress[0],
         );
-      } else if ((level.StudentLevelProgress?.length ?? 0) > 1) {
+      } else if ((level.studentLevelProgress?.length ?? 0) > 1) {
         throw new Error('Level has more than one StudentLevelProgress');
       }
 
@@ -60,12 +60,12 @@ export class ModuleFactory {
     });
 
     const programmingLanguage = new ProgrammingLanguage(
-      module.ProgrammingLanguage.name,
-      module.ProgrammingLanguage.description,
-      ImageFactory.convertOne(module.ProgrammingLanguage.image)!,
-      module.ProgrammingLanguage.id,
-      module.ProgrammingLanguage.createdAt,
-      module.ProgrammingLanguage.updatedAt,
+      module.programmingLanguage.name,
+      module.programmingLanguage.description,
+      ImageFactory.convertOne(module.programmingLanguage.image)!,
+      module.programmingLanguage.id,
+      module.programmingLanguage.createdAt,
+      module.programmingLanguage.updatedAt,
     );
 
     return new Module(

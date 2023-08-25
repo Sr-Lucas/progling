@@ -19,24 +19,24 @@ export class LevelRepository implements ILevelRepository {
         id,
       },
       include: {
-        StudentLevelProgress: true,
+        studentLevelProgress: true,
         miniGames: {
           where: {
-            StudentProgress: {
+            studentAnswers: {
               some: {
                 studentId: userId,
               },
             },
           },
           include: {
-            StudentProgress: true,
-            TrueFalseMiniGame: true,
-            CodeCompletionMiniGame: {
+            studentAnswers: true,
+            trueFalseMiniGame: true,
+            codeCompletionMiniGame: {
               include: {
                 options: true,
               },
             },
-            CodeOrderingMiniGame: {
+            codeOrderingMiniGame: {
               include: {
                 options: true,
               },

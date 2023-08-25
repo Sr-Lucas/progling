@@ -10,7 +10,7 @@ export type LevelType = {
   name: string;
   description: string;
   miniGames?: MiniGameType[];
-  StudentLevelProgress?: {
+  studentLevelProgress?: {
     id: string;
     studentId: string;
     levelId: string;
@@ -38,9 +38,9 @@ export class LevelFactory {
       miniGames,
     );
 
-    if (level.StudentLevelProgress && level.StudentLevelProgress.length > 0) {
+    if (level.studentLevelProgress && level.studentLevelProgress.length > 0) {
       lvl.studentLevelProgress = StudentLevelProgressFactory.convertOne(
-        level.StudentLevelProgress[0],
+        level.studentLevelProgress[0],
       );
     }
 

@@ -12,23 +12,23 @@ datasource db {
 }
 
 model Image {
-  id                  String                @id @default(uuid())
+  id                  String               @id @default(uuid())
   name                String
-  storeType           String                @default("local")
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-  ProgrammingLanguage ProgrammingLanguage[]
+  storeType           String               @default("local")
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  programmingLanguage ProgrammingLanguage?
 }
 
 model Student {
-  id                   String                 @id @default(uuid())
-  email                String                 @unique
-  name                 String?
-  password             String
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  StudentProgress      StudentProgress[]
-  StudentLevelProgress StudentLevelProgress[]
+  id              String                 @id @default(uuid())
+  email           String                 @unique
+  name            String?
+  password        String
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  gameAnswers     StudentAnswer[]
+  levelProgresses StudentLevelProgress[]
 }
 
 model ProgrammingLanguage {
@@ -36,10 +36,10 @@ model ProgrammingLanguage {
   name        String
   description String
   image       Image    @relation(fields: [imageId], references: [id])
+  imageId     String   @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  modules     Module[]
-  imageId     String
+  module      Module?
 }
 
 model Module {
@@ -48,18 +48,18 @@ model Module {
   description           String
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
-  ProgrammingLanguage   ProgrammingLanguage @relation(fields: [programmingLanguageId], references: [id])
-  programmingLanguageId String
-  levels                Level[]
+  programmingLanguage   ProgrammingLanguage @relation(fields: [programmingLanguageId], references: [id])
+  programmingLanguageId String              @unique
   orderNumber           Int                 @default(0)
+  levels                Level[]
 }
 
 model StudentLevelProgress {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Student   Student  @relation(fields: [studentId], references: [id])
-  Level     Level    @relation(fields: [levelId], references: [id])
+  student   Student  @relation(fields: [studentId], references: [id])
+  level     Level    @relation(fields: [levelId], references: [id])
   studentId String
   levelId   String
 }
@@ -70,22 +70,32 @@ model Level {
   description          String
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
-  Module               Module?                @relation(fields: [moduleId], references: [id])
-  moduleId             String?
-  miniGames            MiniGame[]
   orderNumber          Int                    @default(0)
-  StudentLevelProgress StudentLevelProgress[]
+  module               Module                 @relation(fields: [moduleId], references: [id])
+  miniGames            MiniGame[]
+  moduleId             String
+  studentLevelProgress StudentLevelProgress[]
 }
 
-model StudentProgress {
-  id         String   @id @default(uuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  correct    Boolean
-  studentId  String
-  Student    Student  @relation(fields: [studentId], references: [id])
-  MiniGame   MiniGame @relation(fields: [miniGameId], references: [id])
-  miniGameId String
+model StudentAnswer {
+  id                             String                          @id @default(uuid())
+  createdAt                      DateTime                        @default(now())
+  updatedAt                      DateTime                        @updatedAt
+  correct                        Boolean
+  studentId                      String
+  student                        Student                         @relation(fields: [studentId], references: [id])
+  miniGame                       MiniGame                        @relation(fields: [miniGameId], references: [id])
+  miniGameId                     String
+  trueFalseMiniGameStudentAnswer TrueFalseMiniGameStudentAnswer?
+}
+
+model TrueFalseMiniGameStudentAnswer {
+  id              String        @id @default(uuid())
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  studentAnswer   StudentAnswer @relation(fields: [studentAnswerId], references: [id])
+  studentAnswerId String        @unique
+  answer          Boolean
 }
 
 model MiniGame {
@@ -93,25 +103,25 @@ model MiniGame {
   type                     String
   createdAt                DateTime                @default(now())
   updatedAt                DateTime                @updatedAt
-  Level                    Level                   @relation(fields: [levelId], references: [id])
+  level                    Level                   @relation(fields: [levelId], references: [id])
   levelId                  String
-  TrueFalseMiniGame        TrueFalseMiniGame?      @relation(fields: [trueFalseMiniGameId], references: [id])
-  CodeCompletionMiniGame   CodeCompletionMiniGame? @relation(fields: [codeCompletionMiniGameId], references: [id])
-  CodeOrderingMiniGame     CodeOrderingMiniGame?   @relation(fields: [codeOrderingMiniGameId], references: [id])
-  trueFalseMiniGameId      String?
-  codeCompletionMiniGameId String?
-  codeOrderingMiniGameId   String?
-  StudentProgress          StudentProgress[]
+  trueFalseMiniGame        TrueFalseMiniGame?      @relation(fields: [trueFalseMiniGameId], references: [id])
+  codeCompletionMiniGame   CodeCompletionMiniGame? @relation(fields: [codeCompletionMiniGameId], references: [id])
+  codeOrderingMiniGame     CodeOrderingMiniGame?   @relation(fields: [codeOrderingMiniGameId], references: [id])
+  trueFalseMiniGameId      String?                 @unique
+  codeCompletionMiniGameId String?                 @unique
+  codeOrderingMiniGameId   String?                 @unique
+  studentAnswers           StudentAnswer[]
   orderNumber              Int                     @default(0)
 }
 
 model TrueFalseMiniGame {
-  id            String     @id @default(uuid())
+  id            String    @id @default(uuid())
   question      String
   correctAnswer Boolean
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  MiniGame      MiniGame[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  miniGame      MiniGame?
 }
 
 model CodeCompletionMiniGame {
@@ -120,7 +130,7 @@ model CodeCompletionMiniGame {
   options   CodeCompletionMiniGameOption[]
   createdAt DateTime                       @default(now())
   updatedAt DateTime                       @updatedAt
-  MiniGame  MiniGame[]
+  miniGame  MiniGame?
 }
 
 model CodeOrderingMiniGame {
@@ -128,7 +138,7 @@ model CodeOrderingMiniGame {
   options   CodeOrderingMiniGameOption[]
   createdAt DateTime                     @default(now())
   updatedAt DateTime                     @updatedAt
-  MiniGame  MiniGame[]
+  miniGame  MiniGame?
 }
 
 model CodeCompletionMiniGameOption {
@@ -137,7 +147,7 @@ model CodeCompletionMiniGameOption {
   isCorrect                Boolean
   createdAt                DateTime               @default(now())
   updatedAt                DateTime               @updatedAt
-  CodeCompletionMiniGame   CodeCompletionMiniGame @relation(fields: [codeCompletionMiniGameId], references: [id])
+  codeCompletionMiniGame   CodeCompletionMiniGame @relation(fields: [codeCompletionMiniGameId], references: [id])
   codeCompletionMiniGameId String
 }
 
@@ -147,6 +157,6 @@ model CodeOrderingMiniGameOption {
   order                  Int
   createdAt              DateTime             @default(now())
   updatedAt              DateTime             @updatedAt
-  CodeOrderingMiniGame   CodeOrderingMiniGame @relation(fields: [codeOrderingMiniGameId], references: [id])
+  codeOrderingMiniGame   CodeOrderingMiniGame @relation(fields: [codeOrderingMiniGameId], references: [id])
   codeOrderingMiniGameId String
 }
