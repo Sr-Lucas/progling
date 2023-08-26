@@ -22,7 +22,7 @@ export class LevelRepository implements ILevelRepository {
         miniGames: {
           where: {
             studentAnswers: {
-              some: {
+              every: {
                 studentId: userId,
               },
             },

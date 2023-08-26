@@ -20,10 +20,12 @@ export default function LevelView() {
   }, []);
 
   const handleStartGame = () => {
-    const currentGame = level.miniGames[0];
-    setCurrentGame(currentGame);
-    setGames(level.miniGames);
-    router.replace(resolveGameNavigationByGameType(currentGame.type));
+    if (level.miniGames.length > 0) {
+      const currentGame = level.miniGames[0];
+      setCurrentGame(currentGame);
+      setGames(level.miniGames);
+      router.replace(resolveGameNavigationByGameType(currentGame.type));
+    }
   };
 
   return (

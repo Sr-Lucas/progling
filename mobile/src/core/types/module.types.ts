@@ -4,9 +4,11 @@ import { ProgrammingLanguage } from './programming-language.types';
 export type Module = {
   id: string;
   name: string;
+  doneLevels: number;
+  numberOfLevels: number;
   description: string;
   levels: Level[];
   programmingLanguage: ProgrammingLanguage;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 };

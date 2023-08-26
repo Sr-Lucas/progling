@@ -23,7 +23,7 @@ export class TrueFalseMiniGame extends MiniGame {
     return {
       id: this.id,
       question: this.question,
-      studentAnswer: this.studentAnswers?.map((studentAnswer) =>
+      studentAnswers: this.studentAnswers?.map((studentAnswer) =>
         studentAnswer.toJSON(),
       ),
       type: MiniGameEnum.TRUE_FALSE,

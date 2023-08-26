@@ -25,7 +25,7 @@ export class CodeCompletionMiniGame extends MiniGame {
       id: this.id,
       code: this.code,
       type: MiniGameEnum.CODE_COMPLETION,
-      studentAnswer: this.studentAnswers?.map((studentAnswer) =>
+      studentAnswers: this.studentAnswers?.map((studentAnswer) =>
         studentAnswer.toJSON(),
       ),
       options: this.options.map((option) => option.toJSON()),

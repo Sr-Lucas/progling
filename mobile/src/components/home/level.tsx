@@ -7,13 +7,16 @@ import { useLocalSearchParams } from 'expo-router';
 
 type Props = {
   onTap?: () => void;
-  isCurrent?: boolean;
-  isDone?: boolean;
+  status: 'blocked' | 'done' | 'doing';
   showLine?: boolean;
 };
 
-export function Level({ isCurrent, isDone, onTap, showLine = true }: Props) {
-  const iconState = isDone ? 'check' : isCurrent ? 'play' : 'lock';
+export function Level({ status, onTap, showLine = true }: Props) {
+  const iconState =
+    status === 'blocked' ? 'lock' : status === 'done' ? 'check' : 'play';
+
+  const isCurrent = status === 'doing';
+  const isDone = status === 'done';
 
   return (
     <View

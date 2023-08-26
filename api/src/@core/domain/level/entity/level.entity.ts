@@ -56,6 +56,7 @@ export class Level extends Entity {
       id: this.id,
       name: this.name,
       description: this.description,
+      numberOfMiniGames: this._miniGames?.length ?? 0,
       levelProgress: this.calculateLevelProgress(this._miniGames ?? []) ?? 0,
       miniGames: miniGames,
       createdAt: this.createdAt,

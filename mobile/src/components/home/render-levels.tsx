@@ -31,19 +31,33 @@ export function RenderLevels({ modules }: Props) {
       const levels = module.levels.map((level, index) => {
         const isLast = index === module.levels.length - 1;
 
+        let levelStatus: 'blocked' | 'done' | 'doing' = 'blocked';
+
+        if (level.levelProgress > 0) {
+          levelStatus = 'done';
+        }
+
+        if (
+          level.levelProgress === 0 &&
+          module.levels[index - 1].levelProgress > 0
+        ) {
+          levelStatus = 'doing';
+        }
+
         return (
           <View
-            key={index}
+            key={level.id}
             className="flex items-center"
             style={{
               marginTop: levelMT,
             }}
           >
             <LevelC
-              isCurrent={false}
-              isDone={false}
+              status={levelStatus}
               showLine={!isLast}
-              onTap={() => navigateToLevel(level, module)}
+              onTap={() =>
+                levelStatus === 'doing' && navigateToLevel(level, module)
+              }
             />
           </View>
         );
@@ -51,15 +65,25 @@ export function RenderLevels({ modules }: Props) {
 
       const moduleHasLevels = module.levels.length > 0;
 
+      let moduleStatus: 'blocked' | 'done' | 'doing' = 'blocked';
+
+      if (module.doneLevels === module.numberOfLevels) {
+        moduleStatus = 'done';
+      }
+
+      if (module.doneLevels > 0 && module.doneLevels < module.numberOfLevels) {
+        moduleStatus = 'doing';
+      }
+
       return (
         <View
-          key={index}
+          key={module.id}
           className="flex items-center"
           style={{
             marginTop: index === 0 ? firstModuleMT : moduleMT,
           }}
         >
-          <ModuleC status={'blocked'} showLine={moduleHasLevels} />
+          <ModuleC status={moduleStatus} showLine={moduleHasLevels} />
 
           {levels}
         </View>
