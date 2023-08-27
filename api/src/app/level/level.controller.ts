@@ -7,30 +7,10 @@ import { UpdateLevelDto } from './dto/update-level.dto';
 export class LevelController {
   constructor(private readonly levelService: LevelService) {}
 
-  // @Post()
-  // create(@Body() createLevelDto: CreateLevelDto) {
-  //   return this.levelService.create(createLevelDto);
-  // }
-
-  // @Get()
-  // findAll() {
-  //   return this.levelService.findAll();
-  // }
-
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const output = await this.levelService.findOne(id);
 
     return output.toJSON();
   }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateLevelDto: UpdateLevelDto) {
-  //   return this.levelService.update(+id, updateLevelDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.levelService.remove(+id);
-  // }
 }

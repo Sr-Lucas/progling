@@ -5,12 +5,18 @@ import { PrismaService } from './services/prisma.service';
 import { ProgrammingLanguageModule } from './app/programming-language/programming-language.module';
 import { ModuleModule } from './app/module/module.module';
 import { LevelModule } from './app/level/level.module';
-import { ImageController } from './app/image/image.controller';
 import { StudentModule } from './app/student/student.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [ProgrammingLanguageModule, ModuleModule, LevelModule, StudentModule],
-  controllers: [AppController, ImageController],
+  imports: [
+    ProgrammingLanguageModule,
+    ModuleModule,
+    LevelModule,
+    StudentModule,
+    AuthModule,
+  ],
+  controllers: [AppController],
   providers: [AppService, PrismaService],
 })
 export class AppModule {}

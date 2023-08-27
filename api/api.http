@@ -1,19 +1,52 @@
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTY5MzE2MzQ4OSwiZXhwIjoxNjkzMjQ5ODg5fQ.9F1vGmWh2O2FPWiCILaO9y16kZ0KlSWXOY0RBxY167A
+
+
+###
 GET http://localhost:3000/
 
 ###
 GET http://localhost:3000/programming-languages
+Authorization: Bearer {{{authToken}}}
 
 ###
 GET http://localhost:3000/programming-languages/7506837e-3f60-4b11-99a0-98f131854999
+Authorization: Bearer {{{authToken}}}
 
 ###
 GET http://localhost:3000/modules
+Authorization: Bearer {{{authToken}}}
 
 ###
 GET http://localhost:3000/modules/1
+Authorization: Bearer {{{authToken}}}
 
 ###
 GET http://localhost:3000/programming-languages/7506837e-3f60-4b11-99a0-98f131854999/modules
+Authorization: Bearer {{{authToken}}}
 
 ###
 GET http://localhost:3000/levels/1
+Authorization: Bearer {{{authToken}}}
+
+###
+GET http://localhost:3000/auth/student/me
+Authorization: Bearer {{authToken}}
+
+###
+POST http://localhost:3000/auth/student
+content-type: application/json
+
+{
+    "email": "john@doe.com",
+    "password": "$2b$10$"
+}
+
+###
+POST http://localhost:3000/auth/student/register
+content-type: application/json
+
+{
+    "email": "john@doe.com",
+    "name": "John Doe",
+    "password": "$2b$10$"
+}

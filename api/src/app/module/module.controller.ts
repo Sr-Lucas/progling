@@ -5,11 +5,6 @@ import { ModuleService } from './module.service';
 export class ModuleController {
   constructor(private readonly moduleService: ModuleService) {}
 
-  // @Post()
-  // create(@Body() createModuleDto: CreateModuleDto) {
-  //   return this.moduleService.create(createModuleDto);
-  // }
-
   @Get('modules')
   async findAll() {
     const output = await this.moduleService.findAll();
@@ -30,14 +25,4 @@ export class ModuleController {
 
     return output.map((module) => module.toJSON());
   }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateModuleDto: UpdateModuleDto) {
-  //   return this.moduleService.update(+id, updateModuleDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.moduleService.remove(+id);
-  // }
 }

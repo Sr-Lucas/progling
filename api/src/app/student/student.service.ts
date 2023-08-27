@@ -1,26 +1,53 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
+import { FindStudentByEmailUseCase } from '@application/student/find-by-email/find-student-by-email.usecase';
+import { FindStudentByIdUseCase } from '@application/student/find-by-id/find-student-by-id.usecase';
+import { CreateStudentUseCase } from '@application/student/create/create-student.usecase';
+import { UpdateStudentUseCase } from '@application/student/update/update-student.usecase';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class StudentService {
+  constructor(
+    private readonly jwtService: JwtService,
+
+    private readonly findStudentByEmailUseCase: FindStudentByEmailUseCase,
+    private readonly findStudentByIdUseCase: FindStudentByIdUseCase,
+    private readonly createStudentUseCase: CreateStudentUseCase,
+    private readonly updateStudentUseCase: UpdateStudentUseCase,
+  ) {}
+
   create(createStudentDto: CreateStudentDto) {
-    return 'This action adds a new student';
+    return this.createStudentUseCase.execute(createStudentDto);
   }
 
-  findAll() {
-    return `This action returns all student`;
+  findOne(id: string) {
+    return this.findStudentByIdUseCase.execute(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} student`;
+  findOneByEmail(email: string) {
+    return this.findStudentByEmailUseCase.execute(email);
   }
 
-  update(id: number, updateStudentDto: UpdateStudentDto) {
-    return `This action updates a #${id} student`;
+  update(id: string, updateStudentDto: UpdateStudentDto) {
+    return this.updateStudentUseCase.execute({
+      id,
+      ...updateStudentDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} student`;
+  async signIn(email: string, pass: string) {
+    const user = await this.findOneByEmail(email);
+
+    if (!user || user.password !== pass) {
+      throw new UnauthorizedException();
+    }
+
+    const payload = { sub: user.id, username: user.name };
+
+    return {
+      access_token: await this.jwtService.signAsync(payload),
+    };
   }
 }
