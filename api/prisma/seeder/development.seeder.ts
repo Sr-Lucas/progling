@@ -25,15 +25,15 @@ export class SeedDevelopment {
       updatedAt: new Date(),
       name: 'John Doe',
       password: '$2b$10$',
+      deletedAt: null,
     },
   ];
 
-  private _studentProgress: StudentAnswer[] = [
+  private _studentAnswer: StudentAnswer[] = [
     {
       id: '1',
       studentId: '1',
       miniGameId: '1',
-      correct: true,
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -454,7 +454,7 @@ export class SeedDevelopment {
 
     // CREATE studentProgress
     await this.prisma.studentAnswer.createMany({
-      data: this._studentProgress,
+      data: this._studentAnswer,
       skipDuplicates: true,
     });
 

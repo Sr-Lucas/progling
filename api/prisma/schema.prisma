@@ -23,10 +23,11 @@ model Image {
 model Student {
   id          String          @id @default(uuid())
   email       String          @unique
-  name        String?
+  name        String
   password    String
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
+  deletedAt   DateTime?
   gameAnswers StudentAnswer[]
 }
 
@@ -69,7 +70,6 @@ model StudentAnswer {
   id                                  String                               @id @default(uuid())
   createdAt                           DateTime                             @default(now())
   updatedAt                           DateTime                             @updatedAt
-  correct                             Boolean
   studentId                           String
   student                             Student                              @relation(fields: [studentId], references: [id])
   miniGame                            MiniGame                             @relation(fields: [miniGameId], references: [id])

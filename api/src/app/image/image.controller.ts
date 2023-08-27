@@ -6,7 +6,15 @@ import { join } from 'path';
 export class ImageController {
   @Get(':filename')
   getImage(@Param('filename') filename: string, @Res() res: Response) {
-    const imagePath = join(__dirname, '..', '..', 'public', 'images', filename);
+    const imagePath = join(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'public',
+      'images',
+      filename,
+    );
 
     res.sendFile(imagePath);
   }

@@ -1,4 +1,4 @@
-import { StudentAnswer } from '../entity/student-progress.entity';
+import { StudentAnswer } from '../entity/student-answer.entity';
 
 export type StudentAnswerType = {
   id: string;

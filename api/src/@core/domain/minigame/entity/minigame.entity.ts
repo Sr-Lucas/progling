@@ -2,7 +2,7 @@ import { Entity } from '@domain/@shared/entity/entity.abstract';
 import { CodeOrderingMiniGame } from './code-ordering-minigame';
 import { CodeCompletionMiniGame } from './code-completion-minigame';
 import { TrueFalseMiniGame } from './true-false-minigame';
-import { StudentAnswer } from '@domain/student/entity/student-progress.entity';
+import { StudentAnswer } from '@domain/student/entity/student-answer.entity';
 
 export enum MiniGameEnum {
   TRUE_FALSE = 'TRUE_FALSE',
@@ -52,6 +52,10 @@ export class MiniGame extends Entity {
     }
 
     return this._codeOrdering;
+  }
+
+  get stringType(): string {
+    return this._type;
   }
 
   set studentAnswers(studentProgress: StudentAnswer[]) {
