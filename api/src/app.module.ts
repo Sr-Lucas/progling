@@ -7,6 +7,7 @@ import { ModuleModule } from './app/module/module.module';
 import { LevelModule } from './app/level/level.module';
 import { StudentModule } from './app/student/student.module';
 import { AuthModule } from './auth/auth.module';
+import { MiniGameModule } from './app/minigame/minigame.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthModule } from './auth/auth.module';
     LevelModule,
     StudentModule,
     AuthModule,
+    MiniGameModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

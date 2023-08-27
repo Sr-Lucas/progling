@@ -7,11 +7,6 @@ export class ProgrammingLanguageController {
     private readonly programmingLanguageService: ProgrammingLanguageService,
   ) {}
 
-  // @Post()
-  // create(@Body() createProgrammingLanguageDto: CreateProgrammingLanguageDto) {
-  //   return this.programmingLanguageService.create(createProgrammingLanguageDto);
-  // }
-
   @Get()
   async findAll() {
     const output = await this.programmingLanguageService.findAll();
@@ -25,20 +20,4 @@ export class ProgrammingLanguageController {
 
     return output.toJSON();
   }
-
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateProgrammingLanguageDto: UpdateProgrammingLanguageDto,
-  // ) {
-  //   return this.programmingLanguageService.update(
-  //     +id,
-  //     updateProgrammingLanguageDto,
-  //   );
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.programmingLanguageService.remove(+id);
-  // }
 }
