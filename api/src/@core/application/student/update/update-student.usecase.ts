@@ -1,7 +1,4 @@
-import {
-  CreateStudentDTO,
-  UpdateStudentDTO,
-} from '@domain/student/dto/student.dto';
+import { UpdateStudentDTO } from '@domain/student/dto/student.dto';
 import { Student } from '@domain/student/entity/student.entity';
 import { IStudentRepository } from '@domain/student/repository/student.repository';
 

@@ -13,27 +13,21 @@ export class ModuleService {
     private readonly findByLanguageIdModulesUseCase: FindModulesByProgrammingLanguageIdUseCase,
   ) {}
 
-  // create(createModuleDto: CreateModuleDto) {
-  //   return 'This action adds a new module';
-  // }
-
-  findAll() {
-    return this.findAllModulesUseCase.execute();
+  findAll(userId: string) {
+    return this.findAllModulesUseCase.execute(userId);
   }
 
-  findOne(id: string) {
-    return this.findByIdModulesUseCase.execute(id);
+  findOne(id: string, userId: string) {
+    return this.findByIdModulesUseCase.execute({
+      id,
+      userId,
+    });
   }
 
-  findByLanguageId(id: string) {
-    return this.findByLanguageIdModulesUseCase.execute(id);
+  findByLanguageId(id: string, userId: string) {
+    return this.findByLanguageIdModulesUseCase.execute({
+      programmingLanguageId: id,
+      userId,
+    });
   }
-
-  // update(id: number, updateModuleDto: UpdateModuleDto) {
-  //   return `This action updates a #${id} module`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} module`;
-  // }
 }

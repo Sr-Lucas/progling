@@ -4,7 +4,7 @@ import { IModuleRepository } from '@domain/module/repository/module.repository.i
 export class FindAllModulesUseCase {
   constructor(private readonly moduleRepository: IModuleRepository) {}
 
-  async execute(): Promise<Module[]> {
-    return this.moduleRepository.findAll('1');
+  async execute(userId: string): Promise<Module[]> {
+    return this.moduleRepository.findAll(userId);
   }
 }

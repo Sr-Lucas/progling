@@ -1,6 +1,6 @@
 import { Text } from '@/components/shared/Text';
 import { clsx } from 'clsx';
-import { Link, useGlobalSearchParams, router } from 'expo-router';
+import { useGlobalSearchParams, router } from 'expo-router';
 import React, { useEffect } from 'react';
 import { View, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';

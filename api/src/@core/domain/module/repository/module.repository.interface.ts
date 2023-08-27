@@ -1,13 +1,13 @@
 import {
-  FindAllByProgrammingLanguageDTO,
-  FindByIdDTO,
-} from '../dto/find-all-by-programming-language.dto';
+  FindAllModulesByProgrammingLanguageDTO,
+  FindModuleByIdDTO,
+} from '../dto/module.dto';
 import { Module } from '../entity/module.entity';
 
 export interface IModuleRepository {
   findAll(userId: string): Promise<Module[]>;
-  findById({}: FindByIdDTO): Promise<Module | null>;
-  findAllByProgrammingLanguageId({}: FindAllByProgrammingLanguageDTO): Promise<
+  findById({}: FindModuleByIdDTO): Promise<Module | null>;
+  findAllByProgrammingLanguageId({}: FindAllModulesByProgrammingLanguageDTO): Promise<
     Module[]
   >;
 }

@@ -1,7 +1,7 @@
 import {
-  FindAllByProgrammingLanguageDTO,
-  FindByIdDTO,
-} from '@domain/module/dto/find-all-by-programming-language.dto';
+  FindAllModulesByProgrammingLanguageDTO,
+  FindModuleByIdDTO,
+} from '@domain/module/dto/module.dto';
 import { Module } from '@domain/module/entity/module.entity';
 import { ModuleFactory } from '@domain/module/factory/module.factory';
 import { IModuleRepository } from '@domain/module/repository/module.repository.interface';
@@ -13,7 +13,7 @@ export class ModuleRepository implements IModuleRepository {
   async findAllByProgrammingLanguageId({
     programmingLanguageId,
     userId,
-  }: FindAllByProgrammingLanguageDTO): Promise<Module[]> {
+  }: FindAllModulesByProgrammingLanguageDTO): Promise<Module[]> {
     const modules = await this.prisma.module.findMany({
       orderBy: {
         orderNumber: 'asc',
@@ -81,7 +81,7 @@ export class ModuleRepository implements IModuleRepository {
     return ModuleFactory.convertMany(modules);
   }
 
-  async findById({ id, userId }: FindByIdDTO): Promise<Module | null> {
+  async findById({ id, userId }: FindModuleByIdDTO): Promise<Module | null> {
     const module = await this.prisma.module.findUnique({
       where: {
         id,
