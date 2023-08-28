@@ -1,13 +1,8 @@
 import { Text } from '@/components/shared/Text';
 import { Images } from '@/core/constants/images';
 import clsx from 'clsx';
-import {
-  Image,
-  Touchable,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Link } from 'expo-router';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Auth() {
@@ -31,7 +26,7 @@ export default function Auth() {
             classNameP="text-center text-xl tracking-wider text-[#8EABAF]"
             weight="medium"
           >
-            Aprenda programar{'\n'}da forma mais divertida!
+            Aprenda a programar da{'\n'} forma divertida!
           </Text>
         </View>
         <TouchableOpacity
@@ -70,9 +65,11 @@ export default function Auth() {
           <Text weight="medium">Apple</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity className="opacity-80 h-10 w-72 bg-white flex flex-row items-center justify-center rounded-lg">
-          <Text weight="medium">Já possuo uma conta</Text>
-        </TouchableOpacity>
+        <Link href={'/auth/login'} asChild>
+          <TouchableOpacity className="opacity-80 h-10 w-72 bg-white flex flex-row items-center justify-center rounded-lg">
+            <Text weight="medium">Já possuo uma conta</Text>
+          </TouchableOpacity>
+        </Link>
       </SafeAreaView>
     </View>
   );

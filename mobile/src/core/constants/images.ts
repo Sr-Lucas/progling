@@ -8,3 +8,10 @@ export const Images = {
   check: require('@/../assets/images/pngs/check-small.png'),
   cross: require('@/../assets/images/pngs/cross-small.png'),
 };
+
+export const ImagesSvg = {
+  lock: require('@/../assets/images/svgs/lock.svg'),
+  user: require('@/../assets/images/svgs/user.svg'),
+  eye: require('@/../assets/images/svgs/eye.svg'),
+  eyeHide: require('@/../assets/images/svgs/eye-hide.svg'),
+};

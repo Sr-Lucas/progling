@@ -20,7 +20,12 @@ module.exports = {
         systemColor: {
           success: "#26D04C",
           danger: "#FF3B30",
-          warning: "#F45757",
+          warning: {
+            100: '#FFD54F',
+            200: '#FFCA28',
+            300: '#FBB96D',
+            800: '#F45757',
+          },
         },
         grey: {
           100: "#FAFAFA",
