@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "#83CFB6",
-        secondary: "#F9FCDD",
+        secondary: "#F99E4D",
         primaryGradient: "linear-gradient(137deg, #094851 0%, #047A78 100%)",
         primaryTint: {
           100: "#C6E9DD",
@@ -33,6 +33,7 @@ module.exports = {
           800: "#4B585E",
         },
         background: "#FCFCFC",
+        backgroundSecondary: "#08424A",
       }
     },
   },

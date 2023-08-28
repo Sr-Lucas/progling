@@ -10,7 +10,7 @@ import { useGameStore } from '@/core/store/games/game.store';
 
 export default function LevelView() {
   const { level, module, getLevelById } = useLevelStore();
-  const { games, setCurrentGame, setGames, resolveGameNavigationByGameType } =
+  const { setCurrentGame, setGames, resolveGameNavigationByGameType } =
     useGameStore();
 
   const { id } = useGlobalSearchParams();

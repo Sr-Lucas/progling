@@ -1,9 +1,18 @@
-import { Stack } from 'expo-router';
+import { Slot, SplashScreen, Stack } from 'expo-router';
 import '../../global.css';
 import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
+
+export const unstable_settings = {
+  // Ensure that reloading on `/modal` keeps a back button present.
+  initialRouteName: 'auth',
+};
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
+SplashScreen.preventAutoHideAsync();
 
 export default function () {
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, error] = useFonts({
     'mplus-black': require('@/../assets/fonts/MPLUSRounded1c-Black.ttf'),
     'mplus-bold': require('@/../assets/fonts/MPLUSRounded1c-Bold.ttf'),
     'mplus-light': require('@/../assets/fonts/MPLUSRounded1c-Light.ttf'),
@@ -13,13 +22,25 @@ export default function () {
     'mplus-extra-bold': require('@/../assets/fonts/MPLUSRounded1c-ExtraBold.ttf'),
   });
 
-  if (!fontsLoaded) return <></>;
+  useEffect(() => {
+    if (error) throw error;
+  }, [error]);
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
 
   return (
     <Stack
       screenOptions={{
         headerShown: false,
       }}
-    />
+    >
+      <Stack.Screen name="index" redirect />
+    </Stack>
   );
 }
