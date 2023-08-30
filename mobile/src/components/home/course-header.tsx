@@ -1,5 +1,5 @@
 import { Images } from '@/core/constants/images';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import clsx from 'clsx';
 import { View } from 'react-native';
 import { CircularProgressIndicator } from './circular-progress-indicator';

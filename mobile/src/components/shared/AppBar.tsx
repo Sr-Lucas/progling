@@ -1,9 +1,17 @@
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Images } from '@/core/constants/images';
 import { Text } from '@/components/shared/Text';
+import { useAuth } from '@/core/context/auth.context';
 
 export default function AppBar() {
+  const { signOut } = useAuth();
+
+  const logOut = () => {
+    console.log('logout');
+    signOut();
+  };
+
   return (
     <LinearGradient
       colors={['#83CFB6', '#1CAE7E']}
@@ -23,9 +31,11 @@ export default function AppBar() {
           3
         </Text>
       </View>
-      <Text classNameP="text-xl text-white" weight="bold">
-        Prog:Ling
-      </Text>
+      <TouchableOpacity onPress={() => logOut()}>
+        <Text classNameP="text-xl text-white" weight="bold">
+          Prog:Ling
+        </Text>
+      </TouchableOpacity>
       <View className="flex flex-row items-center">
         <View className="flex items-end">
           <View className="flex flex-row items-end">

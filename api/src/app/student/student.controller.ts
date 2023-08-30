@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Req,
   HttpStatus,
   HttpCode,
 } from '@nestjs/common';
@@ -18,8 +17,14 @@ export class StudentController {
 
   @Public()
   @Post('register')
-  create(@Body() createStudentDto: CreateStudentDto) {
-    return this.studentService.create(createStudentDto);
+  async create(@Body() createStudentDto: CreateStudentDto) {
+    await this.studentService.create(createStudentDto);
+    const auth = await this.studentService.signIn(
+      createStudentDto.email,
+      createStudentDto.password,
+    );
+
+    return auth;
   }
 
   @Get('me')

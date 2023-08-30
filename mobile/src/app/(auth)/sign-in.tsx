@@ -65,7 +65,7 @@ export default function Auth() {
           <Text weight="medium">Apple</Text>
         </TouchableOpacity>
 
-        <Link href={'/auth/login'} asChild>
+        <Link href={'/(auth)/login'} asChild>
           <TouchableOpacity className="opacity-80 h-10 w-72 bg-white flex flex-row items-center justify-center rounded-lg">
             <Text weight="medium">Já possuo uma conta</Text>
           </TouchableOpacity>

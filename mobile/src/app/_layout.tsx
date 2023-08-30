@@ -1,12 +1,8 @@
 import { Slot, SplashScreen, Stack } from 'expo-router';
 import '../../global.css';
 import { useFonts } from 'expo-font';
-import { useEffect } from 'react';
-
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: 'auth',
-};
+import React, { useEffect } from 'react';
+import { AuthProvider } from '@/core/context/auth.context';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -32,15 +28,15 @@ export default function () {
     }
   }, [fontsLoaded]);
 
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded) return <Slot />;
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="index" redirect />
-    </Stack>
+    <AuthProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
+    </AuthProvider>
   );
 }

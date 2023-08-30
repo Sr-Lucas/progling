@@ -18,9 +18,9 @@ export const gameStore = combine({ ...initialState }, (set) => ({
   resolveGameNavigationByGameType(gameType: string) {
     switch (gameType) {
       case 'TrueFalseGame':
-        return '/games/TrueFalseGame';
+        return '/levels/games/TrueFalseGame';
       default:
-        return '/games/TrueFalseGame';
+        return '/levels/games/TrueFalseGame';
     }
   },
 }));

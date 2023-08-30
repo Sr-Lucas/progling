@@ -26,9 +26,9 @@ POST {{baseUrl}}/auth/student/register
 content-type: application/json
 
 {
-    "email": "john@doe.com",
-    "name": "John Doe",
-    "password": "$2b$10$"
+    "email": "lucas@test.tst",
+    "name": "Lucas Santos",
+    "password": "Teste123@"
 }
 
 

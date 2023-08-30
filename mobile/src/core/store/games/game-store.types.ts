@@ -5,7 +5,7 @@ export type GameState = {
   currentGame: MiniGame | null;
 };
 
-export type GameRoutes = '/games/TrueFalseGame';
+export type GameRoutes = '/levels/games/TrueFalseGame';
 
 export type IGameStore = GameState & {
   setGames(games: MiniGame[]): void;
