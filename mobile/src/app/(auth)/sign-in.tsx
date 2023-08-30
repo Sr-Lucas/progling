@@ -1,75 +1,134 @@
+import { LoginTextField } from '@/components/login/LoginTextField';
+import DefaultAppBar from '@/components/shared/DefaultAppBar';
 import { Text } from '@/components/shared/Text';
 import { Images } from '@/core/constants/images';
+import { useAuthStore } from '@/core/store/auth/auth.store';
 import clsx from 'clsx';
-import { Link } from 'expo-router';
-import { Image, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react';
+import { View, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 
-export default function Auth() {
+export default function Login() {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const { isLoading, signIn } = useAuthStore();
+
+  const onSubmit = async () => {
+    await signIn({ email, password });
+  };
+
   return (
-    <View className="flex items-center h-screen w-full bg-backgroundSecondary">
-      <View className="w-full h-[400px] bg-white rounded-ee-xl rounded-b-[100px] relative">
-        <View className="absolute h-0 w-full flex items-center top-10">
-          <Image source={Images.loginArt} />
-        </View>
-        <View
-          className={clsx(
-            'absolute',
-            'w-full',
-            'flex',
-            'items-center',
-            'mx-auto',
-            'top-64',
-          )}
-        >
-          <Text
-            classNameP="text-center text-xl tracking-wider text-[#8EABAF]"
-            weight="medium"
+    <View className="bg-white h-full">
+      <DefaultAppBar textSize="xl" textWeight="medium" title="Entre" />
+      <SafeAreaView>
+        <View className="p-10 mt-36">
+          <View className="mb-7">
+            <LoginTextField
+              onChange={setEmail}
+              value={email}
+              icon="user"
+              placeholder="E-mail"
+              keyboardType="email-address"
+            />
+          </View>
+          <View>
+            <LoginTextField
+              onChange={setPassword}
+              value={password}
+              icon="lock"
+              placeholder="Senha"
+              keyboardType="default"
+            />
+          </View>
+          <View className="flex flex-row justify-end mt-3 mr-2">
+            <TouchableOpacity>
+              <Text classNameP="text-md text-[#8e8e8e]" weight="regular">
+                Esqueci minha senha
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            className={clsx(
+              'bg-secondary',
+              'h-11',
+              'rounded-full',
+              'flex',
+              'items-center',
+              'justify-center',
+              'mx-auto',
+              'mt-10',
+              'transition-all',
+              'duration-300',
+              isLoading ? 'w-20' : 'w-full',
+              isLoading ? 'opacity-50' : 'opacity-100',
+            )}
+            onPressOut={onSubmit}
           >
-            Aprenda a programar da{'\n'} forma divertida!
-          </Text>
-        </View>
-        <TouchableOpacity
-          className={clsx(
-            'bg-secondary',
-            'w-48',
-            'h-11',
-            'rounded-full',
-            'flex',
-            'items-center',
-            'justify-center',
-            'top-[375px]',
-            'mx-auto',
-          )}
-        >
-          <Text classNameP="text-white" weight="medium">
-            Saiba mais
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <SafeAreaView className="mt-auto mb-6 w-full flex justify-end items-center">
-        <View className="mb-4">
-          <Text classNameP="text-white" weight="medium">
-            Entre com:
-          </Text>
-        </View>
-
-        <TouchableOpacity className="h-10 w-72 bg-white flex flex-row items-center justify-center rounded-lg mb-5">
-          <Image source={Images.google} className="h-6 w-6 absolute left-5" />
-          <Text weight="medium">Google</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity className="h-10 w-72 bg-white flex flex-row items-center justify-center rounded-lg mb-5">
-          <Image source={Images.apple} className="h-6 w-6 absolute left-5" />
-          <Text weight="medium">Apple</Text>
-        </TouchableOpacity>
-
-        <Link href={'/(auth)/login'} asChild>
-          <TouchableOpacity className="opacity-80 h-10 w-72 bg-white flex flex-row items-center justify-center rounded-lg">
-            <Text weight="medium">Já possuo uma conta</Text>
+            {isLoading ? (
+              <Image
+                source={require('@/../assets/gifs/ripple-loading-light.gif')}
+                className="w-12 h-12"
+              />
+            ) : (
+              <Text classNameP="text-white" weight="medium">
+                Entrar
+              </Text>
+            )}
           </TouchableOpacity>
-        </Link>
+        </View>
+
+        <View className="flex flex-row justify-center items-center w-screen px-36">
+          <View className="h-[1px] w-full bg-gray-300 mr-3" />
+          <Text classNameP="text-grey-500">Entrar com</Text>
+          <View className="h-[1px] w-full bg-gray-300 ml-3" />
+        </View>
+
+        <View className="flex flex-row justify-center gap-5 mt-6">
+          <TouchableOpacity
+            className={clsx(
+              'bg-white',
+              'w-36',
+              'h-16',
+              'rounded-lg',
+              'flex',
+              'flex-row',
+              'justify-center',
+              'items-center',
+              'border-2',
+              'border-gray-300',
+            )}
+          >
+            <Image source={Images.google} className="h-4 w-4 mr-3" />
+            <Text>Google</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className={clsx(
+              'bg-white',
+              'w-36',
+              'h-16',
+              'rounded-lg',
+              'flex',
+              'flex-row',
+              'justify-center',
+              'items-center',
+              'border-2',
+              'border-gray-300',
+            )}
+          >
+            <Image source={Images.apple} className="h-4 w-4 mr-3" />
+            <Text>Apple</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="flex flex-row justify-center mt-6">
+          <Text classNameP="text-grey-500 text-md">Não possui uma conta? </Text>
+          <TouchableOpacity>
+            <Text classNameP="text-black" weight="medium">
+              Cadastre-se
+            </Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </View>
   );

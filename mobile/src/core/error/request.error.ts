@@ -1,15 +1,19 @@
-import { AxiosError } from "axios";
+import { AxiosError } from 'axios';
+
+type Error = {
+  message: string;
+  stack: string;
+  code: number;
+};
 
 export default class ResponseError {
   message: string;
-
+  stack: string;
   code: number;
 
-  constructor({ response, isAxiosError }: AxiosError | any) {
-    const text = response?.data?.message as string;
-    const message = text || 'An error has occurred, please try again.';
-
-    this.message = isAxiosError ? message : '';
-    this.code = response?.status || 0;
+  constructor({ message, code, stack }: Error) {
+    this.message = message;
+    this.code = code;
+    this.stack = stack;
   }
 }

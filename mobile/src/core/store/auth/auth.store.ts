@@ -37,6 +37,17 @@ const authStore = persist<IAuthStore>(
         set({ isLoading: false });
       }
     },
+    getMe: async () => {
+      try {
+        set({ isLoading: true });
+        const user = await authApi.getMe();
+        set({ user, isLoading: false });
+
+        return user;
+      } finally {
+        set({ isLoading: false });
+      }
+    },
     setUser(user: Student) {
       set({ user });
     },

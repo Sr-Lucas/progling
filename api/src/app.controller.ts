@@ -9,7 +9,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Public()
-  @Get(':filename')
+  @Get('/images/:filename')
   getImage(@Param('filename') filename: string, @Res() res: Response) {
     const imagePath = join(__dirname, '..', '..', 'public', 'images', filename);
 

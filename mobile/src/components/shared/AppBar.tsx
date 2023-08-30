@@ -2,10 +2,10 @@ import { View, Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Images } from '@/core/constants/images';
 import { Text } from '@/components/shared/Text';
-import { useAuth } from '@/core/context/auth.context';
+import { useAuthStore } from '@/core/store/auth/auth.store';
 
 export default function AppBar() {
-  const { signOut } = useAuth();
+  const { logOut: signOut } = useAuthStore();
 
   const logOut = () => {
     console.log('logout');

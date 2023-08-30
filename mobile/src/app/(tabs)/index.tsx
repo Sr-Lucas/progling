@@ -16,6 +16,10 @@ export default function Home() {
     getModulesByLanguageId('7506837e-3f60-4b11-99a0-98f131854999');
   }, []);
 
+  useEffect(() => {
+    console.log('modules', modules);
+  }, [modules]);
+
   return (
     <ScrollView className="w-full">
       <StatusBar style="light" backgroundColor="transparent" translucent />

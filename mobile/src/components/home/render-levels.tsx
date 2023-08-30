@@ -39,8 +39,11 @@ export function RenderLevels({ modules }: Props) {
 
         if (
           level.levelProgress === 0 &&
+          index > 0 &&
           module.levels[index - 1].levelProgress > 0
         ) {
+          levelStatus = 'doing';
+        } else if (index == 0 && module.levels[index].levelProgress === 0) {
           levelStatus = 'doing';
         }
 

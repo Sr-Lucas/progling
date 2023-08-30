@@ -16,7 +16,11 @@ export class AuthApi implements IAuthApi {
 
       return response.data;
     } catch (e) {
-      throw new ResponseError(e);
+      throw new ResponseError({
+        message: 'Login error',
+        stack: 'AuthApi',
+        code: 401,
+      });
     }
   }
 
@@ -30,11 +34,26 @@ export class AuthApi implements IAuthApi {
 
       return response.data;
     } catch (e) {
-      throw new ResponseError(e);
+      throw new ResponseError({
+        message: 'Register error',
+        stack: 'AuthApi',
+        code: 401,
+      });
     }
   }
 
-  async getMe(): Promise<void> {
-    throw new Error('Method not implemented.');
+  async getMe(): Promise<Student> {
+    try {
+      const response = await request.get<Student>('/auth/student/me');
+
+      return response.data;
+    } catch (e) {
+      console.log(e);
+      throw new ResponseError({
+        message: 'Get me error',
+        stack: 'AuthApi',
+        code: 401,
+      });
+    }
   }
 }

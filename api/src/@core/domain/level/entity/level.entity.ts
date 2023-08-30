@@ -35,7 +35,7 @@ export class Level extends Entity {
 
   calculateLevelProgress(miniGames: MiniGame[]): number {
     return miniGames.reduce((acc, miniGame) => {
-      if (miniGame.studentAnswers) {
+      if (miniGame.studentAnswers?.length ?? 0 > 0) {
         return acc + 1;
       }
 

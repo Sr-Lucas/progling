@@ -1,7 +1,7 @@
-import { Level } from "@/core/types/level.types";
-import { ILevelApi } from "./level.interface";
-import request from "../request";
-import ResponseError from "@/core/error/request.error";
+import { Level } from '@/core/types/level.types';
+import { ILevelApi } from './level.interface';
+import request from '../request';
+import ResponseError from '@/core/error/request.error';
 
 export class LevelApi implements ILevelApi {
   async findOne(id: string): Promise<Level> {
@@ -10,7 +10,11 @@ export class LevelApi implements ILevelApi {
 
       return response.data;
     } catch (e) {
-      throw new ResponseError(e);
+      throw new ResponseError({
+        message: 'Get level error',
+        stack: 'LevelApi',
+        code: (e as any).response?.status ?? 400,
+      });
     }
   }
 }

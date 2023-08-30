@@ -1,6 +1,6 @@
 import { FindLevelByIdDTO } from '@domain/level/dto/level.dto';
 import { Level } from '@domain/level/entity/level.entity';
-import { LevelFactory } from '@domain/level/factory/level.factory';
+import { LevelFactory, LevelType } from '@domain/level/factory/level.factory';
 import { ILevelRepository } from '@domain/level/repository/level.repository.interface';
 import { PrismaService } from 'src/services/prisma.service';
 
@@ -20,25 +20,7 @@ export class LevelRepository implements ILevelRepository {
       },
       include: {
         miniGames: {
-          where: {
-            studentAnswers: {
-              every: {
-                studentId: userId,
-              },
-            },
-          },
           include: {
-            studentAnswers: {
-              include: {
-                codeCompletionMiniGameStudentAnswer: true,
-                codeOrderingMiniGameStudentAnswer: {
-                  include: {
-                    answer: true,
-                  },
-                },
-                trueFalseMiniGameStudentAnswer: true,
-              },
-            },
             trueFalseMiniGame: true,
             codeCompletionMiniGame: {
               include: {
@@ -53,6 +35,21 @@ export class LevelRepository implements ILevelRepository {
           },
         },
       },
+    });
+
+    if (!level) return null;
+
+    const levelT = level as LevelType;
+
+    levelT.miniGames?.map(async (miniGame) => {
+      const answers = await this.prisma.studentAnswer.findMany({
+        where: {
+          miniGameId: miniGame.id,
+          studentId: userId,
+        },
+      });
+
+      miniGame.studentAnswers = answers;
     });
 
     return LevelFactory.convertOne(level);

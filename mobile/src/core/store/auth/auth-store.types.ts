@@ -13,4 +13,5 @@ export type IAuthStore = AuthState & {
   setUser: (user: Student) => void;
   setToken: (token: string) => void;
   logOut: () => void;
+  getMe: () => Promise<Student | undefined>;
 };

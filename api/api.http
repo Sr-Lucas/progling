@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3000
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTY5MzE2MzQ4OSwiZXhwIjoxNjkzMjQ5ODg5fQ.9F1vGmWh2O2FPWiCILaO9y16kZ0KlSWXOY0RBxY167A
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MWM4NDg1YS1mMjc2LTQ0ZTgtYmI5Ny1lNTFlM2YyODBkNjIiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsImlhdCI6MTY5MzQzMTY1NywiZXhwIjoxNjkzNTE4MDU3fQ.zcyVwqkQYwF-f6lwMuJ5velVEUMjC-5SRjZ4gPmmlSA
 
 
 ### Helath Check
@@ -17,8 +17,8 @@ POST {{baseUrl}}/auth/student
 content-type: application/json
 
 {
-    "email": "john@doe.com",
-    "password": "$2b$10$"
+    "email": "lucas@test.tst",
+    "password": "Teste123@"
 }
 
 ###
@@ -36,33 +36,33 @@ content-type: application/json
 
 ### Programming Languages
 GET {{baseUrl}}/programming-languages
-Authorization: Bearer {{{authToken}}}
+Authorization: Bearer {{authToken}}
 
 ###
 GET {{baseUrl}}/programming-languages/7506837e-3f60-4b11-99a0-98f131854999
-Authorization: Bearer {{{authToken}}}
+Authorization: Bearer {{authToken}}
 
 
 
 
 ### Modules
 GET {{baseUrl}}/modules
-Authorization: Bearer {{{authToken}}}
+Authorization: Bearer {{authToken}}
 
 ###
 GET {{baseUrl}}/modules/1
-Authorization: Bearer {{{authToken}}}
+Authorization: Bearer {{authToken}}
 
 ###
 GET {{baseUrl}}/programming-languages/7506837e-3f60-4b11-99a0-98f131854999/modules
-Authorization: Bearer {{{authToken}}}
+Authorization: Bearer {{authToken}}
 
 
 
 
 ### Levels
 GET {{baseUrl}}/levels/1
-Authorization: Bearer {{{authToken}}}
+Authorization: Bearer {{authToken}}
 
 
 
