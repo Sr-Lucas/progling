@@ -4,6 +4,7 @@ import { CodeOrderingMiniGameOption } from '../object-value/code-ordering-miniga
 export class CodeOrderingMiniGame extends MiniGame {
   constructor(
     private _options: CodeOrderingMiniGameOption[],
+    private miniGameId: string,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -23,7 +24,7 @@ export class CodeOrderingMiniGame extends MiniGame {
 
   toJSON(): any {
     return {
-      id: this.id,
+      id: this.miniGameId,
       options: this.options.map((option) => option.toJSON()),
       type: MiniGameEnum.CODE_ORDERING,
       studentAnswers: this.studentAnswers?.map((answer) => answer.toJSON()),

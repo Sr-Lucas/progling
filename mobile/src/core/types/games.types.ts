@@ -1,3 +1,8 @@
+export type AnswerGameDTO = {
+  answer: AnswerType;
+  gameId: string;
+};
+
 export type MiniGameType = 'TRUE_FALSE' | 'CODE_COMPLETION' | 'CODE_ORDERING';
 
 export type MiniGame = {

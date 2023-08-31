@@ -5,6 +5,7 @@ export class CodeCompletionMiniGame extends MiniGame {
   constructor(
     private _code: string,
     private _options: CodeCompletionMiniGameOption[],
+    private miniGameId: string,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -22,7 +23,7 @@ export class CodeCompletionMiniGame extends MiniGame {
 
   toJSON(): any {
     return {
-      id: this.id,
+      id: this.miniGameId,
       code: this.code,
       type: MiniGameEnum.CODE_COMPLETION,
       studentAnswers: this.studentAnswers?.map((studentAnswer) =>

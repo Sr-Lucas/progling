@@ -1,4 +1,4 @@
-import { MiniGame } from '@/core/types/games.types';
+import { AnswerType, MiniGame } from '@/core/types/games.types';
 
 export type GameState = {
   games: MiniGame[];
@@ -11,4 +11,5 @@ export type IGameStore = GameState & {
   setGames(games: MiniGame[]): void;
   setCurrentGame(game: MiniGame): void;
   resolveGameNavigationByGameType(gameType: string): GameRoutes;
+  submitGameAnswer(answer: AnswerType): Promise<void>;
 };

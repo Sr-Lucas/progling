@@ -9,6 +9,7 @@ import { useGameStore } from '@/core/store/games/game.store';
 import { Sounds } from '@/core/constants/sounds';
 import { useState } from 'react';
 import { Colors } from '@/core/constants/colors';
+import { useModuleStore } from '@/core/store/modules/module.store';
 
 export default function TrueFalseGame() {
   const {
@@ -17,7 +18,9 @@ export default function TrueFalseGame() {
     setCurrentGame,
     setGames,
     resolveGameNavigationByGameType,
+    submitGameAnswer,
   } = useGameStore();
+  const { getModulesByLanguageId } = useModuleStore();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [gameState, setGameState] = useState(0);
   const [userAnswer, setUserAnswer] = useState<boolean | null>(null);
@@ -54,8 +57,22 @@ export default function TrueFalseGame() {
 
       setIsSubmitted(true);
       setGameState(1);
-    } else {
-      // TODO: Navigate to next game
+    } else if (userAnswer !== null && currentGame) {
+      await submitGameAnswer(userAnswer);
+
+      const nextGameIndex = games.findIndex((g) => g.id === currentGame.id) + 1;
+      const nextGame = games[nextGameIndex];
+
+      console.log('nextGame', nextGame);
+
+      if (nextGame) {
+        setCurrentGame(nextGame);
+      } else {
+        getModulesByLanguageId('7506837e-3f60-4b11-99a0-98f131854999');
+        router.back();
+        return;
+      }
+      router.replace(resolveGameNavigationByGameType(currentGame.type));
     }
   }
 

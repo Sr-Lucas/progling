@@ -7,7 +7,6 @@ import { RenderLevels } from '@/components/home/render-levels';
 import { RenderGridPoints } from '@/components/home/render-points';
 import { useModuleStore } from '@/core/store/modules/module.store';
 import { useEffect } from 'react';
-import { useAuth } from '@/core/context/auth.context';
 
 export default function Home() {
   const { getModulesByLanguageId, modules } = useModuleStore();

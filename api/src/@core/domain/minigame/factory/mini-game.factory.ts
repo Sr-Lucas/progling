@@ -66,6 +66,7 @@ export class MiniGameFactory {
       const trueFalseGame = new TrueFalseMiniGame(
         miniGame.trueFalseMiniGame.question,
         miniGame.trueFalseMiniGame.correctAnswer,
+        miniGame.id,
         miniGame.trueFalseMiniGame.id,
         miniGame.trueFalseMiniGame.createdAt,
         miniGame.trueFalseMiniGame.updatedAt,
@@ -103,6 +104,7 @@ export class MiniGameFactory {
       const codeCompletion = new CodeCompletionMiniGame(
         miniGame.codeCompletionMiniGame.code,
         options,
+        miniGame.id,
         miniGame.codeCompletionMiniGame.id,
         miniGame.codeCompletionMiniGame.createdAt,
         miniGame.codeCompletionMiniGame.updatedAt,
@@ -131,6 +133,7 @@ export class MiniGameFactory {
 
       const codeOrderingMiniGame = new CodeOrderingMiniGame(
         options,
+        miniGame.id,
         miniGame.codeOrderingMiniGame.id,
         miniGame.codeOrderingMiniGame.createdAt,
         miniGame.codeOrderingMiniGame.updatedAt,

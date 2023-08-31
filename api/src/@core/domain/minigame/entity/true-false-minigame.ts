@@ -4,6 +4,7 @@ export class TrueFalseMiniGame extends MiniGame {
   constructor(
     private _question: string,
     private _correctAnswer: boolean,
+    private miniGameId: string,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -21,7 +22,7 @@ export class TrueFalseMiniGame extends MiniGame {
 
   toJSON(): any {
     return {
-      id: this.id,
+      id: this.miniGameId,
       question: this.question,
       studentAnswers: this.studentAnswers?.map((studentAnswer) =>
         studentAnswer.toJSON(),
