@@ -48,7 +48,33 @@ export class StudentService {
 
     return {
       accessToken: await this.jwtService.signAsync(payload),
+      refreshToken: await this.jwtService.signAsync(
+        { ...payload, refresh: true },
+        {
+          expiresIn: '7d',
+        },
+      ),
       user,
     };
+  }
+
+  async refresh(refreshToken: string) {
+    try {
+      const payload = await this.jwtService.verifyAsync(refreshToken);
+
+      if (!payload.refresh) {
+        throw new UnauthorizedException();
+      }
+
+      return {
+        accessToken: await this.jwtService.signAsync({
+          sub: payload.sub,
+          username: payload.username,
+        }),
+        refreshToken,
+      };
+    } catch (_) {
+      throw new UnauthorizedException();
+    }
   }
 }

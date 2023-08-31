@@ -4,6 +4,7 @@ import { AuthState, IAuthStore } from './auth-store.types';
 import { create } from 'zustand';
 import { authApi } from '@/core/api';
 import { zustandMMKVStorage } from '../../adapters/mmkv.adapter';
+import ResponseError from '@/core/error/request.error';
 
 const initialState: AuthState = {
   user: null,
@@ -13,13 +14,19 @@ const initialState: AuthState = {
 };
 
 const authStore = persist<IAuthStore>(
-  (set) => ({
+  (set, get) => ({
     ...initialState,
     signIn: async ({ email, password }) => {
       try {
         set({ isLoading: true });
         const auth = await authApi.signIn({ email, password });
-        set({ token: auth.accessToken, user: auth.user, isLoading: false });
+        console.log(auth);
+        set({
+          token: auth.accessToken,
+          refreshToken: auth.refreshToken,
+          user: auth.user,
+          isLoading: false,
+        });
       } finally {
         set({ isLoading: false });
       }
@@ -32,7 +39,34 @@ const authStore = persist<IAuthStore>(
           name,
           password,
         });
-        set({ user: auth.user, token: auth.accessToken, isLoading: false });
+        set({
+          user: auth.user,
+          token: auth.accessToken,
+          refreshToken: auth.refreshToken,
+          isLoading: false,
+        });
+      } finally {
+        set({ isLoading: false });
+      }
+    },
+    refreshAccessToken: async () => {
+      try {
+        set({ isLoading: true });
+        console.log('refreshingAccessToken');
+        const refresh = await authApi.refreshToken(get().refreshToken ?? '');
+        console.log('refreshed');
+        set({
+          token: refresh.accessToken,
+          refreshToken: refresh.refreshToken,
+          isLoading: false,
+        });
+      } catch (e) {
+        console.log('error refresh');
+        if (e instanceof ResponseError) {
+          if (e.code === 401) {
+            get().logOut();
+          }
+        }
       } finally {
         set({ isLoading: false });
       }

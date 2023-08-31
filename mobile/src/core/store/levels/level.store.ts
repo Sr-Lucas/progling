@@ -15,7 +15,9 @@ export const levelStore = combine({ ...initialState }, (set) => ({
     set({ module });
   },
   getLevelById: async (id: string): Promise<void> => {
+    console.log('getLevelById');
     const level = await levelApi.findOne(id);
+    console.log('level Getted: ', level);
 
     set({ level });
   },

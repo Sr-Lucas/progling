@@ -35,19 +35,19 @@ export class ModuleApi implements IModuleApi {
   }
 
   async findByLanguageId(id: string): Promise<Module[]> {
-    try {
-      console.log(request.defaults.headers);
-      const response = await request.get<Module[]>(
-        `programming-languages/${id}/modules`,
-      );
+    // try {
+    const response = await request.get<Module[]>(
+      `programming-languages/${id}/modules`,
+    );
 
-      return response.data;
-    } catch (e) {
-      throw new ResponseError({
-        message: 'Get modules error',
-        stack: 'ModuleApi',
-        code: (e as any).response?.status ?? 400,
-      });
-    }
+    return response.data;
+    // } catch (e) {
+    //   console.log(e);
+    //   throw new ResponseError({
+    //     message: 'Get modules error',
+    //     stack: 'ModuleApi',
+    //     code: (e as any).response?.status ?? 400,
+    //   });
+    // }
   }
 }

@@ -38,4 +38,11 @@ export class StudentController {
   signIn(@Body() signInDto: Record<string, any>) {
     return this.studentService.signIn(signInDto.email, signInDto.password);
   }
+
+  @Public()
+  @HttpCode(HttpStatus.OK)
+  @Post('refresh')
+  refresh(@Body() refreshDto: Record<string, any>) {
+    return this.studentService.refresh(refreshDto.refreshToken);
+  }
 }

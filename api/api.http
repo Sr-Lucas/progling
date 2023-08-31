@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MWM4NDg1YS1mMjc2LTQ0ZTgtYmI5Ny1lNTFlM2YyODBkNjIiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsImlhdCI6MTY5MzQzMTY1NywiZXhwIjoxNjkzNTE4MDU3fQ.zcyVwqkQYwF-f6lwMuJ5velVEUMjC-5SRjZ4gPmmlSA
-
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MWM4NDg1YS1mMjc2LTQ0ZTgtYmI5Ny1lNTFlM2YyODBkNjIiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsImlhdCI6MTY5MzQzNDUzOSwiZXhwIjoxNjkzNTIwOTM5fQ.ZtiBm2XqhdkSYhmBihgi_ueAzHi-PTJOJv7vsuyWtcg
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MWM4NDg1YS1mMjc2LTQ0ZTgtYmI5Ny1lNTFlM2YyODBkNjIiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsInJlZnJlc2giOnRydWUsImlhdCI6MTY5MzQzNDE4OCwiZXhwIjoxNjk0MDM4OTg4fQ.b8w8CoI8PXICBHUTBvhBM21WUku3pwkprzqXTUusRFQ
 
 ### Helath Check
 GET {{baseUrl}}/
@@ -19,6 +19,14 @@ content-type: application/json
 {
     "email": "lucas@test.tst",
     "password": "Teste123@"
+}
+
+###
+POST {{baseUrl}}/auth/student/refresh
+content-type: application/json
+
+{
+    "refreshToken": "{{refreshToken}}"
 }
 
 ###

@@ -8,7 +8,6 @@ export default function AppBar() {
   const { logOut: signOut } = useAuthStore();
 
   const logOut = () => {
-    console.log('logout');
     signOut();
   };
 

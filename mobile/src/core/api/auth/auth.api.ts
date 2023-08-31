@@ -1,7 +1,7 @@
 import ResponseError from '@/core/error/request.error';
 import request from '../request';
 import { IAuthApi } from './auth.interface';
-import { Auth } from '@/core/types/auth.types';
+import { Auth, Refresh } from '@/core/types/auth.types';
 import { SignInDTO, SignUpDTO, Student } from '@/core/types/user.types';
 
 export class AuthApi implements IAuthApi {
@@ -19,7 +19,7 @@ export class AuthApi implements IAuthApi {
       throw new ResponseError({
         message: 'Login error',
         stack: 'AuthApi',
-        code: 401,
+        code: (e as any).response.status,
       });
     }
   }
@@ -37,7 +37,7 @@ export class AuthApi implements IAuthApi {
       throw new ResponseError({
         message: 'Register error',
         stack: 'AuthApi',
-        code: 401,
+        code: (e as any).response.status,
       });
     }
   }
@@ -52,7 +52,23 @@ export class AuthApi implements IAuthApi {
       throw new ResponseError({
         message: 'Get me error',
         stack: 'AuthApi',
-        code: 401,
+        code: (e as any).response.status,
+      });
+    }
+  }
+
+  async refreshToken(refreshToken: string): Promise<Refresh> {
+    try {
+      const response = await request.post<Refresh>('/auth/student/refresh', {
+        refreshToken,
+      });
+
+      return response.data;
+    } catch (e) {
+      throw new ResponseError({
+        message: 'Refresh token error',
+        stack: 'AuthApi',
+        code: (e as any).response.status,
       });
     }
   }

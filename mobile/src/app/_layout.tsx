@@ -19,21 +19,49 @@ export default function () {
     'mplus-thin': require('@/../assets/fonts/MPLUSRounded1c-Thin.ttf'),
     'mplus-extra-bold': require('@/../assets/fonts/MPLUSRounded1c-ExtraBold.ttf'),
   });
-  const { token, user, getMe } = useAuthStore();
+  const { token, user, getMe, logOut, refreshAccessToken } = useAuthStore();
 
   useEffect(() => {
     const inAuthGroup = segments[0] === '(auth)';
 
+    console.log('token updated');
     request.defaults.headers.Authorization = `Bearer ${token}`;
 
-    if (!token && !inAuthGroup) {
-      router.replace('/(auth)/');
-    }
+    setTimeout(() => {
+      if (!token && !inAuthGroup) {
+        router.replace('/(auth)/');
+      }
 
-    if (token && inAuthGroup) {
-      router.replace('/(tabs)/');
-    }
+      if (token && inAuthGroup) {
+        router.replace('/(tabs)/');
+      }
+    }, 300);
   }, [token, segments]);
+
+  let isRefreshing = false;
+
+  request.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalConfig = error.config;
+      if (error.response && !isRefreshing) {
+        if (error.response.status === 401) {
+          // isRefreshing = true;
+          // setTimeout(() => {
+          //   isRefreshing = false;
+          // }, 30 * 1000); // 30 seconds
+
+          // await refreshAccessToken();
+
+          logOut();
+
+          return null;
+        }
+
+        return Promise.reject(error);
+      }
+    },
+  );
 
   useEffect(() => {
     if (error) throw error;

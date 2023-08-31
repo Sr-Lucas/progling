@@ -5,16 +5,8 @@ import ResponseError from '@/core/error/request.error';
 
 export class LevelApi implements ILevelApi {
   async findOne(id: string): Promise<Level> {
-    try {
-      const response = await request.get<Level>(`/levels/${id}`);
+    const response = await request.get<Level>(`/levels/${id}`);
 
-      return response.data;
-    } catch (e) {
-      throw new ResponseError({
-        message: 'Get level error',
-        stack: 'LevelApi',
-        code: (e as any).response?.status ?? 400,
-      });
-    }
+    return response.data;
   }
 }

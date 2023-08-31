@@ -10,6 +10,7 @@ export type AuthState = {
 export type IAuthStore = AuthState & {
   signIn: ({}: SignInDTO) => Promise<void>;
   signUp: ({}: SignUpDTO) => Promise<void>;
+  refreshAccessToken: () => Promise<void>;
   setUser: (user: Student) => void;
   setToken: (token: string) => void;
   logOut: () => void;
