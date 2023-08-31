@@ -28,6 +28,8 @@ export function RenderLevels({ modules }: Props) {
     const levelMT = levelH + 6;
 
     return modules.map((module, index) => {
+      const isFirstModule = index === 0;
+
       const levels = module.levels.map((level, index) => {
         const isLast = index === module.levels.length - 1;
 
@@ -78,6 +80,14 @@ export function RenderLevels({ modules }: Props) {
         moduleStatus = 'doing';
       }
 
+      const isLastModuleDone =
+        modules[modules.length - 1].doneLevels ===
+        modules[modules.length - 1].numberOfLevels;
+
+      if (!isLastModuleDone) {
+        moduleStatus = 'doing';
+      }
+
       return (
         <View
           key={module.id}
@@ -86,8 +96,12 @@ export function RenderLevels({ modules }: Props) {
             marginTop: index === 0 ? firstModuleMT : moduleMT,
           }}
         >
-          <ModuleC status={moduleStatus} showLine={moduleHasLevels} />
-
+          <ModuleC
+            status={moduleStatus}
+            showLine={moduleHasLevels}
+            doneLevels={module.doneLevels}
+            maxLevels={module.numberOfLevels}
+          />
           {levels}
         </View>
       );

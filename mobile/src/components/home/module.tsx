@@ -8,9 +8,16 @@ import Svg, { Line } from 'react-native-svg';
 type props = {
   status: 'doing' | 'done' | 'blocked';
   showLine?: boolean;
+  doneLevels: number;
+  maxLevels: number;
 };
 
-export function Module({ status, showLine = true }: props) {
+export function Module({
+  status,
+  doneLevels,
+  maxLevels,
+  showLine = true,
+}: props) {
   console.log('status', status);
 
   const icon = {
@@ -91,7 +98,7 @@ export function Module({ status, showLine = true }: props) {
         <View className={clsx('mb-0', '-rotate-90')}>
           {status === 'doing' ? (
             <Text weight="medium" classNameP="text-white text-lg">
-              1/3
+              {doneLevels}/{maxLevels}
             </Text>
           ) : (
             <Feather name={icon[status] as any} size={20} color="white" />
