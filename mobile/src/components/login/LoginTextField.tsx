@@ -14,8 +14,9 @@ type Props = {
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
-  icon: keyof typeof ImagesSvg;
+  trailingIcon?: keyof typeof ImagesSvg;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
+  isSecure?: boolean;
 };
 
 export function LoginTextField({
@@ -23,14 +24,15 @@ export function LoginTextField({
   onChange,
   placeholder,
   keyboardType,
-  icon,
+  trailingIcon: icon,
+  isSecure = false,
 }: Props) {
   const [isFocused, setIsFocused] = React.useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
   return (
     <View className="relative">
-      <View className="absolute z-10 top-5 left-4">
+      <View className={clsx('absolute', 'z-10', 'top-5', icon && 'left-4')}>
         {icon === 'user' && (
           <User
             stroke={
@@ -52,7 +54,7 @@ export function LoginTextField({
         onChangeText={onChange}
         passwordRules="minlength: 8; required: lower; required: upper; required: digit;"
         textContentType={icon === 'user' ? 'username' : 'password'}
-        secureTextEntry={icon === 'lock' && !isPasswordVisible}
+        secureTextEntry={isSecure && !isPasswordVisible}
         placeholder={placeholder}
         cursorColor={Colors.systemColor.warning[300]}
         focusable={true}
@@ -73,7 +75,8 @@ export function LoginTextField({
           'h-16',
           'rounded-3xl',
           'p-4',
-          'px-12',
+          icon && 'px-12',
+          isSecure ? 'pr-12' : '',
           'focus:border-1',
           'focus:border-systemColor-warning-300',
         )}
@@ -83,7 +86,7 @@ export function LoginTextField({
         className={clsx(
           'absolute',
           'right-4',
-          icon === 'user' ? 'hidden' : '',
+          !isSecure ? 'hidden' : '',
           isPasswordVisible ? 'top-[23.2px]' : 'top-[25px]',
         )}
       >

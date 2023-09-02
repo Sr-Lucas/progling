@@ -4,6 +4,7 @@ import { Text } from '@/components/shared/Text';
 import { Images } from '@/core/constants/images';
 import { useAuthStore } from '@/core/store/auth/auth.store';
 import clsx from 'clsx';
+import { Link } from 'expo-router';
 import React from 'react';
 import { View, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 
@@ -26,7 +27,7 @@ export default function Login() {
             <LoginTextField
               onChange={setEmail}
               value={email}
-              icon="user"
+              trailingIcon="user"
               placeholder="E-mail"
               keyboardType="email-address"
             />
@@ -35,9 +36,10 @@ export default function Login() {
             <LoginTextField
               onChange={setPassword}
               value={password}
-              icon="lock"
+              trailingIcon="lock"
               placeholder="Senha"
               keyboardType="default"
+              isSecure
             />
           </View>
           <View className="flex flex-row justify-end mt-3 mr-2">
@@ -123,11 +125,13 @@ export default function Login() {
 
         <View className="flex flex-row justify-center mt-6">
           <Text classNameP="text-grey-500 text-md">Não possui uma conta? </Text>
-          <TouchableOpacity>
-            <Text classNameP="text-black" weight="medium">
-              Cadastre-se
-            </Text>
-          </TouchableOpacity>
+          <Link href={'/(auth)/sign-up'} asChild>
+            <TouchableOpacity>
+              <Text classNameP="text-black" weight="medium">
+                Cadastre-se
+              </Text>
+            </TouchableOpacity>
+          </Link>
         </View>
       </SafeAreaView>
     </View>
