@@ -27,8 +27,6 @@ export function RenderLevels({ modules }: Props) {
     const levelH = 30;
     const levelMT = levelH + 6;
 
-    console.log('MODULES', modules);
-
     return modules.map((module, index) => {
       const isFirstModule = index === 0;
 

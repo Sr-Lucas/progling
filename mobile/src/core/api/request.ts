@@ -3,8 +3,6 @@ import { Envs } from '../utils/envs';
 
 const baseURL = Envs.BASE_URL;
 
-console.log(baseURL);
-
 const request = axios.create({
   baseURL,
   timeout: 20000, // 20s timeout

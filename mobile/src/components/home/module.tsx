@@ -18,8 +18,6 @@ export function Module({
   maxLevels,
   showLine = true,
 }: props) {
-  console.log('status', status);
-
   const icon = {
     done: 'check',
     blocked: 'lock',

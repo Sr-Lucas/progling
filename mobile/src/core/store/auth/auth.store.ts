@@ -20,7 +20,6 @@ const authStore = persist<IAuthStore>(
       try {
         set({ isLoading: true });
         const auth = await authApi.signIn({ email, password });
-        console.log(auth);
         set({
           token: auth.accessToken,
           refreshToken: auth.refreshToken,
@@ -52,21 +51,14 @@ const authStore = persist<IAuthStore>(
     refreshAccessToken: async () => {
       try {
         set({ isLoading: true });
-        console.log('refreshingAccessToken');
         const refresh = await authApi.refreshToken(get().refreshToken ?? '');
-        console.log('refreshed');
         set({
           token: refresh.accessToken,
           refreshToken: refresh.refreshToken,
           isLoading: false,
         });
       } catch (e) {
-        console.log('error refresh');
-        if (e instanceof ResponseError) {
-          if (e.code === 401) {
-            get().logOut();
-          }
-        }
+        get().logOut();
       } finally {
         set({ isLoading: false });
       }

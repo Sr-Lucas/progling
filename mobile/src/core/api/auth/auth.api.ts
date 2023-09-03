@@ -12,8 +12,6 @@ export class AuthApi implements IAuthApi {
         password,
       });
 
-      console.log(response.data);
-
       return response.data;
     } catch (e) {
       throw new ResponseError({
@@ -48,7 +46,6 @@ export class AuthApi implements IAuthApi {
 
       return response.data;
     } catch (e) {
-      console.log(e);
       throw new ResponseError({
         message: 'Get me error',
         stack: 'AuthApi',

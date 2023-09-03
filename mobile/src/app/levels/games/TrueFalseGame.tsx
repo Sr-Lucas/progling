@@ -26,7 +26,6 @@ export default function TrueFalseGame() {
   const [userAnswer, setUserAnswer] = useState<boolean | null>(null);
 
   async function playCorrectSound() {
-    console.log('Loading Sound');
     const { sound } = await Audio.Sound.createAsync(Sounds.correct, {
       shouldPlay: true,
     });
@@ -37,7 +36,6 @@ export default function TrueFalseGame() {
   }
 
   async function playWrongSound() {
-    console.log('Loading Sound');
     const { sound } = await Audio.Sound.createAsync(Sounds.wrong, {
       shouldPlay: true,
     });
@@ -62,8 +60,6 @@ export default function TrueFalseGame() {
 
       const nextGameIndex = games.findIndex((g) => g.id === currentGame.id) + 1;
       const nextGame = games[nextGameIndex];
-
-      console.log('nextGame', nextGame);
 
       if (nextGame) {
         setCurrentGame(nextGame);

@@ -4,6 +4,7 @@ import { useFonts } from 'expo-font';
 import React, { useEffect } from 'react';
 import request from '@/core/api/request';
 import { useAuthStore } from '@/core/store/auth/auth.store';
+import { AxiosResponse } from 'axios';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -19,13 +20,10 @@ export default function () {
     'mplus-thin': require('@/../assets/fonts/MPLUSRounded1c-Thin.ttf'),
     'mplus-extra-bold': require('@/../assets/fonts/MPLUSRounded1c-ExtraBold.ttf'),
   });
-  const { token, user, getMe, logOut, refreshAccessToken } = useAuthStore();
+  const { token, logOut, refreshAccessToken } = useAuthStore();
 
   useEffect(() => {
     const inAuthGroup = segments[0] === '(auth)';
-
-    console.log('token updated');
-    request.defaults.headers.Authorization = `Bearer ${token}`;
 
     setTimeout(() => {
       if (!token && !inAuthGroup) {
@@ -38,30 +36,48 @@ export default function () {
     }, 300);
   }, [token, segments]);
 
-  let isRefreshing = false;
-
-  request.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      const originalConfig = error.config;
-      if (error.response && !isRefreshing) {
-        if (error.response.status === 401) {
-          // isRefreshing = true;
-          // setTimeout(() => {
-          //   isRefreshing = false;
-          // }, 30 * 1000); // 30 seconds
-
-          // await refreshAccessToken();
-
-          logOut();
-
-          return null;
+  useEffect(() => {
+    const requestInterceptor = request.interceptors.request.use(
+      async (config) => {
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
         }
 
+        return config;
+      },
+      (error) => {
         return Promise.reject(error);
-      }
-    },
-  );
+      },
+    );
+
+    const responseInterceptor = request.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        const originalConfig = error.config;
+
+        if (error.response) {
+          if (error.response.status === 401 && !originalConfig._retry) {
+            originalConfig._retry = true;
+
+            await refreshAccessToken();
+
+            return request(originalConfig);
+          }
+
+          if (error.response.status === 403) {
+            logOut();
+          }
+
+          return Promise.reject(error);
+        }
+      },
+    );
+
+    return () => {
+      request.interceptors.request.eject(requestInterceptor);
+      request.interceptors.response.eject(responseInterceptor);
+    };
+  }, [token]);
 
   useEffect(() => {
     if (error) throw error;

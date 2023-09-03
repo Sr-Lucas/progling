@@ -13,11 +13,7 @@ export const gameStore = combine({ ...initialState }, (set, get) => ({
   submitGameAnswer: async (answer: AnswerType) => {
     const { currentGame } = get();
 
-    console.log(currentGame);
-
     if (currentGame) {
-      console.log('currentGame.id', currentGame.id);
-      console.log('answer', answer);
       await gameApi.submitGameAnswer({
         answer,
         gameId: currentGame.id,
