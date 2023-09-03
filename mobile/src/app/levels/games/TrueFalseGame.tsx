@@ -1,4 +1,10 @@
-import { SafeAreaView, Image, View, TouchableOpacity } from 'react-native';
+import {
+  SafeAreaView,
+  Image,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { router } from 'expo-router';
 import { Audio } from 'expo-av';
 
@@ -7,7 +13,7 @@ import { GameHeader } from '@/components/games/Header';
 import { Images } from '@/core/constants/images';
 import { useGameStore } from '@/core/store/games/game.store';
 import { Sounds } from '@/core/constants/sounds';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Colors } from '@/core/constants/colors';
 import { useModuleStore } from '@/core/store/modules/module.store';
 
@@ -72,15 +78,35 @@ export default function TrueFalseGame() {
     }
   }
 
+  const question: string[] = useMemo(() => {
+    if (currentGame) {
+      return currentGame.question!.split('\\n');
+    }
+    return [];
+  }, [currentGame]);
+
   return (
     <SafeAreaView>
       <View className="flex items-center px-5 h-full">
         <GameHeader onTapClose={() => router.back()} />
 
-        <View className="my-32">
-          <Text classNameP="text-base text-center">
-            {currentGame?.question}
-          </Text>
+        <View className="h-72 my-24">
+          <ScrollView
+            scrollEnabled={question.length > 1}
+            persistentScrollbar={true}
+          >
+            {question.map((line, index) => {
+              return (
+                <Text
+                  key={index}
+                  weight="medium"
+                  classNameP="text-base text-start mb-2"
+                >
+                  {line.trimStart()}
+                </Text>
+              );
+            })}
+          </ScrollView>
         </View>
 
         <View className="flex items-center justify-center absolute bottom-4 w-full h-[230px]">
