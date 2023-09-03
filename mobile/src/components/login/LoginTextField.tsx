@@ -9,6 +9,7 @@ import Lock from '@/../assets/images/svgs/lock.svg';
 import Eye from '@/../assets/images/svgs/eye.svg';
 import EyeHide from '@/../assets/images/svgs/eye-hide.svg';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text } from '../shared/Text';
 
 type Props = {
   value: string;
@@ -17,6 +18,7 @@ type Props = {
   trailingIcon?: keyof typeof ImagesSvg;
   keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad';
   isSecure?: boolean;
+  error?: string | null;
 };
 
 export function LoginTextField({
@@ -26,27 +28,28 @@ export function LoginTextField({
   keyboardType,
   trailingIcon: icon,
   isSecure = false,
+  error,
 }: Props) {
   const [isFocused, setIsFocused] = React.useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
+  const iconStroke = isFocused
+    ? error
+      ? Colors.systemColor.danger
+      : Colors.systemColor.warning[300]
+    : Colors.gray[500];
+
   return (
     <View className="relative">
+      {error && (
+        <View className="absolute left-4 top-[70px]">
+          <Text classNameP="text-systemColor-danger">{error}</Text>
+        </View>
+      )}
+
       <View className={clsx('absolute', 'z-10', 'top-5', icon && 'left-4')}>
-        {icon === 'user' && (
-          <User
-            stroke={
-              isFocused ? Colors.systemColor.warning[300] : Colors.gray[500]
-            }
-          />
-        )}
-        {icon === 'lock' && (
-          <Lock
-            stroke={
-              isFocused ? Colors.systemColor.warning[300] : Colors.gray[500]
-            }
-          />
-        )}
+        {icon === 'user' && <User stroke={iconStroke} />}
+        {icon === 'lock' && <Lock stroke={iconStroke} />}
       </View>
 
       <TextInput
@@ -79,6 +82,8 @@ export function LoginTextField({
           isSecure ? 'pr-12' : '',
           'focus:border-1',
           'focus:border-systemColor-warning-300',
+          error && !isFocused ? 'border-1' : '',
+          error && !isFocused ? 'border-systemColor-danger' : '',
         )}
       />
 

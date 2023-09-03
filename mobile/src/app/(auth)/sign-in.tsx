@@ -4,18 +4,40 @@ import { Text } from '@/components/shared/Text';
 import { Images } from '@/core/constants/images';
 import { useAuthStore } from '@/core/store/auth/auth.store';
 import clsx from 'clsx';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import React from 'react';
-import { View, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from 'react-native';
 
 export default function Login() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  const [error, setError] = React.useState<string | null>(null);
+
   const { isLoading, signIn } = useAuthStore();
 
+  const createAlert = ({ title = 'Alert Title', message = 'My Alert Msg' }) =>
+    Alert.alert(title, message, [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ]);
+
   const onSubmit = async () => {
-    await signIn({ email, password });
+    try {
+      await signIn({ email, password });
+    } catch (e) {
+      createAlert({
+        title: 'Erro ao entrar',
+        message: 'Verifique se os dados estão corretos',
+      });
+
+      setError('Senha ou email incorretos!');
+    }
   };
 
   return (
@@ -32,13 +54,14 @@ export default function Login() {
               keyboardType="email-address"
             />
           </View>
-          <View>
+          <View className="mb-6">
             <LoginTextField
               onChange={setPassword}
               value={password}
               trailingIcon="lock"
               placeholder="Senha"
               keyboardType="default"
+              error={error}
               isSecure
             />
           </View>
