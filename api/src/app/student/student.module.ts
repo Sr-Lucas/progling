@@ -7,6 +7,7 @@ import { FindStudentByIdUseCase } from '@application/student/find-by-id/find-stu
 import { FindStudentByEmailUseCase } from '@application/student/find-by-email/find-student-by-email.usecase';
 import { CreateStudentUseCase } from '@application/student/create/create-student.usecase';
 import { UpdateStudentUseCase } from '@application/student/update/update-student.usecase';
+import { HeartsRenovationUseCase } from '@application/student/hearts/hears_renovation.usecase';
 
 @Module({
   controllers: [StudentController],
@@ -46,6 +47,12 @@ import { UpdateStudentUseCase } from '@application/student/update/update-student
       provide: UpdateStudentUseCase,
       useFactory: (studentRepository) =>
         new UpdateStudentUseCase(studentRepository),
+      inject: [StudentRepository],
+    },
+    {
+      provide: HeartsRenovationUseCase,
+      useFactory: (studentRepository) =>
+        new HeartsRenovationUseCase(studentRepository),
       inject: [StudentRepository],
     },
 

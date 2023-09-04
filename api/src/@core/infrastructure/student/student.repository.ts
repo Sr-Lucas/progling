@@ -1,6 +1,7 @@
 import {
   CreateStudentDTO,
   UpdateStudentDTO,
+  UpdateStudentRepositoryDTO,
 } from '@domain/student/dto/student.dto';
 import { Student } from '@domain/student/entity/student.entity';
 import { StudentFactory } from '@domain/student/factory/student.factory';
@@ -46,7 +47,13 @@ export class StudentRepository implements IStudentRepository {
     return StudentFactory.convertOne(student);
   }
 
-  async update({ id, name, email }: UpdateStudentDTO): Promise<Student | null> {
+  async update({
+    id,
+    name,
+    email,
+    hearts,
+    heartsRenewAt,
+  }: UpdateStudentRepositoryDTO): Promise<Student | null> {
     const student = await this.prisma.student.update({
       where: {
         id,
@@ -54,6 +61,8 @@ export class StudentRepository implements IStudentRepository {
       data: {
         name,
         email,
+        hearts,
+        heartsRenewAt,
       },
     });
 

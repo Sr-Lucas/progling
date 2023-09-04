@@ -21,14 +21,16 @@ model Image {
 }
 
 model Student {
-  id          String          @id @default(uuid())
-  email       String          @unique
-  name        String
-  password    String
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
-  deletedAt   DateTime?
-  gameAnswers StudentAnswer[]
+  id            String          @id @default(uuid())
+  email         String          @unique
+  name          String
+  password      String
+  hearts        Int             @default(3)
+  heartsRenewAt DateTime?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  deletedAt     DateTime?
+  gameAnswers   StudentAnswer[]
 }
 
 model ProgrammingLanguage {

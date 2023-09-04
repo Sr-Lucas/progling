@@ -22,6 +22,14 @@ export class CodeOrderingMiniGame extends MiniGame {
     return this._options;
   }
 
+  isCorrectAnswer(answer: string | boolean | number[]): boolean {
+    const order = answer as number[];
+
+    return this.correctOrder.every((correctOrder, index) => {
+      return correctOrder === order[index];
+    });
+  }
+
   toJSON(): any {
     return {
       id: this.miniGameId,

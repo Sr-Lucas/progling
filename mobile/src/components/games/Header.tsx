@@ -6,12 +6,15 @@ import Animated, {
   SharedTransition,
   withSpring,
 } from 'react-native-reanimated';
+import { useGameStore } from '@/core/store/games/game.store';
 
 type Props = {
   onTapClose?: () => void;
 };
 
 export function GameHeader({ onTapClose }: Props) {
+  const { hearts } = useGameStore();
+
   return (
     <View className="flex w-full">
       <View className="mr-auto mt-4 flex flex-row items-center justify-between w-full">
@@ -27,7 +30,7 @@ export function GameHeader({ onTapClose }: Props) {
         </View>
       </View>
       <View className="flex items-center justify-center ">
-        <Life hearts={2} />
+        <Life hearts={hearts} />
       </View>
     </View>
   );

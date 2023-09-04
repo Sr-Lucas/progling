@@ -6,14 +6,23 @@ import { StatusBar } from 'expo-status-bar';
 import { RenderLevels } from '@/components/home/render-levels';
 import { RenderGridPoints } from '@/components/home/render-points';
 import { useModuleStore } from '@/core/store/modules/module.store';
+import { useAuthStore } from '@/core/store/auth/auth.store';
 import { useEffect } from 'react';
+import { useSegments } from 'expo-router';
 
 export default function Home() {
+  const segments = useSegments();
   const { getModulesByLanguageId, modules } = useModuleStore();
+  const { getMe } = useAuthStore();
 
   useEffect(() => {
-    getModulesByLanguageId('7506837e-3f60-4b11-99a0-98f131854999');
-  }, []);
+    const inHomePage = segments[0] === '(tabs)';
+
+    if (inHomePage) {
+      getModulesByLanguageId('7506837e-3f60-4b11-99a0-98f131854999');
+      getMe();
+    }
+  }, [segments]);
 
   return (
     <ScrollView className="w-full">

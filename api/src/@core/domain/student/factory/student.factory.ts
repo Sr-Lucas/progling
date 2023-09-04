@@ -4,6 +4,8 @@ export type StudentType = {
   id: string;
   name: string;
   email: string;
+  hearts: number;
+  heartsRenewAt: Date | null;
   password: string;
   createdAt: Date;
   updatedAt: Date;
@@ -17,6 +19,8 @@ export class StudentFactory {
       student.name,
       student.email,
       student.password,
+      student.hearts,
+      student.heartsRenewAt,
       student.id,
       student.createdAt,
       student.updatedAt,

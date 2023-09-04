@@ -70,6 +70,10 @@ export class MiniGame extends Entity {
     return !!this.type;
   }
 
+  isCorrectAnswer(answer: string | boolean | number[]): boolean {
+    return this.type?.isCorrectAnswer(answer) ?? false;
+  }
+
   toJSON(): any {
     return this.type?.toJSON() ?? undefined;
   }

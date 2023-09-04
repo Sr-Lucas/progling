@@ -6,6 +6,7 @@ import { FindStudentByIdUseCase } from '@application/student/find-by-id/find-stu
 import { CreateStudentUseCase } from '@application/student/create/create-student.usecase';
 import { UpdateStudentUseCase } from '@application/student/update/update-student.usecase';
 import { JwtService } from '@nestjs/jwt';
+import { HeartsRenovationUseCase } from '@application/student/hearts/hears_renovation.usecase';
 
 @Injectable()
 export class StudentService {
@@ -16,13 +17,15 @@ export class StudentService {
     private readonly findStudentByIdUseCase: FindStudentByIdUseCase,
     private readonly createStudentUseCase: CreateStudentUseCase,
     private readonly updateStudentUseCase: UpdateStudentUseCase,
+    private readonly heartsRenewUseCase: HeartsRenovationUseCase,
   ) {}
 
   create(createStudentDto: CreateStudentDto) {
     return this.createStudentUseCase.execute(createStudentDto);
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
+    await this.heartsRenewUseCase.execute(id);
     return this.findStudentByIdUseCase.execute(id);
   }
 

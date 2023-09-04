@@ -5,7 +5,7 @@ import { Text } from '@/components/shared/Text';
 import { useAuthStore } from '@/core/store/auth/auth.store';
 
 export default function AppBar() {
-  const { logOut: signOut } = useAuthStore();
+  const { logOut: signOut, user } = useAuthStore();
 
   const logOut = () => {
     signOut();
@@ -27,7 +27,7 @@ export default function AppBar() {
           classNameP="text-white text-base font-medium pl-1"
           weight="medium"
         >
-          3
+          {user?.hearts}
         </Text>
       </View>
       <TouchableOpacity onPress={() => logOut()}>
@@ -47,7 +47,7 @@ export default function AppBar() {
           </View>
           <View className="w-1" />
           <Text classNameP="text-white" weight="regular">
-            Lucas
+            {user?.name.split(' ')[0]}
           </Text>
         </View>
         <View className="w-1.5" />

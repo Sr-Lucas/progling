@@ -21,6 +21,14 @@ export class CodeCompletionMiniGame extends MiniGame {
     return this._options;
   }
 
+  isCorrectAnswer(answer: string | boolean | number[]): boolean {
+    const awsr = answer as string;
+
+    return this._options.some(
+      (option) => option.isCorrect && option.content === awsr,
+    );
+  }
+
   toJSON(): any {
     return {
       id: this.miniGameId,

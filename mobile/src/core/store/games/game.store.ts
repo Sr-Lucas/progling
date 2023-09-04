@@ -7,6 +7,7 @@ import { gameApi } from '@/core/api';
 const initialState: GameState = {
   games: [],
   currentGame: null,
+  hearts: 0,
 };
 
 export const gameStore = combine({ ...initialState }, (set, get) => ({
@@ -25,6 +26,9 @@ export const gameStore = combine({ ...initialState }, (set, get) => ({
   },
   setCurrentGame(currentGame: MiniGame) {
     set({ currentGame });
+  },
+  setHearts(hearts: number) {
+    set({ hearts });
   },
   resolveGameNavigationByGameType(gameType: string) {
     switch (gameType) {

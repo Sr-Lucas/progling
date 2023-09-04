@@ -5,6 +5,7 @@ import { PrismaService } from 'src/services/prisma.service';
 import { MiniGameRepository } from '@infrastructure/minigame/minigame.repository';
 import { StudentAnswerRepository } from '@infrastructure/student/student-answer.repository';
 import { CreateStudentAnswerUseCase } from '@application/student/student-answer/create/create-student-answer.usecase';
+import { StudentRepository } from '@infrastructure/student/student.repository';
 
 @Module({
   controllers: [MiniGameController],
@@ -27,6 +28,12 @@ import { CreateStudentAnswerUseCase } from '@application/student/student-answer/
         new StudentAnswerRepository(prismaService),
       inject: [PrismaService],
     },
+    {
+      provide: StudentRepository,
+      useFactory: (prismaService: PrismaService) =>
+        new StudentRepository(prismaService),
+      inject: [PrismaService],
+    },
 
     // USE CASES
     {
@@ -34,12 +41,14 @@ import { CreateStudentAnswerUseCase } from '@application/student/student-answer/
       useFactory: (
         studentAnswerRepository: StudentAnswerRepository,
         miniGameRepository: MiniGameRepository,
+        studentRepository: StudentRepository,
       ) =>
         new CreateStudentAnswerUseCase(
           studentAnswerRepository,
           miniGameRepository,
+          studentRepository,
         ),
-      inject: [StudentAnswerRepository, MiniGameRepository],
+      inject: [StudentAnswerRepository, MiniGameRepository, StudentRepository],
     },
 
     // SERVICES

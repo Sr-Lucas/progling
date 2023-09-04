@@ -5,6 +5,8 @@ export class Student extends Entity {
     private _name: string,
     private _email: string,
     private _password: string,
+    private _hearts: number,
+    private _heartsRenewAt?: Date | null,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -24,11 +26,21 @@ export class Student extends Entity {
     return this._password;
   }
 
+  get hearts(): number {
+    return this._hearts;
+  }
+
+  get heartsRenewAt(): Date | null | undefined {
+    return this._heartsRenewAt;
+  }
+
   toJSON(): any {
     return {
       id: this.id,
       name: this.name,
       email: this.email,
+      hearts: this.hearts,
+      heartsRenewAt: this.heartsRenewAt,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };

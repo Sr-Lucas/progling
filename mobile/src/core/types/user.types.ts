@@ -2,6 +2,7 @@ export type Student = {
   id: string;
   name: string;
   email: string;
+  hearts: number;
 };
 
 export type SignInDTO = {

@@ -22,7 +22,8 @@ export default function TrueFalseGame() {
     games,
     currentGame,
     setCurrentGame,
-    setGames,
+    hearts,
+    setHearts,
     resolveGameNavigationByGameType,
     submitGameAnswer,
   } = useGameStore();
@@ -57,6 +58,7 @@ export default function TrueFalseGame() {
         playCorrectSound();
       } else {
         playWrongSound();
+        setHearts(hearts - 1);
       }
 
       setIsSubmitted(true);

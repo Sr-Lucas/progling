@@ -20,6 +20,10 @@ export class TrueFalseMiniGame extends MiniGame {
     return this._correctAnswer;
   }
 
+  isCorrectAnswer(answer: string | boolean | number[]): boolean {
+    return this._correctAnswer === answer;
+  }
+
   toJSON(): any {
     return {
       id: this.miniGameId,

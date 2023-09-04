@@ -26,6 +26,8 @@ export class SeedDevelopment {
       name: 'John Doe',
       password: '$2b$10$',
       deletedAt: null,
+      hearts: 5,
+      heartsRenewAt: new Date(),
     },
   ];
 

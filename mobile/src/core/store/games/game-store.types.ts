@@ -3,6 +3,7 @@ import { AnswerType, MiniGame } from '@/core/types/games.types';
 export type GameState = {
   games: MiniGame[];
   currentGame: MiniGame | null;
+  hearts: number;
 };
 
 export type GameRoutes = '/levels/games/TrueFalseGame';
@@ -12,4 +13,5 @@ export type IGameStore = GameState & {
   setCurrentGame(game: MiniGame): void;
   resolveGameNavigationByGameType(gameType: string): GameRoutes;
   submitGameAnswer(answer: AnswerType): Promise<void>;
+  setHearts(hearts: number): void;
 };
