@@ -16,6 +16,7 @@ import { Sounds } from '@/core/constants/sounds';
 import { useMemo, useState } from 'react';
 import { Colors } from '@/core/constants/colors';
 import { useModuleStore } from '@/core/store/modules/module.store';
+import { useLevelStore } from '@/core/store/levels/level.store';
 
 export default function TrueFalseGame() {
   const {
@@ -26,7 +27,9 @@ export default function TrueFalseGame() {
     setHearts,
     resolveGameNavigationByGameType,
     submitGameAnswer,
+    deleteAllAnswersByLevelId,
   } = useGameStore();
+  const { level } = useLevelStore();
   const { getModulesByLanguageId } = useModuleStore();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [gameState, setGameState] = useState(0);
@@ -53,7 +56,7 @@ export default function TrueFalseGame() {
   }
 
   async function continuePressed() {
-    if (gameState === 0) {
+    if (gameState === 0 && userAnswer !== null) {
       if (currentGame?.correctAnswer === userAnswer) {
         playCorrectSound();
       } else {
@@ -63,9 +66,8 @@ export default function TrueFalseGame() {
 
       setIsSubmitted(true);
       setGameState(1);
-    } else if (userAnswer !== null && currentGame) {
       await submitGameAnswer(userAnswer);
-
+    } else if (currentGame) {
       const nextGameIndex = games.findIndex((g) => g.id === currentGame.id) + 1;
       const nextGame = games[nextGameIndex];
 
@@ -90,7 +92,12 @@ export default function TrueFalseGame() {
   return (
     <SafeAreaView>
       <View className="flex items-center px-5 h-full">
-        <GameHeader onTapClose={() => router.back()} />
+        <GameHeader
+          onTapClose={() => {
+            deleteAllAnswersByLevelId(level.id);
+            router.back();
+          }}
+        />
 
         <View className="h-72 my-24">
           <ScrollView

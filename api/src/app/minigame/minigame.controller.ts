@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post, Delete } from '@nestjs/common';
 import { MiniGameService } from './minigame.service';
 import { RegisterAnswerDTO } from './dto/register-answer.dto';
 import { User } from 'src/auth/decorators/user.decorator';
@@ -14,5 +14,10 @@ export class MiniGameController {
     @Body() body: RegisterAnswerDTO,
   ) {
     return this.miniGameService.registerAnswer(id, user.sub, body);
+  }
+
+  @Delete('levels/:id/delete-answer')
+  async deleteAllAnswerByLevel(@Param('id') id: string, @User() user: User) {
+    return this.miniGameService.deleteAllAnswerByLevel(id, user.sub);
   }
 }

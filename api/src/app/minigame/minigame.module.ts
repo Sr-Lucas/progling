@@ -6,6 +6,7 @@ import { MiniGameRepository } from '@infrastructure/minigame/minigame.repository
 import { StudentAnswerRepository } from '@infrastructure/student/student-answer.repository';
 import { CreateStudentAnswerUseCase } from '@application/student/student-answer/create/create-student-answer.usecase';
 import { StudentRepository } from '@infrastructure/student/student.repository';
+import { DeleteAllStudentAnswerByLevelIdUseCase } from '@application/student/student-answer/delete/delete-all-by-level-id';
 
 @Module({
   controllers: [MiniGameController],
@@ -49,6 +50,12 @@ import { StudentRepository } from '@infrastructure/student/student.repository';
           studentRepository,
         ),
       inject: [StudentAnswerRepository, MiniGameRepository, StudentRepository],
+    },
+    {
+      provide: DeleteAllStudentAnswerByLevelIdUseCase,
+      useFactory: (studentAnswerRepository: StudentAnswerRepository) =>
+        new DeleteAllStudentAnswerByLevelIdUseCase(studentAnswerRepository),
+      inject: [StudentAnswerRepository],
     },
 
     // SERVICES

@@ -1,5 +1,6 @@
 import {
   CreateStudentAnswerDTO,
+  DeleteStudentAnswerDTO,
   UpdateStudentAnswerDTO,
 } from '@domain/student/dto/student-answer.dto';
 import { StudentAnswer } from '@domain/student/entity/student-answer.entity';
@@ -9,6 +10,55 @@ import { PrismaService } from 'src/services/prisma.service';
 
 export class StudentAnswerRepository implements IStudentAnswerRepository {
   constructor(private readonly prisma: PrismaService) {}
+
+  async deleteAllByStudentIdAndLevelId({
+    levelId,
+    studentId,
+  }: DeleteStudentAnswerDTO): Promise<void> {
+    await this.prisma.codeCompletionMiniGameStudentAnswer.deleteMany({
+      where: {
+        studentAnswer: {
+          studentId,
+          miniGame: {
+            levelId,
+          },
+        },
+      },
+    });
+
+    await this.prisma.codeOrderingMiniGameStudentAnswerOption.deleteMany({
+      where: {
+        codeOrderingMiniGameStudentAnswer: {
+          studentAnswer: {
+            studentId,
+            miniGame: {
+              levelId,
+            },
+          },
+        },
+      },
+    });
+
+    await this.prisma.trueFalseMiniGameStudentAnswer.deleteMany({
+      where: {
+        studentAnswer: {
+          studentId,
+          miniGame: {
+            levelId,
+          },
+        },
+      },
+    });
+
+    await this.prisma.studentAnswer.deleteMany({
+      where: {
+        studentId,
+        miniGame: {
+          levelId,
+        },
+      },
+    });
+  }
 
   async create({
     answer,

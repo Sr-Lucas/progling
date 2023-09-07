@@ -3,6 +3,7 @@ import { CodeOrderingMiniGame } from './code-ordering-minigame';
 import { CodeCompletionMiniGame } from './code-completion-minigame';
 import { TrueFalseMiniGame } from './true-false-minigame';
 import { StudentAnswer } from '@domain/student/entity/student-answer.entity';
+import { Level } from '@domain/level/entity/level.entity';
 
 export enum MiniGameEnum {
   TRUE_FALSE = 'TRUE_FALSE',
@@ -14,6 +15,7 @@ export class MiniGame extends Entity {
   private _codeCompletion: CodeCompletionMiniGame;
   private _codeOrdering: CodeOrderingMiniGame;
   private _trueFalse: TrueFalseMiniGame;
+  private _level?: Level | null;
 
   private _studentAnswers?: StudentAnswer[] = [];
 
@@ -56,6 +58,14 @@ export class MiniGame extends Entity {
 
   get stringType(): string {
     return this._type;
+  }
+
+  get level(): Level | null | undefined {
+    return this._level;
+  }
+
+  set level(level: Level | null | undefined) {
+    this._level = level;
   }
 
   set studentAnswers(studentProgress: StudentAnswer[]) {

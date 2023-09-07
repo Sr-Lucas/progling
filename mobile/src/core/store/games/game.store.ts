@@ -21,6 +21,9 @@ export const gameStore = combine({ ...initialState }, (set, get) => ({
       });
     }
   },
+  deleteAllAnswersByLevelId: async (levelId: string) => {
+    await gameApi.deleteAllAnswersByLevelId({ levelId });
+  },
   setGames(games: MiniGame[]) {
     set({ games });
   },

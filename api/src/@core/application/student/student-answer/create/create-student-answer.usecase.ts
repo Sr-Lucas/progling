@@ -59,6 +59,24 @@ export class CreateStudentAnswerUseCase {
 
     const isCorrectAnswer = miniGame.isCorrectAnswer(answer);
 
+    if (!miniGame.level) {
+      throw new Error('Level not found');
+    }
+
+    if (!isCorrectAnswer && student.hearts - 1 === 0) {
+      await this.studentAnswerRepository.deleteAllByStudentIdAndLevelId({
+        studentId,
+        levelId: miniGame.level.id!,
+      });
+
+      await this.studentRepository.update({
+        id: studentId,
+        hearts: student.hearts - 1,
+      });
+
+      return null;
+    }
+
     if (!isCorrectAnswer && student.hearts > 0) {
       await this.studentRepository.update({
         id: studentId,

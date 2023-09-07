@@ -8,6 +8,7 @@ import { MiniGame, MiniGameEnum } from '../entity/minigame.entity';
 import { TrueFalseMiniGame } from '../entity/true-false-minigame';
 import { CodeCompletionMiniGameOption } from '../object-value/code-completion-minigame-option';
 import { CodeOrderingMiniGameOption } from '../object-value/code-ordering-minigame-option';
+import { LevelFactory, LevelType } from '@domain/level/factory/level.factory';
 
 export type MiniGameType = {
   id: string;
@@ -47,6 +48,7 @@ export type MiniGameType = {
     }[];
   } | null;
   studentAnswers?: StudentAnswerType[];
+  level?: LevelType;
 };
 
 export class MiniGameFactory {
@@ -54,6 +56,8 @@ export class MiniGameFactory {
     if (!miniGame) return null;
 
     let miniGameO: MiniGame | null = null;
+
+    const level = LevelFactory.convertOne(miniGame.level);
 
     if (miniGame.trueFalseMiniGame) {
       miniGameO = new MiniGame(
@@ -168,6 +172,8 @@ export class MiniGameFactory {
         miniGame.studentAnswers,
       )!;
     }
+
+    miniGameO.level = level;
 
     return miniGameO!;
   }

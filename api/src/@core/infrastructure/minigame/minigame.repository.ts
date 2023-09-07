@@ -11,6 +11,20 @@ export class MiniGameRepository implements IMiniGameRepository {
       where: {
         id,
       },
+      include: {
+        level: true,
+        trueFalseMiniGame: true,
+        codeOrderingMiniGame: {
+          include: {
+            options: true,
+          },
+        },
+        codeCompletionMiniGame: {
+          include: {
+            options: true,
+          },
+        },
+      },
     });
 
     return MiniGameFactory.convertOne(miniGame);

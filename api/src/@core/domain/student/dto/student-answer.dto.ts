@@ -7,3 +7,8 @@ export type CreateStudentAnswerDTO = {
 export type UpdateStudentAnswerDTO = Partial<CreateStudentAnswerDTO> & {
   id: string;
 };
+
+export type DeleteStudentAnswerDTO = {
+  studentId: string;
+  levelId: string;
+};
