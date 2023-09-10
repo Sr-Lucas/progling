@@ -7,7 +7,9 @@ export type GameState = {
   hearts: number;
 };
 
-export type GameRoutes = '/levels/games/TrueFalseGame';
+export type GameRoutes =
+  | '/levels/games/TrueFalseGame'
+  | '/levels/games/CodeCompletionGame';
 
 export type IGameStore = GameState & {
   setGames(games: MiniGame[]): void;

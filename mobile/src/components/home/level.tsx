@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { clsx } from 'clsx';
 import Svg, { Line } from 'react-native-svg';
@@ -19,8 +19,9 @@ export function Level({ status, onTap, showLine = true }: Props) {
   const isDone = status === 'done';
 
   return (
-    <View
-      onTouchEndCapture={() => onTap?.()}
+    <TouchableOpacity
+      activeOpacity={1}
+      onPressOut={() => onTap?.()}
       className={clsx(
         'flex',
         'items-center',
@@ -77,6 +78,6 @@ export function Level({ status, onTap, showLine = true }: Props) {
           <Feather name={iconState} size={20} color="white" />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

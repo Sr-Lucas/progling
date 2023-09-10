@@ -5,7 +5,13 @@ import { View } from 'react-native';
 import { CircularProgressIndicator } from './circular-progress-indicator';
 import { Text } from '../shared/Text';
 
-export function CourseHeader() {
+type Props = {
+  title: string;
+  imageUrl: string;
+  progress: number;
+};
+
+export function CourseHeader({ title, imageUrl, progress }: Props) {
   return (
     <View
       className={clsx(
@@ -13,10 +19,8 @@ export function CourseHeader() {
         'flex-row',
         'items-center',
         'px-2',
-        'absolute',
-        'top-7',
-        'w-[280px]',
-        'h-[80px]',
+        'w-full',
+        'h-[90px]',
         'bg-white',
         'border-[4px]',
         'border-primaryTint-300',
@@ -24,7 +28,7 @@ export function CourseHeader() {
       )}
     >
       <Image
-        source={Images.js}
+        source={{ uri: imageUrl }}
         width={200}
         height={200}
         className="w-10 h-10"
@@ -32,7 +36,7 @@ export function CourseHeader() {
       <View className="mx-2 h-12 w-[2px] bg-secondaryTint-300" />
       <View className="flex flex-col justify-center mb-1">
         <Text weight="bold" classNameP="text-secondaryTint-300 text-lg">
-          JAVASCRIPT
+          {title}
         </Text>
         <View className="h-[2px]" />
         <Text weight="regular" classNameP="text-gray-600 text-sm">
@@ -40,7 +44,7 @@ export function CourseHeader() {
         </Text>
       </View>
 
-      <CircularProgressIndicator progress={86} />
+      <CircularProgressIndicator progress={progress} />
     </View>
   );
 }

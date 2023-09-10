@@ -1,3 +1,4 @@
+import { ProgrammingLanguage } from '@/core/types/programming-language.types';
 import { SignInDTO, SignUpDTO, Student } from '@/core/types/user.types';
 
 export type AuthState = {
@@ -5,6 +6,7 @@ export type AuthState = {
   token?: string | null;
   refreshToken?: string | null;
   isLoading: boolean;
+  programmingLanguage: ProgrammingLanguage | null;
 };
 
 export type IAuthStore = AuthState & {
@@ -13,6 +15,7 @@ export type IAuthStore = AuthState & {
   refreshAccessToken: () => Promise<void>;
   setUser: (user: Student) => void;
   setToken: (token: string) => void;
+  setProgrammingLanguage: (language: ProgrammingLanguage) => void;
   logOut: () => void;
   getMe: () => Promise<Student | undefined>;
 };

@@ -17,8 +17,10 @@ import { useMemo, useState } from 'react';
 import { Colors } from '@/core/constants/colors';
 import { useModuleStore } from '@/core/store/modules/module.store';
 import { useLevelStore } from '@/core/store/levels/level.store';
+import { useAuthStore } from '@/core/store/auth/auth.store';
 
 export default function TrueFalseGame() {
+  const { programmingLanguage } = useAuthStore();
   const {
     games,
     currentGame,
@@ -74,10 +76,11 @@ export default function TrueFalseGame() {
       if (nextGame) {
         setCurrentGame(nextGame);
       } else {
-        getModulesByLanguageId('7506837e-3f60-4b11-99a0-98f131854999');
+        programmingLanguage && getModulesByLanguageId(programmingLanguage.id);
         router.back();
         return;
       }
+
       router.replace(resolveGameNavigationByGameType(currentGame.type));
     }
   }

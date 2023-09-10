@@ -6,7 +6,21 @@ export class FindAllProgrammingLanguagesUseCase {
     private readonly programmingLanguageRepository: IProgrammingLanguageRepository,
   ) {}
 
-  async execute(): Promise<ProgrammingLanguage[]> {
-    return this.programmingLanguageRepository.findAll();
+  async execute(userId: string): Promise<ProgrammingLanguage[]> {
+    const programmingLanguages =
+      await this.programmingLanguageRepository.findAll(userId);
+
+    for (const programmingLanguage of programmingLanguages) {
+      if (programmingLanguage.id) {
+        const progression =
+          await this.programmingLanguageRepository.getProgressionByProgrammingLanguage(
+            programmingLanguage.id,
+            userId,
+          );
+        programmingLanguage.progression = progression;
+      }
+    }
+
+    return programmingLanguages;
   }
 }

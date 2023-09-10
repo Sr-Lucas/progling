@@ -34,9 +34,13 @@ export const gameStore = combine({ ...initialState }, (set, get) => ({
     set({ hearts });
   },
   resolveGameNavigationByGameType(gameType: string) {
+    console.log('gameType', gameType);
+
     switch (gameType) {
-      case 'TrueFalseGame':
+      case 'TRUE_FALSE':
         return '/levels/games/TrueFalseGame';
+      case 'CODE_COMPLETION':
+        return '/levels/games/CodeCompletionGame';
       default:
         return '/levels/games/TrueFalseGame';
     }

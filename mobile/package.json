@@ -26,6 +26,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.3",
+    "react-native-code-highlighter": "^1.2.1",
     "react-native-dotenv": "^3.4.9",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-mmkv": "^2.10.2",
@@ -34,12 +35,15 @@
     "react-native-screens": "~3.22.0",
     "react-native-svg": "13.9.0",
     "react-native-svg-transformer": "^1.1.0",
+    "react-native-syntax-highlighter": "^2.1.0",
     "react-native-web": "~0.19.6",
+    "react-syntax-highlighter": "^15.5.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.14",
+    "@types/react-syntax-highlighter": "^15.5.7",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^34.0.0",
     "eslint-plugin-import": "^2.25.2",

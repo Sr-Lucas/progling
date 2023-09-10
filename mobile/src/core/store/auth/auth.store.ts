@@ -4,18 +4,22 @@ import { AuthState, IAuthStore } from './auth-store.types';
 import { create } from 'zustand';
 import { authApi } from '@/core/api';
 import { zustandMMKVStorage } from '../../adapters/mmkv.adapter';
-import ResponseError from '@/core/error/request.error';
+import { ProgrammingLanguage } from '@/core/types/programming-language.types';
 
 const initialState: AuthState = {
   user: null,
   token: null,
   refreshToken: null,
   isLoading: false,
+  programmingLanguage: null,
 };
 
 const authStore = persist<IAuthStore>(
   (set, get) => ({
     ...initialState,
+    setProgrammingLanguage(language: ProgrammingLanguage) {
+      set({ programmingLanguage: language });
+    },
     signIn: async ({ email, password }) => {
       try {
         set({ isLoading: true });

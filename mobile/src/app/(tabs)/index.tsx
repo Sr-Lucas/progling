@@ -1,5 +1,4 @@
 import { TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import { clsx } from 'clsx';
 import { CourseHeader } from '@/components/home/course-header';
 import { StatusBar } from 'expo-status-bar';
@@ -8,24 +7,30 @@ import { RenderGridPoints } from '@/components/home/render-points';
 import { useModuleStore } from '@/core/store/modules/module.store';
 import { useAuthStore } from '@/core/store/auth/auth.store';
 import { useEffect } from 'react';
-import { useSegments } from 'expo-router';
+import { router, useSegments } from 'expo-router';
 
 export default function Home() {
   const segments = useSegments();
   const { getModulesByLanguageId, modules } = useModuleStore();
-  const { getMe } = useAuthStore();
+  const { getMe, programmingLanguage, token } = useAuthStore();
 
   useEffect(() => {
     const inHomePage = segments[0] === '(tabs)';
 
     if (inHomePage) {
-      getModulesByLanguageId('7506837e-3f60-4b11-99a0-98f131854999');
+      programmingLanguage && getModulesByLanguageId(programmingLanguage.id);
       getMe();
     }
   }, [segments]);
 
+  useEffect(() => {
+    if (!programmingLanguage && token) {
+      router.push('/languages/');
+    }
+  }, [programmingLanguage, segments]);
+
   return (
-    <ScrollView className="w-full">
+    <View className="w-full">
       <StatusBar style="light" backgroundColor="transparent" translucent />
 
       <View
@@ -39,10 +44,23 @@ export default function Home() {
       >
         <RenderGridPoints />
 
-        <CourseHeader />
-
         <RenderLevels modules={modules} />
+
+        {programmingLanguage && (
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPressOut={() => router.push('/languages/')}
+            className="h-[80px] w-[280px] absolute top-7"
+          >
+            <CourseHeader
+              imageUrl={programmingLanguage.imageUrl}
+              title={programmingLanguage.name}
+              progress={programmingLanguage.progression}
+            />
+            <View></View>
+          </TouchableOpacity>
+        )}
       </View>
-    </ScrollView>
+    </View>
   );
 }

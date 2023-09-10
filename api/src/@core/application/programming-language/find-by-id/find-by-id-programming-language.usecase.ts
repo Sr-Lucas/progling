@@ -6,13 +6,20 @@ export class FindByIdProgrammingLanguageUseCase {
     private readonly programmingLanguageRepository: IProgrammingLanguageRepository,
   ) {}
 
-  async execute(id: string): Promise<ProgrammingLanguage> {
+  async execute(id: string, userId: string): Promise<ProgrammingLanguage> {
     const programmingLanguage =
       await this.programmingLanguageRepository.findById(id);
 
     if (!programmingLanguage) {
       throw 'Programming Language not found';
     }
+
+    const progression =
+      await this.programmingLanguageRepository.getProgressionByProgrammingLanguage(
+        programmingLanguage.id!,
+        userId,
+      );
+    programmingLanguage.progression = progression;
 
     return programmingLanguage;
   }

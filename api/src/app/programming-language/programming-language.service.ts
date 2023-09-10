@@ -10,23 +10,11 @@ export class ProgrammingLanguageService {
     private readonly findAllProgrammingLanguageUseCase: FindAllProgrammingLanguagesUseCase,
   ) {}
 
-  // create(createProgrammingLanguageDto: CreateProgrammingLanguageDto) {
-  //   return 'This action adds a new programmingLanguage';
-  // }
-
-  findAll() {
-    return this.findAllProgrammingLanguageUseCase.execute();
+  findAll(userId: string) {
+    return this.findAllProgrammingLanguageUseCase.execute(userId);
   }
 
-  findOne(id: string) {
-    return this.findByIdProgrammingLanguageUseCase.execute(id);
+  findOne(id: string, userId: string) {
+    return this.findByIdProgrammingLanguageUseCase.execute(id, userId);
   }
-
-  // update(id: number, updateProgrammingLanguageDto: UpdateProgrammingLanguageDto) {
-  //   return `This action updates a #${id} programmingLanguage`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} programmingLanguage`;
-  // }
 }

@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MWM4NDg1YS1mMjc2LTQ0ZTgtYmI5Ny1lNTFlM2YyODBkNjIiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsImlhdCI6MTY5Mzc4OTkyNSwiZXhwIjoxNjkzODA0MzI1fQ.ZpgekToEF2DGgiW1tsrjz-N85_fROG0C89Iw3_gvt-g
-@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MWM4NDg1YS1mMjc2LTQ0ZTgtYmI5Ny1lNTFlM2YyODBkNjIiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsInJlZnJlc2giOnRydWUsImlhdCI6MTY5MzQzNDE4OCwiZXhwIjoxNjk0MDM4OTg4fQ.b8w8CoI8PXICBHUTBvhBM21WUku3pwkprzqXTUusRFQ
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MWM4NDg1YS1mMjc2LTQ0ZTgtYmI5Ny1lNTFlM2YyODBkNjIiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsImlhdCI6MTY5NDM1OTcyOSwiZXhwIjoxNjk0Mzc0MTI5fQ.CMS1SYfsz3gm4C6YYKLfoNgnWrKoW3s3hvg7GyVqIrM
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MWM4NDg1YS1mMjc2LTQ0ZTgtYmI5Ny1lNTFlM2YyODBkNjIiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsInJlZnJlc2giOnRydWUsImlhdCI6MTY5NDE5NzcxMSwiZXhwIjoxNjk0ODAyNTExfQ.vcPrXq7O7pan8u7JFj3kd4kYtqTpEwqzzAWExkmqDio
 
 ### Helath Check
 GET {{baseUrl}}/
@@ -69,7 +69,7 @@ Authorization: Bearer {{authToken}}
 
 
 ### Levels
-GET {{baseUrl}}/levels/1
+GET {{baseUrl}}/levels/2
 Authorization: Bearer {{authToken}}
 
 
