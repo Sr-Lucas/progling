@@ -16,6 +16,7 @@ services:
       - progling-net
     volumes:
       - ./api:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
       - db
   

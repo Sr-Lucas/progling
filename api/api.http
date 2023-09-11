@@ -34,7 +34,7 @@ POST {{baseUrl}}/auth/student/register
 content-type: application/json
 
 {
-    "email": "lucas@test.tst",
+    "email": "lucas@teste.tst",
     "name": "Lucas Santos",
     "password": "Teste123@"
 }

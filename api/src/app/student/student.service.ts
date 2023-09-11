@@ -7,6 +7,7 @@ import { CreateStudentUseCase } from '@application/student/create/create-student
 import { UpdateStudentUseCase } from '@application/student/update/update-student.usecase';
 import { JwtService } from '@nestjs/jwt';
 import { HeartsRenovationUseCase } from '@application/student/hearts/hears_renovation.usecase';
+import { BcryptAdapter } from 'src/@core/adapters/encrypter/bcrypt.adapter';
 
 @Injectable()
 export class StudentService {
@@ -18,6 +19,7 @@ export class StudentService {
     private readonly createStudentUseCase: CreateStudentUseCase,
     private readonly updateStudentUseCase: UpdateStudentUseCase,
     private readonly heartsRenewUseCase: HeartsRenovationUseCase,
+    private readonly encrypter: BcryptAdapter,
   ) {}
 
   create(createStudentDto: CreateStudentDto) {
@@ -43,7 +45,9 @@ export class StudentService {
   async signIn(email: string, pass: string) {
     const user = await this.findOneByEmail(email);
 
-    if (!user || user.password !== pass) {
+    const passwordMatch = await this.encrypter.compare(pass, user.password);
+
+    if (!user || !passwordMatch) {
       throw new UnauthorizedException();
     }
 

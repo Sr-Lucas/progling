@@ -47,7 +47,7 @@ model ProgrammingLanguage {
 model Module {
   id                    String              @id @default(uuid())
   name                  String
-  description           String
+  description           String              @db.Text
   createdAt             DateTime            @default(now())
   updatedAt             DateTime            @updatedAt
   programmingLanguage   ProgrammingLanguage @relation(fields: [programmingLanguageId], references: [id])
@@ -59,7 +59,7 @@ model Module {
 model Level {
   id          String     @id @default(uuid())
   name        String
-  description String
+  description String     @db.Text
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   orderNumber Int        @default(0)

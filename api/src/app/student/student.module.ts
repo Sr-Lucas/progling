@@ -8,6 +8,7 @@ import { FindStudentByEmailUseCase } from '@application/student/find-by-email/fi
 import { CreateStudentUseCase } from '@application/student/create/create-student.usecase';
 import { UpdateStudentUseCase } from '@application/student/update/update-student.usecase';
 import { HeartsRenovationUseCase } from '@application/student/hearts/hears_renovation.usecase';
+import { BcryptAdapter } from 'src/@core/adapters/encrypter/bcrypt.adapter';
 
 @Module({
   controllers: [StudentController],
@@ -15,6 +16,12 @@ import { HeartsRenovationUseCase } from '@application/student/hearts/hears_renov
     {
       provide: PrismaService,
       useClass: PrismaService,
+    },
+
+    // ADAPTERS
+    {
+      provide: BcryptAdapter,
+      useFactory: () => new BcryptAdapter(),
     },
 
     // REPOSITORY
@@ -39,9 +46,9 @@ import { HeartsRenovationUseCase } from '@application/student/hearts/hears_renov
     },
     {
       provide: CreateStudentUseCase,
-      useFactory: (studentRepository) =>
-        new CreateStudentUseCase(studentRepository),
-      inject: [StudentRepository],
+      useFactory: (studentRepository, bcryptAdapter) =>
+        new CreateStudentUseCase(studentRepository, bcryptAdapter),
+      inject: [StudentRepository, BcryptAdapter],
     },
     {
       provide: UpdateStudentUseCase,
