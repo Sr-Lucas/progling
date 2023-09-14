@@ -8,19 +8,24 @@ RUN apt-get update && apt-get install -y wget \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-COPY tsconfig*.json ./
-COPY package*.json ./
-COPY .env ./
-COPY init.sh ./
+USER root
 
-RUN npm install -g pnpm
+# Copie os arquivos do projeto para o diretório de trabalho do usuário 'appuser'
+COPY --chown=root:root tsconfig*.json ./
+COPY --chown=root:root package*.json ./
+COPY --chown=root:root .env ./
+COPY --chown=root:root init.sh ./
 
-RUN pnpm install
+# Conceda permissões de execução ao 'init.sh'
+RUN chmod +x init.sh
+
+RUN npm install --silent --force
 
 RUN npm -g install @nestjs/cli
 
-COPY . .
+COPY --chown=root:root . .
 
 EXPOSE 3000
 
-CMD [ "pnpm", "start:dev" ]
+# Inicie o aplicativo como o usuário 'appuser'
+CMD [ "npm", "start:dev" ]

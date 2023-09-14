@@ -7,8 +7,8 @@ services:
       dockerfile: Dockerfile
     image: lucassantos/api:latest
     container_name: progling-api
-    # entrypoint: init.sh
-    command: ["pnpm", "start:debug"] # debug
+    entrypoint: /usr/src/app/init.sh
+    command: ["npm", "run", "start:debug"] # debug
     ports:
       - 9229:9229 # debug
     tty: true
