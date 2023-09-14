@@ -1,16 +1,29 @@
-import { TextCodeCompletion } from '@/components/games/TextCodeCompletion';
-import { CodeHighlighterCompletion } from '@/components/shared/CodeHighligherCompletion';
-import { Text, View, StyleSheet } from 'react-native';
-import CodeHighlighter from 'react-native-code-highlighter';
-import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Text, View, ScrollView } from 'react-native';
+import Markdown from '@ronradtke/react-native-markdown-display';
 
 export default function Profile() {
-  const CODE_STR = `var num = num + 1 + 'asdasd';\n\n_23_ a = 3;\nvar b = 4;\nvar c = a + b;\n\nconsole.log(c);`;
+  const CODE_STR = `
+# Profile 8-)
+## Code
+
+* teste
+- teste
+
+**This is some bold text!**
+\`\`\` js
+var foo = function (bar) {
+  return bar++;
+};
+
+console.log(foo(5));
+\`\`\`
+  `;
 
   return (
     <View>
-      <Text>Profile</Text>
-      <TextCodeCompletion>{CODE_STR}</TextCodeCompletion>
+      <ScrollView className="p-10">
+        <Markdown>{CODE_STR}</Markdown>
+      </ScrollView>
     </View>
   );
 }

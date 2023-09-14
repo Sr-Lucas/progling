@@ -9,6 +9,7 @@ export enum MiniGameEnum {
   TRUE_FALSE = 'TRUE_FALSE',
   CODE_COMPLETION = 'CODE_COMPLETION',
   CODE_ORDERING = 'CODE_ORDERING',
+  MARKDOWN = 'MARKDOWN',
 }
 
 export class MiniGame extends Entity {

@@ -24,6 +24,7 @@ export class MiniGameRepository implements IMiniGameRepository {
             options: true,
           },
         },
+        markdownMiniGame: true,
       },
     });
 

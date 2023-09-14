@@ -3,7 +3,11 @@ export type AnswerGameDTO = {
   gameId: string;
 };
 
-export type MiniGameType = 'TRUE_FALSE' | 'CODE_COMPLETION' | 'CODE_ORDERING';
+export type MiniGameType =
+  | 'TRUE_FALSE'
+  | 'CODE_COMPLETION'
+  | 'CODE_ORDERING'
+  | 'MARKDOWN';
 
 export type MiniGame = {
   id: string;
@@ -13,6 +17,7 @@ export type MiniGame = {
   correctAnswer?: boolean;
   createdAt: string;
   updatedAt: string;
+  markdown?: string;
   code?: string;
   options?: Option[];
   correctOrder?: number[];

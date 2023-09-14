@@ -9,6 +9,7 @@ import { TrueFalseMiniGame } from '../entity/true-false-minigame';
 import { CodeCompletionMiniGameOption } from '../object-value/code-completion-minigame-option';
 import { CodeOrderingMiniGameOption } from '../object-value/code-ordering-minigame-option';
 import { LevelFactory, LevelType } from '@domain/level/factory/level.factory';
+import { MarkdownMiniGame } from '../entity/markdown-minigame';
 
 export type MiniGameType = {
   id: string;
@@ -46,6 +47,12 @@ export type MiniGameType = {
       content: string;
       order: number;
     }[];
+  } | null;
+  markdownMiniGame?: {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    markdown: string;
   } | null;
   studentAnswers?: StudentAnswerType[];
   level?: LevelType;
@@ -157,6 +164,23 @@ export class MiniGameFactory {
       );
 
       miniGameO.codeOrdering = codeOrderingMiniGame;
+    }
+
+    if (miniGame.markdownMiniGame) {
+      const markdownMiniGame = new MarkdownMiniGame(
+        miniGame.markdownMiniGame.markdown,
+        miniGame.id,
+        miniGame.markdownMiniGame.id,
+        miniGame.markdownMiniGame.createdAt,
+        miniGame.markdownMiniGame.updatedAt,
+      );
+
+      miniGameO = new MiniGame(
+        MiniGameEnum.MARKDOWN,
+        miniGame.id,
+        miniGame.createdAt,
+        miniGame.updatedAt,
+      );
     }
 
     if (!miniGameO) {

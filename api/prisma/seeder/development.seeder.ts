@@ -11,7 +11,6 @@ import {
   TrueFalseMiniGame,
   Image,
   Student,
-  StudentAnswer,
 } from '@prisma/client';
 import console from 'console';
 import { IEncrypter } from 'src/@core/adapters/encrypter/encrypter.interface';
@@ -452,6 +451,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 0,
     },
     {
@@ -463,6 +463,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 1,
     },
     {
@@ -474,6 +475,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 2,
     },
     {
@@ -485,6 +487,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 3,
     },
     {
@@ -496,6 +499,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 4,
     },
     {
@@ -507,6 +511,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 5,
     },
     {
@@ -518,6 +523,7 @@ export class SeedDevelopment {
       levelId: this._levels[0].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 6,
     },
     // Level 2 (TRUE_FALSE e CODE_COMPLETION)
@@ -530,6 +536,7 @@ export class SeedDevelopment {
       levelId: this._levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 7,
     },
     {
@@ -541,6 +548,7 @@ export class SeedDevelopment {
       levelId: this._levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 8,
     },
     {
@@ -552,6 +560,7 @@ export class SeedDevelopment {
       levelId: this._levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 9,
     },
     {
@@ -563,6 +572,7 @@ export class SeedDevelopment {
       levelId: this._levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 10,
     },
     {
@@ -574,18 +584,12 @@ export class SeedDevelopment {
       levelId: this._levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
+      markdownMiniGameId: null,
       orderNumber: 11,
     },
   ];
 
   private _trueFalseMiniGames: TrueFalseMiniGame[] = [
-    {
-      id: '73aa0f18-8072-40bf-ad40-12e5906e9ac0',
-      question: 'JavaScript é uma linguagem de programação popular?',
-      correctAnswer: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
     {
       id: '2788f7d2-c188-4b44-ad5e-2e6fc2207ede',
       question: 'O operador "===" compara valores e tipos de dados iguais?',

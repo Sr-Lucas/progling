@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@ronradtke/react-native-markdown-display": "^8.0.0",
     "axios": "^1.4.0",
     "clsx": "^2.0.0",
     "expo": "~49.0.5",

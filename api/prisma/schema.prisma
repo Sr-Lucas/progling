@@ -128,11 +128,22 @@ model MiniGame {
   trueFalseMiniGame        TrueFalseMiniGame?      @relation(fields: [trueFalseMiniGameId], references: [id])
   codeCompletionMiniGame   CodeCompletionMiniGame? @relation(fields: [codeCompletionMiniGameId], references: [id])
   codeOrderingMiniGame     CodeOrderingMiniGame?   @relation(fields: [codeOrderingMiniGameId], references: [id])
+  markdownMiniGame         MarkdownMiniGame?       @relation(fields: [markdownMiniGameId], references: [id])
+  markdownMiniGameId       String?                 @unique
   trueFalseMiniGameId      String?                 @unique
   codeCompletionMiniGameId String?                 @unique
   codeOrderingMiniGameId   String?                 @unique
   studentAnswers           StudentAnswer[]
   orderNumber              Int                     @default(0)
+}
+
+model MarkdownMiniGame {
+  id         String    @id @default(uuid())
+  markdown   String    @db.MediumText
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  miniGameId String?
+  miniGame   MiniGame?
 }
 
 model TrueFalseMiniGame {
