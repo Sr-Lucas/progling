@@ -63,7 +63,7 @@ export default function CodeCompletionGame() {
         return;
       }
 
-      router.replace(resolveGameNavigationByGameType(currentGame.type));
+      router.replace(resolveGameNavigationByGameType(nextGame.type));
     }
   }
 

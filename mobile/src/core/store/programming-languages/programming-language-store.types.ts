@@ -6,6 +6,7 @@ export type ProgrammingLanguageState = {
 };
 
 export type IProgrammingLanguageStore = ProgrammingLanguageState & {
+  getOneLanguageById(id: string): Promise<ProgrammingLanguage>;
   setLanguages(languages: ProgrammingLanguage[]): void;
   setCurrentLanguage(currentLanguage: ProgrammingLanguage): void;
   getAllLanguages(): Promise<void>;

@@ -181,6 +181,8 @@ export class MiniGameFactory {
         miniGame.createdAt,
         miniGame.updatedAt,
       );
+
+      miniGameO.markdown = markdownMiniGame;
     }
 
     if (!miniGameO) {

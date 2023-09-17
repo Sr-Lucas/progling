@@ -4,6 +4,7 @@ import { CodeCompletionMiniGame } from './code-completion-minigame';
 import { TrueFalseMiniGame } from './true-false-minigame';
 import { StudentAnswer } from '@domain/student/entity/student-answer.entity';
 import { Level } from '@domain/level/entity/level.entity';
+import { MarkdownMiniGame } from './markdown-minigame';
 
 export enum MiniGameEnum {
   TRUE_FALSE = 'TRUE_FALSE',
@@ -16,6 +17,7 @@ export class MiniGame extends Entity {
   private _codeCompletion: CodeCompletionMiniGame;
   private _codeOrdering: CodeOrderingMiniGame;
   private _trueFalse: TrueFalseMiniGame;
+  private _markdown: MarkdownMiniGame;
   private _level?: Level | null;
 
   private _studentAnswers?: StudentAnswer[] = [];
@@ -41,10 +43,15 @@ export class MiniGame extends Entity {
     this._trueFalse = trueFalse;
   }
 
+  set markdown(markdown: MarkdownMiniGame) {
+    this._markdown = markdown;
+  }
+
   get type():
     | CodeCompletionMiniGame
     | CodeOrderingMiniGame
     | TrueFalseMiniGame
+    | MarkdownMiniGame
     | null {
     if (this._type === MiniGameEnum.TRUE_FALSE) {
       return this._trueFalse;
@@ -52,6 +59,10 @@ export class MiniGame extends Entity {
 
     if (this._type === MiniGameEnum.CODE_COMPLETION) {
       return this._codeCompletion;
+    }
+
+    if (this._type === MiniGameEnum.MARKDOWN) {
+      return this._markdown;
     }
 
     return this._codeOrdering;

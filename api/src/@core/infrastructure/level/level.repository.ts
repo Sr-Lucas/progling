@@ -20,6 +20,9 @@ export class LevelRepository implements ILevelRepository {
       },
       include: {
         miniGames: {
+          orderBy: {
+            orderNumber: 'asc',
+          },
           include: {
             trueFalseMiniGame: true,
             codeCompletionMiniGame: {
@@ -32,6 +35,7 @@ export class LevelRepository implements ILevelRepository {
                 options: true,
               },
             },
+            markdownMiniGame: true,
           },
         },
       },

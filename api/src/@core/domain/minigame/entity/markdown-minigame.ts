@@ -2,7 +2,7 @@ import { MiniGame, MiniGameEnum } from './minigame.entity';
 
 export class MarkdownMiniGame extends MiniGame {
   constructor(
-    private _markdown: string,
+    private _markdownText: string,
     private miniGameId: string,
     id?: string,
     createdAt?: Date,
@@ -11,14 +11,10 @@ export class MarkdownMiniGame extends MiniGame {
     super(MiniGameEnum.MARKDOWN, id, createdAt, updatedAt);
   }
 
-  get markdown(): string {
-    return this._markdown;
-  }
-
   toJSON(): any {
     return {
       id: this.miniGameId,
-      markdown: this.markdown,
+      markdown: this._markdownText,
       type: MiniGameEnum.MARKDOWN,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,

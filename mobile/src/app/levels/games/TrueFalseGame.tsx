@@ -73,6 +73,8 @@ export default function TrueFalseGame() {
       const nextGameIndex = games.findIndex((g) => g.id === currentGame.id) + 1;
       const nextGame = games[nextGameIndex];
 
+      console.log('nextGame', nextGame);
+
       if (nextGame) {
         setCurrentGame(nextGame);
       } else {
@@ -81,13 +83,13 @@ export default function TrueFalseGame() {
         return;
       }
 
-      router.replace(resolveGameNavigationByGameType(currentGame.type));
+      router.replace(resolveGameNavigationByGameType(nextGame.type));
     }
   }
 
   const question: string[] = useMemo(() => {
-    if (currentGame) {
-      return currentGame.question!.split('\\n');
+    if (currentGame && currentGame.question) {
+      return currentGame.question.split('\\n');
     }
     return [];
   }, [currentGame]);
@@ -177,7 +179,7 @@ export default function TrueFalseGame() {
             }}
             onPressOut={() => continuePressed()}
           >
-            <Text weight="medium" classNameP="text-white text-base">
+            <Text weight="medium" classNameP="text-white">
               Continuar
             </Text>
           </TouchableOpacity>

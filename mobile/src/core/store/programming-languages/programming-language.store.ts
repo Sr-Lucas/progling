@@ -17,6 +17,11 @@ export const programmingLanguageStore = combine({ ...initialState }, (set) => ({
     const languages = await programmingLanguageApi.findAll();
     set({ languages });
   },
+  async getOneLanguageById(id: string) {
+    const currentLanguage = await programmingLanguageApi.findOne(id);
+    set({ currentLanguage });
+    return currentLanguage;
+  },
   setLanguages(languages: ProgrammingLanguage[]) {
     set({ languages });
   },

@@ -18,7 +18,7 @@ export function RenderGridPoints() {
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
 
-  const points = calculatePoints(screenWidth, screenHeight * 2);
+  const points = calculatePoints(screenWidth, screenHeight * 3);
 
   const renderPoints = () => {
     return (

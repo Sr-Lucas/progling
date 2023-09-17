@@ -138,12 +138,11 @@ model MiniGame {
 }
 
 model MarkdownMiniGame {
-  id         String    @id @default(uuid())
-  markdown   String    @db.MediumText
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  miniGameId String?
-  miniGame   MiniGame?
+  id        String    @id @default(uuid())
+  markdown  String    @db.MediumText
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  miniGame  MiniGame?
 }
 
 model TrueFalseMiniGame {

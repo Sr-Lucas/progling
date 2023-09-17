@@ -25,8 +25,14 @@ export class ModuleRepository implements IModuleRepository {
       },
       include: {
         levels: {
+          orderBy: {
+            orderNumber: 'asc',
+          },
           include: {
             miniGames: {
+              orderBy: {
+                orderNumber: 'asc',
+              },
               include: {
                 studentAnswers: true,
               },
@@ -53,10 +59,19 @@ export class ModuleRepository implements IModuleRepository {
 
   async findAll(userId: string): Promise<Module[]> {
     const modules = await this.prisma.module.findMany({
+      orderBy: {
+        orderNumber: 'asc',
+      },
       include: {
         levels: {
+          orderBy: {
+            orderNumber: 'asc',
+          },
           include: {
             miniGames: {
+              orderBy: {
+                orderNumber: 'asc',
+              },
               include: {
                 studentAnswers: true,
               },

@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { clsx } from 'clsx';
 import { CourseHeader } from '@/components/home/course-header';
 import { StatusBar } from 'expo-status-bar';
@@ -8,17 +8,24 @@ import { useModuleStore } from '@/core/store/modules/module.store';
 import { useAuthStore } from '@/core/store/auth/auth.store';
 import { useEffect } from 'react';
 import { router, useSegments } from 'expo-router';
+import { useProgrammingLanguageStore } from '../../core/store/programming-languages/programming-language.store';
 
 export default function Home() {
   const segments = useSegments();
   const { getModulesByLanguageId, modules } = useModuleStore();
-  const { getMe, programmingLanguage, token } = useAuthStore();
+  const { getMe, programmingLanguage, setProgrammingLanguage, token } =
+    useAuthStore();
+  const { getOneLanguageById, currentLanguage } = useProgrammingLanguageStore();
 
   useEffect(() => {
     const inHomePage = segments[0] === '(tabs)';
 
     if (inHomePage) {
       programmingLanguage && getModulesByLanguageId(programmingLanguage.id);
+      programmingLanguage &&
+        getOneLanguageById(programmingLanguage.id).then((language) => {
+          setProgrammingLanguage(language);
+        });
       getMe();
     }
   }, [segments]);
@@ -30,7 +37,7 @@ export default function Home() {
   }, [programmingLanguage, segments]);
 
   return (
-    <View className="w-full">
+    <ScrollView className="w-full">
       <StatusBar style="light" backgroundColor="transparent" translucent />
 
       <View
@@ -61,6 +68,6 @@ export default function Home() {
           </TouchableOpacity>
         )}
       </View>
-    </View>
+    </ScrollView>
   );
 }
