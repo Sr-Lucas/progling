@@ -3,6 +3,8 @@ import { Level } from '@domain/level/entity/level.entity';
 import { ProgrammingLanguage } from '@domain/programming-language/entity/programming-language.entity';
 
 export class Module extends Entity {
+  public order: number;
+
   constructor(
     private _name: string,
     private _description: string,
@@ -58,6 +60,7 @@ export class Module extends Entity {
       description: this.description,
       levels: this.levels.map((level) => level.toJSON()),
       programmingLanguage: this.programmingLanguage,
+      order: this.order,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };

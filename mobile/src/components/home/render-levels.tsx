@@ -6,6 +6,8 @@ import { Module } from '@/core/types/module.types';
 import { Module as ModuleC } from './module';
 import { useLevelStore } from '@/core/store/levels/level.store';
 import { Level } from '@/core/types/level.types';
+import { useModuleStore } from '@/core/store/modules/module.store';
+import React, { useEffect, useMemo } from 'react';
 
 type Props = {
   modules: Module[];
@@ -13,6 +15,7 @@ type Props = {
 
 export function RenderLevels({ modules }: Props) {
   const { setModule } = useLevelStore();
+  const { currentModule, setCurrentModule, setCurrentLevel } = useModuleStore();
 
   const navigateToLevel = (level: Level, module: Module) => {
     setModule(module);
@@ -27,26 +30,60 @@ export function RenderLevels({ modules }: Props) {
     const levelH = 30;
     const levelMT = levelH + 6;
 
+    const myCurrentModule = useMemo(() => {
+      return modules.find(
+        (module) => module.doneLevels < module.numberOfLevels,
+      );
+    }, [modules]);
+
+    const myCurrentLevel = useMemo(() => {
+      if (myCurrentModule) {
+        return myCurrentModule.levels.find(
+          (level) => level.levelProgress === 0,
+        );
+      }
+    }, [myCurrentModule]);
+
+    useEffect(() => {
+      if (myCurrentModule) {
+        setCurrentModule(myCurrentModule);
+      }
+    }, [myCurrentModule]);
+
+    useEffect(() => {
+      if (myCurrentLevel) {
+        setCurrentLevel(myCurrentLevel);
+      }
+    }, [myCurrentLevel]);
+
     return modules.map((module, index) => {
-      const isFirstModule = index === 0;
+      const moduleHasLevels = module.levels.length > 0;
+
+      let moduleStatus: 'blocked' | 'done' | 'doing' = 'blocked';
+
+      if (myCurrentModule?.id === module.id) {
+        moduleStatus = 'doing';
+      } else {
+        if (module.doneLevels === module.numberOfLevels) {
+          moduleStatus = 'done';
+        } else {
+          moduleStatus = 'blocked';
+        }
+      }
 
       const levels = module.levels.map((level, index) => {
         const isLast = index === module.levels.length - 1;
 
         let levelStatus: 'blocked' | 'done' | 'doing' = 'blocked';
 
-        if (level.levelProgress > 0) {
-          levelStatus = 'done';
-        }
-
-        if (
-          level.levelProgress === 0 &&
-          index > 0 &&
-          module.levels[index - 1].levelProgress > 0
-        ) {
+        if (myCurrentLevel?.id === level.id) {
           levelStatus = 'doing';
-        } else if (index == 0 && module.levels[index].levelProgress === 0) {
-          levelStatus = 'doing';
+        } else {
+          if (level.levelProgress > 0) {
+            levelStatus = 'done';
+          } else {
+            levelStatus = 'blocked';
+          }
         }
 
         return (
@@ -67,26 +104,6 @@ export function RenderLevels({ modules }: Props) {
           </View>
         );
       });
-
-      const moduleHasLevels = module.levels.length > 0;
-
-      let moduleStatus: 'blocked' | 'done' | 'doing' = 'blocked';
-
-      if (module.doneLevels === module.numberOfLevels) {
-        moduleStatus = 'done';
-      }
-
-      if (module.doneLevels > 0 && module.doneLevels < module.numberOfLevels) {
-        moduleStatus = 'doing';
-      }
-
-      const isLastModuleDone =
-        modules[modules.length - 1].doneLevels ===
-        modules[modules.length - 1].numberOfLevels;
-
-      if (!isLastModuleDone) {
-        moduleStatus = 'doing';
-      }
 
       return (
         <View

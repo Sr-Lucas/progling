@@ -9,6 +9,7 @@ type PrismaModuleType = {
   id: string;
   name: string;
   description: string;
+  orderNumber: number;
   createdAt: Date;
   updatedAt: Date;
   levels: LevelType[];
@@ -56,7 +57,7 @@ export class ModuleFactory {
       module.programmingLanguage.updatedAt,
     );
 
-    return new Module(
+    const moduleO = new Module(
       module.name,
       module.description,
       levels,
@@ -65,6 +66,10 @@ export class ModuleFactory {
       module.createdAt,
       module.updatedAt,
     );
+
+    moduleO.order = module.orderNumber;
+
+    return moduleO;
   }
 
   static convertMany(modules: PrismaModuleType[]): Module[] {

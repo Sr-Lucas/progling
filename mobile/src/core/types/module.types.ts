@@ -9,6 +9,7 @@ export type Module = {
   description: string;
   levels: Level[];
   programmingLanguage: ProgrammingLanguage;
+  order: number;
   createdAt: string;
   updatedAt: string;
 };
