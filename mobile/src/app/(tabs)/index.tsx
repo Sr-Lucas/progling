@@ -17,13 +17,8 @@ import { useProgrammingLanguageStore } from '../../core/store/programming-langua
 
 export default function Home() {
   const segments = useSegments();
-  const {
-    getModulesByLanguageId,
-    modules,
-    currentModule,
-    setCurrentModule,
-    isLoading,
-  } = useModuleStore();
+  const { getModulesByLanguageId, modules, currentModule, setCurrentModule } =
+    useModuleStore();
   const { getMe, programmingLanguage, setProgrammingLanguage, token } =
     useAuthStore();
   const { getOneLanguageById } = useProgrammingLanguageStore();

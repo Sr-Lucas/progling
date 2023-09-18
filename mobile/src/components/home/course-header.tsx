@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { View } from 'react-native';
 import { CircularProgressIndicator } from './circular-progress-indicator';
 import { Text } from '../shared/Text';
+import { useModuleStore } from '@/core/store/modules/module.store';
 
 type Props = {
   title: string;
@@ -12,6 +13,8 @@ type Props = {
 };
 
 export function CourseHeader({ title, imageUrl, progress }: Props) {
+  const { currentLevel, currentModule } = useModuleStore();
+
   return (
     <View
       className={clsx(
@@ -40,7 +43,8 @@ export function CourseHeader({ title, imageUrl, progress }: Props) {
         </Text>
         <View className="h-[2px]" />
         <Text weight="regular" classNameP="text-gray-600 text-sm">
-          Módulo 1 :: Nv. 3
+          Módulo {(currentModule?.order ?? 0) + 1} :: Lvl.{' '}
+          {currentLevel?.name.slice(0, 1)}
         </Text>
       </View>
 
