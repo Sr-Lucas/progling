@@ -5,11 +5,7 @@ import { Text } from '@/components/shared/Text';
 import { useAuthStore } from '@/core/store/auth/auth.store';
 
 export default function AppBar() {
-  const { logOut: signOut, user } = useAuthStore();
-
-  const logOut = () => {
-    signOut();
-  };
+  const { user } = useAuthStore();
 
   return (
     <LinearGradient
@@ -30,11 +26,9 @@ export default function AppBar() {
           {user?.hearts}
         </Text>
       </View>
-      <TouchableOpacity onPress={() => logOut()}>
-        <Text classNameP="text-xl text-white" weight="bold">
-          Prog:Ling
-        </Text>
-      </TouchableOpacity>
+      <Text classNameP="text-xl text-white" weight="bold">
+        Prog:Ling
+      </Text>
       <View className="flex flex-row items-center">
         <View className="flex items-end">
           <View className="flex flex-row items-end">
