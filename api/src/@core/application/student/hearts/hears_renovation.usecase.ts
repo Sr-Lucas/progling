@@ -21,7 +21,7 @@ export class HeartsRenovationUseCase {
     const studentUpdated = await this.studentRepository.update({
       id: student.id!,
       heartsRenewAt: nextDay.toJSDate(),
-      hearts: 5,
+      hearts: 3,
     });
 
     if (!studentUpdated) {
