@@ -1,0 +1,141 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Student {
+  id String [pk]
+  email String [unique, not null]
+  name String
+  password String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  StudentProgress StudentProgress [not null]
+}
+
+Table ProgrammingLanguage {
+  id String [pk]
+  name String [not null]
+  description String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  modules Module [not null]
+}
+
+Table Module {
+  id String [pk]
+  name String [not null]
+  description String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  ProgrammingLanguage ProgrammingLanguage [not null]
+  programmingLanguageId String [not null]
+  levels Level [not null]
+}
+
+Table Level {
+  id String [pk]
+  name String [not null]
+  description String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  Module Module
+  moduleId String
+  miniGames MiniGame [not null]
+  StudentProgress StudentProgress [not null]
+}
+
+Table MiniGame {
+  id String [pk]
+  type String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  Level Level [not null]
+  TrueFalseMiniGame TrueFalseMiniGame
+  CodeCompletionMiniGame CodeCompletionMiniGame
+  CodeOrderingMiniGame CodeOrderingMiniGame
+  levelId String [not null]
+  trueFalseMiniGameId String
+  codeCompletionMiniGameId String
+  codeOrderingMiniGameId String
+  StudentProgress StudentProgress [not null]
+}
+
+Table TrueFalseMiniGame {
+  id String [pk]
+  question String [not null]
+  correctAnswer Boolean [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  MiniGame MiniGame [not null]
+}
+
+Table CodeCompletionMiniGame {
+  id String [pk]
+  code String [not null]
+  options CodeCompletionMiniGameOption [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  MiniGame MiniGame [not null]
+}
+
+Table CodeOrderingMiniGame {
+  id String [pk]
+  options CodeOrderingMiniGameOption [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  MiniGame MiniGame [not null]
+}
+
+Table CodeCompletionMiniGameOption {
+  id String [pk]
+  content String [not null]
+  isCorrect Boolean [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  CodeCompletionMiniGame CodeCompletionMiniGame [not null]
+  codeCompletionMiniGameId String [not null]
+}
+
+Table CodeOrderingMiniGameOption {
+  id String [pk]
+  content String [not null]
+  order Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  CodeOrderingMiniGame CodeOrderingMiniGame [not null]
+  codeOrderingMiniGameId String [not null]
+}
+
+Table StudentProgress {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  Student Student
+  studentId String
+  Level Level
+  levelId String
+  MiniGames MiniGame
+  miniGamesId String
+}
+
+Ref: Module.programmingLanguageId > ProgrammingLanguage.id
+
+Ref: Level.moduleId > Module.id
+
+Ref: MiniGame.levelId > Level.id
+
+Ref: MiniGame.trueFalseMiniGameId > TrueFalseMiniGame.id
+
+Ref: MiniGame.codeCompletionMiniGameId > CodeCompletionMiniGame.id
+
+Ref: MiniGame.codeOrderingMiniGameId > CodeOrderingMiniGame.id
+
+Ref: CodeCompletionMiniGameOption.codeCompletionMiniGameId > CodeCompletionMiniGame.id
+
+Ref: CodeOrderingMiniGameOption.codeOrderingMiniGameId > CodeOrderingMiniGame.id
+
+Ref: StudentProgress.studentId > Student.id
+
+Ref: StudentProgress.levelId > Level.id
+
+Ref: StudentProgress.miniGamesId > MiniGame.id
