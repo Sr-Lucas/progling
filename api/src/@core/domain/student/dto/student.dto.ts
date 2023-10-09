@@ -7,6 +7,9 @@ export type CreateStudentDTO = {
 export type CreateStudentRepositoryDTO = CreateStudentDTO & {
   hearts: number;
   heartsRenewAt: Date;
+  streak: number;
+  streakRenewAt: Date;
+  streakResetAt: Date;
 };
 
 export type UpdateStudentRepositoryDTO = Partial<CreateStudentRepositoryDTO> & {

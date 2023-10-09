@@ -10,6 +10,9 @@ export const students: Student[] = [
     password: 'Teste123@',
     deletedAt: null,
     hearts: 5,
+    streak: 0,
+    streakRenewAt: new Date(),
     heartsRenewAt: new Date(),
+    streakResetAt: new Date(),
   },
 ];

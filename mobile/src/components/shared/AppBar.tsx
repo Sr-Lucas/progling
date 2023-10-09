@@ -15,7 +15,7 @@ export default function AppBar() {
       <View className="flex flex-row items-center">
         <Image source={Images.fire} />
         <Text classNameP="text-white text-base font-medium" weight="medium">
-          3
+          {(user?.streak ?? 0) > 3 ? '3+' : user?.streak}
         </Text>
         <View className="w-3" />
         <Image className="mt-1" source={Images.heart} />

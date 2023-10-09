@@ -7,6 +7,7 @@ import { StudentAnswerRepository } from '@infrastructure/student/student-answer.
 import { CreateStudentAnswerUseCase } from '@application/student/student-answer/create/create-student-answer.usecase';
 import { StudentRepository } from '@infrastructure/student/student.repository';
 import { DeleteAllStudentAnswerByLevelIdUseCase } from '@application/student/student-answer/delete/delete-all-by-level-id';
+import { StreakHandlerUseCase } from '@application/student/streak/streak-handler.usecase';
 
 @Module({
   controllers: [MiniGameController],
@@ -56,6 +57,12 @@ import { DeleteAllStudentAnswerByLevelIdUseCase } from '@application/student/stu
       useFactory: (studentAnswerRepository: StudentAnswerRepository) =>
         new DeleteAllStudentAnswerByLevelIdUseCase(studentAnswerRepository),
       inject: [StudentAnswerRepository],
+    },
+    {
+      provide: StreakHandlerUseCase,
+      useFactory: (studentRepository: StudentRepository) =>
+        new StreakHandlerUseCase(studentRepository),
+      inject: [StudentRepository],
     },
 
     // SERVICES

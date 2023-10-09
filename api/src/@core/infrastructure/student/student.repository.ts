@@ -1,6 +1,5 @@
 import {
   CreateStudentDTO,
-  UpdateStudentDTO,
   UpdateStudentRepositoryDTO,
 } from '@domain/student/dto/student.dto';
 import { Student } from '@domain/student/entity/student.entity';
@@ -53,6 +52,8 @@ export class StudentRepository implements IStudentRepository {
     email,
     hearts,
     heartsRenewAt,
+    streak,
+    streakRenewAt,
   }: UpdateStudentRepositoryDTO): Promise<Student | null> {
     const student = await this.prisma.student.update({
       where: {
@@ -63,6 +64,8 @@ export class StudentRepository implements IStudentRepository {
         email,
         hearts,
         heartsRenewAt,
+        streak,
+        streakRenewAt,
       },
     });
 
