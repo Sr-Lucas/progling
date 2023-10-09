@@ -39,6 +39,10 @@ export class MiniGame extends Entity {
     this._codeOrdering = codeOrdering;
   }
 
+  get codeOrdering(): CodeOrderingMiniGame {
+    return this._codeOrdering;
+  }
+
   set trueFalse(trueFalse: TrueFalseMiniGame) {
     this._trueFalse = trueFalse;
   }

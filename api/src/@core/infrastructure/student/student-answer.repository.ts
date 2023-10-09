@@ -30,9 +30,11 @@ export class StudentAnswerRepository implements IStudentAnswerRepository {
       where: {
         codeOrderingMiniGameStudentAnswer: {
           studentAnswer: {
-            studentId,
-            miniGame: {
-              levelId,
+            some: {
+              studentId,
+              miniGame: {
+                levelId,
+              },
             },
           },
         },
@@ -64,6 +66,7 @@ export class StudentAnswerRepository implements IStudentAnswerRepository {
     answer,
     miniGameId,
     studentId,
+    options,
   }: CreateStudentAnswerDTO): Promise<StudentAnswer | null> {
     const studentAnswer = await this.prisma.studentAnswer.create({
       data: {
@@ -95,14 +98,24 @@ export class StudentAnswerRepository implements IStudentAnswerRepository {
         },
       });
     } else {
-      answer.map(async (item) => {
+      const codeOrderingMiniGameStudentAnswer =
+        await this.prisma.codeOrderingMiniGameStudentAnswer.create({
+          data: {
+            studentAnswerId: studentAnswer.id,
+          },
+        });
+
+      for (let i = 0; i < answer.length; i++) {
         await this.prisma.codeOrderingMiniGameStudentAnswerOption.create({
           data: {
             studentAnswerId: studentAnswer.id,
-            orderAnswer: item,
+            codeOrderingMiniGameStudentAnswerId:
+              codeOrderingMiniGameStudentAnswer.id,
+            answerOrder: answer[i],
+            correctOrder: options!.at(i)!.order,
           },
         });
-      });
+      }
     }
 
     const studentAnswerPopulated = await this.prisma.studentAnswer.findUnique({
@@ -145,6 +158,7 @@ export class StudentAnswerRepository implements IStudentAnswerRepository {
   async update({
     id,
     answer,
+    options,
     miniGameId,
     studentId,
   }: UpdateStudentAnswerDTO): Promise<StudentAnswer | null> {
@@ -193,11 +207,12 @@ export class StudentAnswerRepository implements IStudentAnswerRepository {
       });
 
       // Create new options
-      answer.map(async (item) => {
+      answer.map(async (item, index) => {
         await this.prisma.codeOrderingMiniGameStudentAnswerOption.create({
           data: {
             studentAnswerId: studentAnswer.id,
-            orderAnswer: item,
+            answerOrder: item,
+            correctOrder: options!.at(index)!.order,
           },
         });
       });

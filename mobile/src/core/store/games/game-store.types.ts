@@ -10,7 +10,8 @@ export type GameState = {
 export type GameRoutes =
   | '/levels/games/TrueFalseGame'
   | '/levels/games/CodeCompletionGame'
-  | '/levels/games/MarkdownGame';
+  | '/levels/games/MarkdownGame'
+  | '/levels/games/CodeOrderingGame';
 
 export type IGameStore = GameState & {
   setGames(games: MiniGame[]): void;

@@ -78,7 +78,8 @@ model StudentAnswer {
   miniGameId                          String
   trueFalseMiniGameStudentAnswer      TrueFalseMiniGameStudentAnswer?
   codeCompletionMiniGameStudentAnswer CodeCompletionMiniGameStudentAnswer?
-  codeOrderingMiniGameStudentAnswer   CodeOrderingMiniGameStudentAnswer?
+  codeOrderingMiniGameStudentAnswer   CodeOrderingMiniGameStudentAnswer?   @relation(fields: [codeOrderingMiniGameStudentAnswerId], references: [id])
+  codeOrderingMiniGameStudentAnswerId String?
 }
 
 model TrueFalseMiniGameStudentAnswer {
@@ -103,8 +104,8 @@ model CodeOrderingMiniGameStudentAnswer {
   id              String                                    @id @default(uuid())
   createdAt       DateTime                                  @default(now())
   updatedAt       DateTime                                  @updatedAt
-  studentAnswer   StudentAnswer                             @relation(fields: [studentAnswerId], references: [id])
-  studentAnswerId String                                    @unique
+  studentAnswer   StudentAnswer[]
+  studentAnswerId String
   answer          CodeOrderingMiniGameStudentAnswerOption[]
 }
 
@@ -112,8 +113,9 @@ model CodeOrderingMiniGameStudentAnswerOption {
   id                                  String                             @id @default(uuid())
   createdAt                           DateTime                           @default(now())
   updatedAt                           DateTime                           @updatedAt
-  studentAnswerId                     String                             @unique
-  orderAnswer                         Int
+  studentAnswerId                     String
+  answerOrder                         Int
+  correctOrder                        Int
   codeOrderingMiniGameStudentAnswer   CodeOrderingMiniGameStudentAnswer? @relation(fields: [codeOrderingMiniGameStudentAnswerId], references: [id])
   codeOrderingMiniGameStudentAnswerId String?
 }

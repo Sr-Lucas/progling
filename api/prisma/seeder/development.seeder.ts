@@ -8,6 +8,8 @@ import { students } from './data/students';
 import {
   codeCompletionMiniGameOptions,
   codeCompletionMiniGames,
+  codeOrderingMiniGameOptions,
+  codeOrderingMiniGames,
   markDownMiniGames,
   miniGames,
   trueFalseMiniGames,
@@ -61,17 +63,17 @@ export class SeedDevelopment {
       skipDuplicates: true,
     });
 
-    // // CREATE codeOrderingMiniGames
-    // await this.prisma.codeOrderingMiniGame.createMany({
-    //   data: this.codeOrderingMiniGames,
-    //   skipDuplicates: true,
-    // });
+    // CREATE codeOrderingMiniGames
+    await this.prisma.codeOrderingMiniGame.createMany({
+      data: codeOrderingMiniGames,
+      skipDuplicates: true,
+    });
 
-    // // CREATE codeOrderingMiniGameOptions
-    // await this.prisma.codeOrderingMiniGameOption.createMany({
-    //   data: this._codeOrderingMiniGameOptions,
-    //   skipDuplicates: true,
-    // });
+    // CREATE codeOrderingMiniGameOptions
+    await this.prisma.codeOrderingMiniGameOption.createMany({
+      data: codeOrderingMiniGameOptions,
+      skipDuplicates: true,
+    });
 
     // CREATE MARKDOWN MINIGAMES
     await this.prisma.markdownMiniGame.createMany({
