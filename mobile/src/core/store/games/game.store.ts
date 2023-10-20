@@ -43,6 +43,8 @@ export const gameStore = combine({ ...initialState }, (set, get) => ({
         return '/levels/games/CodeCompletionGame';
       case 'MARKDOWN':
         return '/levels/games/MarkdownGame';
+      case 'CODE_ORDERING':
+        return '/levels/games/CodeOrderingGame';
       default:
         return '/levels/games/TrueFalseGame';
     }

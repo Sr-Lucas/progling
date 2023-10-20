@@ -28,4 +28,4 @@ COPY --chown=root:root . .
 EXPOSE 3000
 
 # Inicie o aplicativo como o usuário 'appuser'
-CMD [ "npm", "start:dev" ]
+CMD [ "npm", "run", "start:dev" ]

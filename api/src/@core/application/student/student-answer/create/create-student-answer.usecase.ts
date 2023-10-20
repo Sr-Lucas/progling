@@ -1,3 +1,4 @@
+import { CodeOrderingMiniGame } from '@domain/minigame/entity/code-ordering-minigame';
 import { MiniGameEnum } from '@domain/minigame/entity/minigame.entity';
 import { IMiniGameRepository } from '@domain/minigame/repository/minigame.repository.interface';
 import { CreateStudentAnswerDTO } from '@domain/student/dto/student-answer.dto';
@@ -84,10 +85,16 @@ export class CreateStudentAnswerUseCase {
       });
     }
 
+    const options =
+      miniGame.stringType === MiniGameEnum.CODE_ORDERING
+        ? miniGame.codeOrdering.options
+        : [];
+
     const studentAnswer = await this.studentAnswerRepository.create({
       answer,
       miniGameId,
       studentId,
+      options,
     });
 
     return studentAnswer;

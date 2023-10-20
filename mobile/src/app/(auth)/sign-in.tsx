@@ -31,6 +31,7 @@ export default function Login() {
     try {
       await signIn({ email, password });
     } catch (e) {
+      console.log(e);
       createAlert({
         title: 'Erro ao entrar',
         message: 'Verifique se os dados estão corretos',

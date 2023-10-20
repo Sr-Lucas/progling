@@ -24,8 +24,25 @@ export class CreateStudentUseCase {
       name,
       password: passwordHash,
       hearts: 5,
+      streak: 0,
       heartsRenewAt: DateTime.fromJSDate(new Date())
         .plus({ days: 1 })
+        .toJSDate(),
+      streakRenewAt: DateTime.fromJSDate(new Date())
+        .plus({ days: 1 })
+        .minus({
+          hour: new Date().getHours(),
+          minute: new Date().getMinutes(),
+          second: new Date().getSeconds(),
+        })
+        .toJSDate(),
+      streakResetAt: DateTime.fromJSDate(new Date())
+        .plus({ days: 2 })
+        .minus({
+          hour: new Date().getHours(),
+          minute: new Date().getMinutes(),
+          second: new Date().getSeconds(),
+        })
         .toJSDate(),
     });
 

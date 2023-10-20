@@ -27,7 +27,8 @@ export type StudentAnswerType = {
       createdAt: Date;
       updatedAt: Date;
       studentAnswerId: string;
-      orderAnswer: number;
+      answerOrder: number;
+      correctOrder: number;
     }[];
   } | null;
 };
@@ -46,7 +47,7 @@ export class StudentAnswerFactory {
       answer = studentAnswer.codeCompletionMiniGameStudentAnswer.answer;
     } else if (studentAnswer.codeOrderingMiniGameStudentAnswer) {
       answer = studentAnswer.codeOrderingMiniGameStudentAnswer.answer.map(
-        (answer) => answer.orderAnswer,
+        (answer) => answer.answerOrder,
       );
     } else {
       answer = '';

@@ -3,6 +3,8 @@ import { module2Mds } from './makdowns/module2-mds';
 import {
   module1CodeCompletionMiniGameOptions,
   module1CodeCompletionMiniGames,
+  module1CodeOrderingMiniGameOptions,
+  module1CodeOrderingMiniGames,
   module1MarkdownMiniGames,
   module1MiniGames,
   module1TrueFalseMiniGames,
@@ -23,6 +25,11 @@ export const trueFalseMiniGames = [
 export const codeCompletionMiniGames = [...module1CodeCompletionMiniGames];
 export const codeCompletionMiniGameOptions = [
   ...module1CodeCompletionMiniGameOptions,
+];
+
+export const codeOrderingMiniGames = [...module1CodeOrderingMiniGames];
+export const codeOrderingMiniGameOptions = [
+  ...module1CodeOrderingMiniGameOptions,
 ];
 
 export const markDownMiniGames = [

@@ -9,6 +9,7 @@ import { CreateStudentUseCase } from '@application/student/create/create-student
 import { UpdateStudentUseCase } from '@application/student/update/update-student.usecase';
 import { HeartsRenovationUseCase } from '@application/student/hearts/hears_renovation.usecase';
 import { BcryptAdapter } from 'src/@core/adapters/encrypter/bcrypt.adapter';
+import { StreakHandlerUseCase } from '@application/student/streak/streak-handler.usecase';
 
 @Module({
   controllers: [StudentController],
@@ -60,6 +61,12 @@ import { BcryptAdapter } from 'src/@core/adapters/encrypter/bcrypt.adapter';
       provide: HeartsRenovationUseCase,
       useFactory: (studentRepository) =>
         new HeartsRenovationUseCase(studentRepository),
+      inject: [StudentRepository],
+    },
+    {
+      provide: StreakHandlerUseCase,
+      useFactory: (studentRepository) =>
+        new StreakHandlerUseCase(studentRepository),
       inject: [StudentRepository],
     },
 

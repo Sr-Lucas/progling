@@ -6,7 +6,10 @@ export class Student extends Entity {
     private _email: string,
     private _password: string,
     private _hearts: number,
+    private _streak: number,
     private _heartsRenewAt?: Date | null,
+    private _streakRenewAt?: Date | null,
+    private _streakResetAt?: Date | null,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -34,6 +37,18 @@ export class Student extends Entity {
     return this._heartsRenewAt;
   }
 
+  get streak(): number {
+    return this._streak;
+  }
+
+  get streakRenewAt(): Date | null | undefined {
+    return this._streakRenewAt;
+  }
+
+  get streakResetAt(): Date | null | undefined {
+    return this._streakResetAt;
+  }
+
   toJSON(): any {
     return {
       id: this.id,
@@ -41,6 +56,8 @@ export class Student extends Entity {
       email: this.email,
       hearts: this.hearts,
       heartsRenewAt: this.heartsRenewAt,
+      streak: this.streak,
+      streakRenewAt: this.streakRenewAt,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };
