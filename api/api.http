@@ -1,6 +1,6 @@
 @baseUrl = http://localhost:3000
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YzdmMzcwYS03YTAzLTQ2OGMtOTY5Ny0wNWFjYzM0Y2ZkN2QiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsImlhdCI6MTY5NDk3MDMzMSwiZXhwIjoxNjk0OTg0NzMxfQ.lncwgdizERHK9oRxpL0jla9WVaaE8zoWnvhn00thAOI
-@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YzdmMzcwYS03YTAzLTQ2OGMtOTY5Ny0wNWFjYzM0Y2ZkN2QiLCJ1c2VybmFtZSI6Ikx1Y2FzIFNhbnRvcyIsInJlZnJlc2giOnRydWUsImlhdCI6MTY5NDkwMjQ1NywiZXhwIjoxNjk1NTA3MjU3fQ.QmKBqj9PCXliYzNgo899kHfMYWtKWDX3XAPP6n9L92Q
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YzdmMzcwYS03YTAzLTQ2OGMtOTY5Ny0wNWFjYzM0Y2ZkN2QiLCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNjk3OTEyMDUxLCJleHAiOjE2OTc5MjY0NTF9.sxsBXswF-2EkoVu3ADYCgFE8bAiLt2EluXg03dRAWwI
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YzdmMzcwYS03YTAzLTQ2OGMtOTY5Ny0wNWFjYzM0Y2ZkN2QiLCJ1c2VybmFtZSI6IkpvaG4gRG9lIiwicmVmcmVzaCI6dHJ1ZSwiaWF0IjoxNjk3OTEyMDUxLCJleHAiOjE2OTg1MTY4NTF9.upfGGnqR9xksA2sHjLWtJCgQIpgiNNeeMeq9HwwMN9I
 
 ### Helath Check
 GET {{baseUrl}}/
@@ -38,8 +38,6 @@ content-type: application/json
     "name": "Lucas Santos",
     "password": "Teste123@"
 }
-
-
 
 
 ### Programming Languages

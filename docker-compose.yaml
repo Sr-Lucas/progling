@@ -1,29 +1,29 @@
 version: '3'
 
 services:
-  api:
+  api_progling:
     build:
       context: api
       dockerfile: Dockerfile
-    image: lucassantos/api:latest
-    container_name: progling-api
+    image: lucassantos/api_progling:latest
+    container_name: progling_api
     entrypoint: /usr/src/app/init.sh
     command: ["npm", "run", "start:debug"] # debug
     ports:
       - 9229:9229 # debug
     tty: true
     networks:
-      - progling-net
+      - progling_net
     volumes:
       - ./api:/usr/src/app
       - /usr/src/app/node_modules
     depends_on:
-      - db
+      - db_progling
   
-  db:
+  db_progling:
     image: mysql
     command: --innodb-use-native-aio=0
-    container_name: db
+    container_name: db_progling
     restart: always
     tty: true
     ports:
@@ -35,23 +35,23 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_ROOT_USER=root
     networks: 
-      - progling-net
+      - progling_net
   
-  nginx:
+  nginx_progling:
     build: 
       context: nginx
-    image: lucassantos/nginx
-    container_name: nginx
+    image: lucassantos/nginx_progling:latest
+    container_name: nginx_progling
     tty: true
     networks:
-      - progling-net
+      - progling_net
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
     ports:
       - 3000:80
     depends_on:
-      - api
+      - api_progling
 
 networks:
-  progling-net:
+  progling_net:
     driver: bridge

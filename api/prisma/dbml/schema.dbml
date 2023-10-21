@@ -2,23 +2,37 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
+Table Image {
+  id String [pk]
+  name String [not null]
+  storeType String [not null, default: 'local']
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  programmingLanguage ProgrammingLanguage
+}
+
 Table Student {
   id String [pk]
   email String [unique, not null]
-  name String
+  name String [not null]
   password String [not null]
+  hearts Int [not null, default: 3]
+  heartsRenewAt DateTime
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  StudentProgress StudentProgress [not null]
+  deletedAt DateTime
+  gameAnswers StudentAnswer [not null]
 }
 
 Table ProgrammingLanguage {
   id String [pk]
   name String [not null]
   description String [not null]
+  image Image [not null]
+  imageId String [unique, not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  modules Module [not null]
+  module Module [not null]
 }
 
 Table Module {
@@ -27,8 +41,9 @@ Table Module {
   description String [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  ProgrammingLanguage ProgrammingLanguage [not null]
+  programmingLanguage ProgrammingLanguage [not null]
   programmingLanguageId String [not null]
+  orderNumber Int [unique, not null, default: 0]
   levels Level [not null]
 }
 
@@ -38,10 +53,60 @@ Table Level {
   description String [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  Module Module
-  moduleId String
+  orderNumber Int [not null, default: 0]
+  module Module [not null]
   miniGames MiniGame [not null]
-  StudentProgress StudentProgress [not null]
+  moduleId String [not null]
+}
+
+Table StudentAnswer {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  studentId String [not null]
+  student Student [not null]
+  miniGame MiniGame [not null]
+  miniGameId String [not null]
+  trueFalseMiniGameStudentAnswer TrueFalseMiniGameStudentAnswer
+  codeCompletionMiniGameStudentAnswer CodeCompletionMiniGameStudentAnswer
+  codeOrderingMiniGameStudentAnswer CodeOrderingMiniGameStudentAnswer
+}
+
+Table TrueFalseMiniGameStudentAnswer {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  studentAnswer StudentAnswer [not null]
+  studentAnswerId String [unique, not null]
+  answer Boolean [not null]
+}
+
+Table CodeCompletionMiniGameStudentAnswer {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  studentAnswer StudentAnswer [not null]
+  studentAnswerId String [unique, not null]
+  answer String [not null]
+}
+
+Table CodeOrderingMiniGameStudentAnswer {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  studentAnswer StudentAnswer [not null]
+  studentAnswerId String [unique, not null]
+  answer CodeOrderingMiniGameStudentAnswerOption [not null]
+}
+
+Table CodeOrderingMiniGameStudentAnswerOption {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  studentAnswerId String [unique, not null]
+  orderAnswer Int [not null]
+  codeOrderingMiniGameStudentAnswer CodeOrderingMiniGameStudentAnswer
+  codeOrderingMiniGameStudentAnswerId String
 }
 
 Table MiniGame {
@@ -49,15 +114,26 @@ Table MiniGame {
   type String [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  Level Level [not null]
-  TrueFalseMiniGame TrueFalseMiniGame
-  CodeCompletionMiniGame CodeCompletionMiniGame
-  CodeOrderingMiniGame CodeOrderingMiniGame
+  level Level [not null]
   levelId String [not null]
-  trueFalseMiniGameId String
-  codeCompletionMiniGameId String
-  codeOrderingMiniGameId String
-  StudentProgress StudentProgress [not null]
+  trueFalseMiniGame TrueFalseMiniGame
+  codeCompletionMiniGame CodeCompletionMiniGame
+  codeOrderingMiniGame CodeOrderingMiniGame
+  markdownMiniGame MarkdownMiniGame
+  markdownMiniGameId String [unique]
+  trueFalseMiniGameId String [unique]
+  codeCompletionMiniGameId String [unique]
+  codeOrderingMiniGameId String [unique]
+  studentAnswers StudentAnswer [not null]
+  orderNumber Int [not null, default: 0]
+}
+
+Table MarkdownMiniGame {
+  id String [pk]
+  markdown String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  miniGame MiniGame
 }
 
 Table TrueFalseMiniGame {
@@ -66,7 +142,7 @@ Table TrueFalseMiniGame {
   correctAnswer Boolean [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  MiniGame MiniGame [not null]
+  miniGame MiniGame
 }
 
 Table CodeCompletionMiniGame {
@@ -75,7 +151,7 @@ Table CodeCompletionMiniGame {
   options CodeCompletionMiniGameOption [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  MiniGame MiniGame [not null]
+  miniGame MiniGame
 }
 
 Table CodeOrderingMiniGame {
@@ -83,7 +159,7 @@ Table CodeOrderingMiniGame {
   options CodeOrderingMiniGameOption [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  MiniGame MiniGame [not null]
+  miniGame MiniGame
 }
 
 Table CodeCompletionMiniGameOption {
@@ -92,7 +168,7 @@ Table CodeCompletionMiniGameOption {
   isCorrect Boolean [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  CodeCompletionMiniGame CodeCompletionMiniGame [not null]
+  codeCompletionMiniGame CodeCompletionMiniGame [not null]
   codeCompletionMiniGameId String [not null]
 }
 
@@ -102,40 +178,38 @@ Table CodeOrderingMiniGameOption {
   order Int [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  CodeOrderingMiniGame CodeOrderingMiniGame [not null]
+  codeOrderingMiniGame CodeOrderingMiniGame [not null]
   codeOrderingMiniGameId String [not null]
 }
 
-Table StudentProgress {
-  id String [pk]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  Student Student
-  studentId String
-  Level Level
-  levelId String
-  MiniGames MiniGame
-  miniGamesId String
-}
+Ref: ProgrammingLanguage.imageId - Image.id
 
 Ref: Module.programmingLanguageId > ProgrammingLanguage.id
 
 Ref: Level.moduleId > Module.id
 
+Ref: StudentAnswer.studentId > Student.id
+
+Ref: StudentAnswer.miniGameId > MiniGame.id
+
+Ref: TrueFalseMiniGameStudentAnswer.studentAnswerId - StudentAnswer.id
+
+Ref: CodeCompletionMiniGameStudentAnswer.studentAnswerId - StudentAnswer.id
+
+Ref: CodeOrderingMiniGameStudentAnswer.studentAnswerId - StudentAnswer.id
+
+Ref: CodeOrderingMiniGameStudentAnswerOption.codeOrderingMiniGameStudentAnswerId > CodeOrderingMiniGameStudentAnswer.id
+
 Ref: MiniGame.levelId > Level.id
 
-Ref: MiniGame.trueFalseMiniGameId > TrueFalseMiniGame.id
+Ref: MiniGame.trueFalseMiniGameId - TrueFalseMiniGame.id
 
-Ref: MiniGame.codeCompletionMiniGameId > CodeCompletionMiniGame.id
+Ref: MiniGame.codeCompletionMiniGameId - CodeCompletionMiniGame.id
 
-Ref: MiniGame.codeOrderingMiniGameId > CodeOrderingMiniGame.id
+Ref: MiniGame.codeOrderingMiniGameId - CodeOrderingMiniGame.id
+
+Ref: MiniGame.markdownMiniGameId - MarkdownMiniGame.id
 
 Ref: CodeCompletionMiniGameOption.codeCompletionMiniGameId > CodeCompletionMiniGame.id
 
 Ref: CodeOrderingMiniGameOption.codeOrderingMiniGameId > CodeOrderingMiniGame.id
-
-Ref: StudentProgress.studentId > Student.id
-
-Ref: StudentProgress.levelId > Level.id
-
-Ref: StudentProgress.miniGamesId > MiniGame.id
