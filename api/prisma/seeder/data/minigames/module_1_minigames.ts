@@ -1,6 +1,8 @@
 import {
   CodeCompletionMiniGame,
   CodeCompletionMiniGameOption,
+  CodeOrderingMiniGame,
+  CodeOrderingMiniGameOption,
   MarkdownMiniGame,
   MiniGame,
   TrueFalseMiniGame,
@@ -126,6 +128,58 @@ export const module1CodeCompletionMiniGames: CodeCompletionMiniGame[] = [
   ],
   //end Level 2;
 ];
+
+export const module1CodeOrderingMiniGames: CodeOrderingMiniGame[] = [
+  {
+    id: '32eab195-6ca4-450f-ada0-6f89d5395963',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
+
+export const module1CodeOrderingMiniGameOptions: CodeOrderingMiniGameOption[] =
+  [
+    {
+      id: '5b9550db-e37b-4b89-aff4-485e518b5635',
+      order: 0,
+      codeOrderingMiniGameId: '32eab195-6ca4-450f-ada0-6f89d5395963',
+      content: 'var',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '10c71167-fbb9-4c19-b048-17f11925028b',
+      order: 1,
+      codeOrderingMiniGameId: '32eab195-6ca4-450f-ada0-6f89d5395963',
+      content: 'userName',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '5abcd88d-ace9-4ba3-af6d-372304bebfed',
+      order: 2,
+      codeOrderingMiniGameId: '32eab195-6ca4-450f-ada0-6f89d5395963',
+      content: '=',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: 'd695f98a-2c22-4065-9358-48b6e4ac4593',
+      order: 3,
+      codeOrderingMiniGameId: '32eab195-6ca4-450f-ada0-6f89d5395963',
+      content: 'Eduardo Mendes',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '15aff025-eee8-42e4-a4b5-036c137caa31',
+      order: 4,
+      codeOrderingMiniGameId: '32eab195-6ca4-450f-ada0-6f89d5395963',
+      content: ';',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ];
 
 export const module1CodeCompletionMiniGameOptions: CodeCompletionMiniGameOption[] =
   [
@@ -304,6 +358,18 @@ export const module1MiniGames: MiniGame[] = [
       orderNumber: 0,
     },
     {
+      id: '3bb2b126-268d-43aa-8fdd-5b061484fc42',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: '32eab195-6ca4-450f-ada0-6f89d5395963',
+      trueFalseMiniGameId: null,
+      markdownMiniGameId: null,
+      type: 'CODE_ORDERING',
+      levelId: levels[1].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 1,
+    },
+    {
       id: '1e6bd0cb-13b3-4493-8032-d7872116cf41',
       codeCompletionMiniGameId: null,
       codeOrderingMiniGameId: null,
@@ -313,7 +379,7 @@ export const module1MiniGames: MiniGame[] = [
       createdAt: new Date(),
       updatedAt: new Date(),
       markdownMiniGameId: null,
-      orderNumber: 1,
+      orderNumber: 2,
     },
     {
       id: '992f1963-b315-4d26-a23f-696ebcd74f08',
@@ -325,7 +391,7 @@ export const module1MiniGames: MiniGame[] = [
       levelId: levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
-      orderNumber: 2,
+      orderNumber: 3,
     },
     {
       id: '91e058a4-a587-405e-9db5-33bc1667a0c8',
@@ -337,7 +403,7 @@ export const module1MiniGames: MiniGame[] = [
       levelId: levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
-      orderNumber: 3,
+      orderNumber: 4,
     },
     {
       id: '336e9567-f38e-4ae7-995c-d60e69e4ff00',
@@ -349,7 +415,7 @@ export const module1MiniGames: MiniGame[] = [
       levelId: levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
-      orderNumber: 4,
+      orderNumber: 5,
     },
     {
       id: '5aa3dc7c-54fd-4b88-978d-4a492cf7eecf',
@@ -361,7 +427,7 @@ export const module1MiniGames: MiniGame[] = [
       levelId: levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
-      orderNumber: 5,
+      orderNumber: 6,
     },
     {
       id: '9b948d01-5aae-4207-84d2-6e9fa46284d4',
@@ -373,7 +439,7 @@ export const module1MiniGames: MiniGame[] = [
       levelId: levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
-      orderNumber: 6,
+      orderNumber: 7,
     },
     {
       id: 'cf027013-87c5-4a01-9e6e-ec573bd5fdcc',
@@ -385,7 +451,7 @@ export const module1MiniGames: MiniGame[] = [
       levelId: levels[1].id,
       createdAt: new Date(),
       updatedAt: new Date(),
-      orderNumber: 7,
+      orderNumber: 8,
     },
   ] as MiniGame[]),
   //end Level 2;

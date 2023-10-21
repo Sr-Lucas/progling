@@ -67,7 +67,7 @@ Authorization: Bearer {{authToken}}
 
 
 ### Levels
-GET {{baseUrl}}/levels/1465f146-ebaf-4a12-abda-d9281a37c386
+GET {{baseUrl}}/levels/cf0b1973-9277-4f70-8f80-a6b5bf33576a
 Authorization: Bearer {{authToken}}
 
 

@@ -18,6 +18,9 @@ Table Student {
   password String [not null]
   hearts Int [not null, default: 3]
   heartsRenewAt DateTime
+  streak Int [not null, default: 0]
+  streakRenewAt DateTime
+  streakResetAt DateTime
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   deletedAt DateTime
@@ -70,6 +73,7 @@ Table StudentAnswer {
   trueFalseMiniGameStudentAnswer TrueFalseMiniGameStudentAnswer
   codeCompletionMiniGameStudentAnswer CodeCompletionMiniGameStudentAnswer
   codeOrderingMiniGameStudentAnswer CodeOrderingMiniGameStudentAnswer
+  codeOrderingMiniGameStudentAnswerId String
 }
 
 Table TrueFalseMiniGameStudentAnswer {
@@ -95,7 +99,7 @@ Table CodeOrderingMiniGameStudentAnswer {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   studentAnswer StudentAnswer [not null]
-  studentAnswerId String [unique, not null]
+  studentAnswerId String [not null]
   answer CodeOrderingMiniGameStudentAnswerOption [not null]
 }
 
@@ -103,8 +107,9 @@ Table CodeOrderingMiniGameStudentAnswerOption {
   id String [pk]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  studentAnswerId String [unique, not null]
-  orderAnswer Int [not null]
+  studentAnswerId String [not null]
+  answerOrder Int [not null]
+  correctOrder Int [not null]
   codeOrderingMiniGameStudentAnswer CodeOrderingMiniGameStudentAnswer
   codeOrderingMiniGameStudentAnswerId String
 }
@@ -192,11 +197,11 @@ Ref: StudentAnswer.studentId > Student.id
 
 Ref: StudentAnswer.miniGameId > MiniGame.id
 
+Ref: StudentAnswer.codeOrderingMiniGameStudentAnswerId > CodeOrderingMiniGameStudentAnswer.id
+
 Ref: TrueFalseMiniGameStudentAnswer.studentAnswerId - StudentAnswer.id
 
 Ref: CodeCompletionMiniGameStudentAnswer.studentAnswerId - StudentAnswer.id
-
-Ref: CodeOrderingMiniGameStudentAnswer.studentAnswerId - StudentAnswer.id
 
 Ref: CodeOrderingMiniGameStudentAnswerOption.codeOrderingMiniGameStudentAnswerId > CodeOrderingMiniGameStudentAnswer.id
 

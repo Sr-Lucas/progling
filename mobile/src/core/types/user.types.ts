@@ -3,6 +3,9 @@ export type Student = {
   name: string;
   email: string;
   hearts: number;
+  heartsRenewedAt: string;
+  streak: number;
+  streakRenewedAt: string;
 };
 
 export type SignInDTO = {
