@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     image: lucassantos/api_progling:latest
     container_name: progling_api
-    entrypoint: /usr/src/app/init.sh
+    entrypoint: ['sh', '/usr/src/app/init.sh']
     command: ["npm", "run", "start:debug"] # debug
     ports:
       - 9229:9229 # debug
