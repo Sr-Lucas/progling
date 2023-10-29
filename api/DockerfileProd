@@ -1,0 +1,48 @@
+FROM node:20.9.0-alpine3.17 as build
+
+RUN apk add --no-cache libc6-compat
+
+RUN addgroup --system --gid 1001 app
+RUN adduser --system --uid 1001 app
+WORKDIR /app
+
+COPY --chown=app:app package*.json ./
+COPY --chown=app:app .env.production ./.env
+
+RUN npm ci
+
+COPY --chown=app:app . .
+
+RUN npx prisma generate
+
+RUN npm run build
+
+# --
+
+FROM node:20.9.0-alpine3.17 as prod
+
+RUN apk add --no-cache libc6-compat
+
+RUN addgroup --system --gid 1001 app
+RUN adduser --system --uid 1001 app
+WORKDIR home/node
+
+ENV NODE_ENV=production
+
+
+COPY --chown=app:app --from=build /app/node_modules ./node_modules
+COPY --chown=app:app --from=build /app/package*.json ./
+COPY --chown=app:app --from=build /app/prisma/schema.prisma ./prisma/
+COPY --chown=app:app --from=build /app/prisma/migrations ./prisma/migrations
+COPY --chown=app:app --from=build /app/.env ./.env
+COPY --chown=app:app --from=build /app/init-prod.sh ./init.sh
+COPY --chown=app:app --from=build /app/dist ./dist
+
+RUN chmod +x init.sh
+
+USER app
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "start:prod" ]
+

@@ -4,19 +4,14 @@ services:
   api:
     build:
       context: api
-      dockerfile: Dockerfile
-    image: lucassantos/apidev:latest
+      dockerfile: DockerfileProd
+    image: lucassantos/api:latest
     container_name: api
-    entrypoint: ['sh', '/usr/src/app/init.sh']
-    command: ["npm", "run", "start:debug"] # debug
-    ports:
-      - 9229:9229 # debug
-    tty: true
+    restart: always
+    entrypoint: ['sh', '/home/node/init.sh']
+    command: ["npm", "run", "start:prod"]
     networks:
-      - progling_net
-    volumes:
-      - ./api:/usr/src/app
-      - /usr/src/app/node_modules
+      - prod_net
     depends_on:
       - db
   
@@ -25,25 +20,24 @@ services:
     command: --innodb-use-native-aio=0
     container_name: db
     restart: always
-    tty: true
     ports:
-      - 3306:3306
+      - 39906:3306
     volumes:
-      - ./db/dev:/var/lib/mysql
+      - ./db/prod:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=proglingdb
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=0c37fb451be64e03a35ba461af94fff4
     networks: 
-      - progling_net
+      - prod_net
   
   nginx:
     build: 
       context: nginx
-    image: lucassantos/nginxdev:latest
+    image: lucassantos/nginx:latest
     container_name: nginx
-    tty: true
+    restart: always
     networks:
-      - progling_net
+      - prod_net
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
     ports:
@@ -52,5 +46,5 @@ services:
       - api
 
 networks:
-  progling_net:
+  prod_net:
     driver: bridge
