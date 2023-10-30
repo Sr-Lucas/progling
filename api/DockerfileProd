@@ -32,8 +32,7 @@ ENV NODE_ENV=production
 
 COPY --chown=app:app --from=build /app/node_modules ./node_modules
 COPY --chown=app:app --from=build /app/package*.json ./
-COPY --chown=app:app --from=build /app/prisma/schema.prisma ./prisma/
-COPY --chown=app:app --from=build /app/prisma/migrations ./prisma/migrations
+COPY --chown=app:app --from=build /app/prisma/ ./prisma/
 COPY --chown=app:app --from=build /app/.env ./.env
 COPY --chown=app:app --from=build /app/init-prod.sh ./init.sh
 COPY --chown=app:app --from=build /app/dist ./dist
