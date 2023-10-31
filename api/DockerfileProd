@@ -36,6 +36,7 @@ COPY --chown=app:app --from=build /app/prisma/ ./prisma/
 COPY --chown=app:app --from=build /app/.env ./.env
 COPY --chown=app:app --from=build /app/init-prod.sh ./init.sh
 COPY --chown=app:app --from=build /app/dist ./dist
+COPY --chown=app:app --from=build /app/public ./public
 
 RUN chmod +x init.sh
 
