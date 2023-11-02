@@ -12,8 +12,6 @@ services:
     command: ["npm", "run", "start:prod"]
     networks:
       - prod_net
-    depends_on:
-      - db
 
 networks:
   prod_net:
