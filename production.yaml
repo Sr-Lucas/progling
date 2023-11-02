@@ -14,36 +14,6 @@ services:
       - prod_net
     depends_on:
       - db
-  
-  db:
-    image: mysql
-    command: --innodb-use-native-aio=0
-    container_name: db
-    restart: always
-    ports:
-      - 39906:3306
-    volumes:
-      - ./db/prod:/var/lib/mysql
-    environment:
-      - MYSQL_DATABASE=proglingdb
-      - MYSQL_ROOT_PASSWORD=0c37fb451be64e03a35ba461af94fff4
-    networks: 
-      - prod_net
-  
-  nginx:
-    build: 
-      context: nginx
-    image: lucassantos/nginx:latest
-    container_name: nginx
-    restart: always
-    networks:
-      - prod_net
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-    ports:
-      - 3000:80
-    depends_on:
-      - api
 
 networks:
   prod_net:
