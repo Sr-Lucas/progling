@@ -8,6 +8,8 @@ services:
     image: lucassantos/api:latest
     container_name: api
     restart: always
+    ports:
+      - 3000:3000
     entrypoint: ['sh', '/home/node/init.sh']
     command: ["npm", "run", "start:prod"]
     networks:
