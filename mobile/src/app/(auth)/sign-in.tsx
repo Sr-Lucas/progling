@@ -103,13 +103,13 @@ export default function Login() {
           </TouchableOpacity>
         </View>
 
-        <View className="flex flex-row justify-center items-center w-screen px-36">
+        <View className="flex flex-row justify-center items-center w-screen px-36 hidden">
           <View className="h-[1px] w-full bg-gray-300 mr-3" />
           <Text classNameP="text-grey-500">Entrar com</Text>
           <View className="h-[1px] w-full bg-gray-300 ml-3" />
         </View>
 
-        <View className="flex flex-row justify-center gap-5 mt-6">
+        <View className="flex flex-row justify-center gap-5 mt-6 hidden">
           <TouchableOpacity
             className={clsx(
               'bg-white',
