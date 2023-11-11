@@ -21,7 +21,7 @@
       "bundleIdentifier": "com.progling.progling"
     },
     "android": {
-      "versionCode": 5,
+      "versionCode": 6,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -37,15 +37,7 @@
       "tsconfigPaths": true
     },
     "plugins": [
-      "expo-router",
-       [
-        "expo-build-properties",
-        {
-          "android": {
-            "usesCleartextTraffic": true
-          }
-        }
-       ]
+      "expo-router"
     ],
     "extra": {
       "router": {

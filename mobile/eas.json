@@ -8,11 +8,17 @@
       "distribution": "internal"
     },
     "preview": {
+      "env": {
+        "EXPO_PUBLIC_BASE_URL": "https://www.api.progling.com"
+      },
       "android": {
         "buildType": "apk"
       }
     },
     "preview2": {
+      "env": {
+        "EXPO_PUBLIC_BASE_URL": "https://www.api.progling.com"
+      },
       "android": {
         "gradleCommand": ":app:assembleRelease"
       }
@@ -20,7 +26,11 @@
     "preview3": {
       "developmentClient": true
     },
-    "production": {}
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_BASE_URL": "https://www.api.progling.com"
+      }
+    }
   },
   "submit": {
     "production": {}
