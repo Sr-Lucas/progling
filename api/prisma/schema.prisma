@@ -59,7 +59,7 @@ model Module {
   updatedAt             DateTime            @updatedAt
   programmingLanguage   ProgrammingLanguage @relation(fields: [programmingLanguageId], references: [id])
   programmingLanguageId String
-  orderNumber           Int                 @unique @default(0)
+  orderNumber           Int                 @default(0)
   levels                Level[]
 }
 

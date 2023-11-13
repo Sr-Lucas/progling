@@ -46,7 +46,7 @@ Table Module {
   updatedAt DateTime [not null]
   programmingLanguage ProgrammingLanguage [not null]
   programmingLanguageId String [not null]
-  orderNumber Int [unique, not null, default: 0]
+  orderNumber Int [not null, default: 0]
   levels Level [not null]
 }
 

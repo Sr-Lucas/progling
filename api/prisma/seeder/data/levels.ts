@@ -2,6 +2,9 @@ import { Level } from '@prisma/client';
 import { modules } from './modules';
 
 export const levels: Level[] = [
+  /**
+   * Javascript
+   */
   {
     name: '1.1 O que é o JavaScript',
     description:
@@ -281,5 +284,73 @@ export const levels: Level[] = [
     id: '6e049689-b8a9-46c0-9df2-7bca5e3c5460',
     moduleId: modules[7].id,
     orderNumber: 4,
+  },
+
+  /**
+   * Python
+   */
+
+  // Module 1
+  {
+    name: '1.1 Introdução ao Python',
+    description:
+      'Neste nível introdutório, você será apresentado ao Python e sua importância no desenvolvimento de aplicativos e automação.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: '1465f146-ebaf-4a12-abda-d9281a37c387',
+    moduleId: modules[8].id,
+    orderNumber: 0,
+  },
+  {
+    name: '1.2 Variáveis e Constantes em Python',
+    description:
+      'Aprofunde-se no conceito de variáveis e constantes em Python e como elas são usadas para armazenar informações dinâmicas e imutáveis.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: 'cf0b1973-9277-4f70-8f80-a6b5bf33576b',
+    moduleId: modules[8].id,
+    orderNumber: 1,
+  },
+  {
+    name: '1.3 Tipos de Dados Primitivos em Python',
+    description:
+      'Explore os tipos de dados primitivos em Python, incluindo números, strings, booleanos, e saiba como usá-los em seus programas.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: '6a3ca00b-a4da-4057-b005-f2f2110b0ba9',
+    moduleId: modules[8].id,
+    orderNumber: 2,
+  },
+  {
+    name: '1.4 Conversão de Tipos de Dados em Python',
+    description:
+      'Aprenda a converter entre diferentes tipos de dados em Python para manipular informações de maneira flexível.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: 'dcade942-aaa3-4a09-801f-5f8729f1f66f',
+    moduleId: modules[8].id,
+    orderNumber: 3,
+  },
+
+  // Module 2
+  {
+    name: '2.1 Declarações Condicionais em Python',
+    description:
+      'Domine o uso de declarações condicionais em Python, como if, elif e else, para criar lógica baseada em condições.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: 'ec416a7d-6c14-465f-8b37-22ba48c4c837',
+    moduleId: modules[9].id,
+    orderNumber: 0,
+  },
+  {
+    name: '2.2 Estruturas de Repetição em Python',
+    description:
+      'Aprenda a automatizar tarefas com estruturas de repetição em Python, como for, while e do...while.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: 'f06d24cd-086e-4eae-a797-26a0172f3751',
+    moduleId: modules[9].id,
+    orderNumber: 1,
   },
 ];

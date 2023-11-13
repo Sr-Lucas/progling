@@ -2,6 +2,7 @@ import { Module } from '@prisma/client';
 import { programmingLanguages } from './languages';
 
 export const modules: Module[] = [
+  // Javascript
   {
     name: 'Variáveis e Tipos de Dados em JavaScript',
     description:
@@ -81,5 +82,75 @@ export const modules: Module[] = [
     id: '55533e8d-e2d7-4b26-ae41-ba2465b103f1',
     programmingLanguageId: programmingLanguages[0].id,
     orderNumber: 7,
+  },
+
+  // Python
+  {
+    name: 'Variáveis e Tipos de Dados em Python',
+    description:
+      'Neste módulo, você explorará os conceitos fundamentais de variáveis e tipos de dados em Python.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: '0cc207e4-1205-4f34-94df-4abefd770632',
+    programmingLanguageId: programmingLanguages[1].id,
+    orderNumber: 0,
+  },
+  {
+    name: 'Estruturas de Controle em Python',
+    description:
+      'Neste módulo, você mergulhará nas estruturas de controle em Python. Explore declarações condicionais, como if, elif e else, para criar lógica condicional.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: 'd0eb4677-9333-4397-964f-b692b4bce84d',
+    programmingLanguageId: programmingLanguages[1].id,
+    orderNumber: 1,
+  },
+  {
+    name: 'Funções em Python',
+    description: 'Este módulo é uma introdução ao mundo das funções em Python.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: '9f1046d7-7a3a-4545-a11f-a8afadb9e610',
+    programmingLanguageId: programmingLanguages[1].id,
+    orderNumber: 2,
+  },
+  {
+    name: 'Listas e Dicionários em Python',
+    description: 'Explore a manipulação de dados em Python com este módulo.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: 'a602a528-4326-446a-b81e-75c875d5728c',
+    programmingLanguageId: programmingLanguages[1].id,
+    orderNumber: 3,
+  },
+  {
+    name: 'Tratamento de Exceções em Python',
+    description:
+      'Este módulo aborda a gestão de erros em Python. Aprenda a lidar com exceções usando try...except, lançar exceções personalizadas e garantir a robustez do seu código.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: '57f06ec3-70b2-4a16-8b13-b1593563dcfe',
+    programmingLanguageId: programmingLanguages[1].id,
+    orderNumber: 4,
+  },
+  {
+    name: 'Bibliotecas e Módulos em Python',
+    description:
+      'Neste módulo, você explorará o uso de bibliotecas e módulos em Python para estender a funcionalidade da linguagem. Aprenda a importar e utilizar bibliotecas populares para tarefas como manipulação de dados, visualização e muito mais. Domine a arte de reutilizar código Python existente para acelerar o desenvolvimento de seus aplicativos.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: '55533e8d-e2d7-4b26-ae41-ba2465b103f2',
+    programmingLanguageId: programmingLanguages[1].id,
+    orderNumber: 5,
+  },
+  {
+    name: 'Introdução a Python 3.8+ e Recursos Modernos',
+    description:
+      'Explore os recursos mais recentes do Python neste módulo. Aprenda sobre as funcionalidades adicionadas nas versões recentes, como f-strings, tipagem de variáveis, expressões lambda e muito mais. Domine as técnicas modernas para tornar seu código Python mais eficiente e legível.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    id: '55533e8d-e2d7-4b26-ae41-ba2465b103f3',
+    programmingLanguageId: programmingLanguages[1].id,
+    orderNumber: 6,
   },
 ];

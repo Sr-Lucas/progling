@@ -1,5 +1,3 @@
-import { module1Mds } from './makdowns/module1-mds';
-import { module2Mds } from './makdowns/module2-mds';
 import {
   module1CodeCompletionMiniGameOptions,
   module1CodeCompletionMiniGames,
@@ -10,6 +8,8 @@ import {
   module1TrueFalseMiniGames,
 } from './module_1_minigames';
 import {
+  module2CodeCompletionMiniGameOptions,
+  module2CodeCompletionMiniGames,
   module2MarkDownMiniGames,
   module2MiniGames,
   module2TrueFalseMiniGames,
@@ -22,9 +22,13 @@ export const trueFalseMiniGames = [
   ...module2TrueFalseMiniGames,
 ];
 
-export const codeCompletionMiniGames = [...module1CodeCompletionMiniGames];
+export const codeCompletionMiniGames = [
+  ...module1CodeCompletionMiniGames,
+  ...module2CodeCompletionMiniGames,
+];
 export const codeCompletionMiniGameOptions = [
   ...module1CodeCompletionMiniGameOptions,
+  ...module2CodeCompletionMiniGameOptions,
 ];
 
 export const codeOrderingMiniGames = [...module1CodeOrderingMiniGames];

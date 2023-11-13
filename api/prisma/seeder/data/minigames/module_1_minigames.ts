@@ -11,6 +11,9 @@ import { levels } from '../levels';
 import { module1Mds } from './makdowns/module1-mds';
 
 export const module1MarkdownMiniGames: MarkdownMiniGame[] = [
+  /**
+   * JavaScript
+   */
   {
     id: 'b9ae4dea-8299-454e-9a62-6e6c602bb1e3',
     markdown: module1Mds[0],
@@ -26,6 +29,22 @@ export const module1MarkdownMiniGames: MarkdownMiniGame[] = [
   {
     id: 'ff0b7e21-4223-4f2b-b1be-4a09468a236e',
     markdown: module1Mds[2],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+
+  /**
+   * Python
+   */
+  {
+    id: 'f8d0a6a7-b18d-4d16-8e53-1d4422b727bc',
+    markdown: module1Mds[3],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '0964fab1-3956-4035-b299-2ff1083cab78',
+    markdown: module1Mds[4],
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -106,9 +125,75 @@ export const module1TrueFalseMiniGames: TrueFalseMiniGame[] = [
     },
   ],
   //end Level 2;
+
+  /**
+   * Python
+   */
+
+  // Level 1
+  {
+    id: '8ea5fc07-bda7-4ef1-a7d9-0375eb3960e5',
+    correctAnswer: true,
+    question: 'Python é uma linguagem de programação orientada a eventos.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '4ae36f65-5950-4c60-a9b0-1de902fb6488',
+    correctAnswer: false,
+    question: 'Python é uma linguagem compilada antes da execução.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '809b9e29-5578-4efc-981b-ed1c5036e41b',
+    correctAnswer: true,
+    question:
+      'Python pode ser utilizado tanto no lado do cliente (navegador) quanto no lado do servidor (Node.js).',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '1cbbdc17-bd52-44ae-8bbc-28763e976950',
+    correctAnswer: true,
+    question:
+      'Python é amplamente utilizado no desenvolvimento de aplicações web interativas.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+
+  // Level 2
+  {
+    id: '6a70aef5-9089-49eb-bb10-dec806917424',
+    correctAnswer: true,
+    question:
+      'Variáveis em Python podem ser atualizadas após a sua declaração.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '08b0a628-c20f-49fb-b818-58668f10e344',
+    correctAnswer: true,
+    question:
+      'Em Python, o tipo de uma variável pode ser alterado apos a atribuição do primeiro valor.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '62cba724-448c-4dbc-9aba-8450377d123f',
+    correctAnswer: false,
+    question:
+      'Em Python, existem constantes e elas sao imutáveis e declaradas com o nome da variável em letras maiúsculas.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 export const module1CodeCompletionMiniGames: CodeCompletionMiniGame[] = [
+  /**
+   * JavaScript
+   */
+
   // Level 2: Variáveis e constantes
   //
   ...[
@@ -127,11 +212,39 @@ export const module1CodeCompletionMiniGames: CodeCompletionMiniGame[] = [
     },
   ],
   //end Level 2;
+
+  /**
+   * Python
+   */
+
+  {
+    id: 'ffc83078-6467-496d-aef8-943a1237dc04',
+    code: `\n// Declaração de variáveis\nnome _20_ "João"\n\nprint(nome) // João`,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 export const module1CodeOrderingMiniGames: CodeOrderingMiniGame[] = [
+  /**
+   * JavaScript
+   */
   {
     id: '32eab195-6ca4-450f-ada0-6f89d5395963',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+
+  /**
+   * Python
+   */
+  {
+    id: '5f545f25-9a55-43d9-83f3-3edb56701997',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '4f092c07-c6b9-4e58-8167-f7e9813a9532',
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -179,10 +292,63 @@ export const module1CodeOrderingMiniGameOptions: CodeOrderingMiniGameOption[] =
       createdAt: new Date(),
       updatedAt: new Date(),
     },
+
+    // Python
+    {
+      id: '67cf4c7c-377b-4075-b996-84fb25106924',
+      order: 0,
+      codeOrderingMiniGameId: '5f545f25-9a55-43d9-83f3-3edb56701997',
+      content: 'name',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '0401caac-dadd-4a1d-891c-188a98d006f1',
+      order: 1,
+      codeOrderingMiniGameId: '5f545f25-9a55-43d9-83f3-3edb56701997',
+      content: '=',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '479a2e96-841e-45a7-a5ee-53424c0c1ce2',
+      order: 2,
+      codeOrderingMiniGameId: '5f545f25-9a55-43d9-83f3-3edb56701997',
+      content: '"João"',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: 'f7b3ee6d-cd15-495e-8122-2190d8cff53a',
+      order: 0,
+      codeOrderingMiniGameId: '4f092c07-c6b9-4e58-8167-f7e9813a9532',
+      content: 'name',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '78aaa959-2648-4842-89c2-f8a9f5d74c12',
+      order: 1,
+      codeOrderingMiniGameId: '4f092c07-c6b9-4e58-8167-f7e9813a9532',
+      content: '=',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: '29d87295-31c4-45b3-8ef2-4b7d37313f4b',
+      order: 2,
+      codeOrderingMiniGameId: '4f092c07-c6b9-4e58-8167-f7e9813a9532',
+      content: '"João"',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ];
 
 export const module1CodeCompletionMiniGameOptions: CodeCompletionMiniGameOption[] =
   [
+    /**
+     * JavaScript
+     */
     // Code Completion - 1 (6e2d5644-8c68-427c-8cfb-02af7580ec31)
     ...[
       {
@@ -272,10 +438,63 @@ export const module1CodeCompletionMiniGameOptions: CodeCompletionMiniGameOption[
       },
     ],
     //end Code Completion - 2;
+
+    /**
+     * Python
+     */
+
+    // Code Completion - 1 (ffc83078-6467-496d-aef8-943a1237dc04)
+    ...[
+      {
+        id: '6eb4c629-1e6c-447f-a66e-42c5be2da5a8',
+        codeCompletionMiniGameId: 'ffc83078-6467-496d-aef8-943a1237dc04',
+        content: ':=',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '25cab3f8-8e1d-44cc-8a33-8c433e46f76c',
+        codeCompletionMiniGameId: 'ffc83078-6467-496d-aef8-943a1237dc04',
+        content: '==',
+        isCorrect: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '990c1143-f516-478e-84a5-8340976e7100',
+        codeCompletionMiniGameId: 'ffc83078-6467-496d-aef8-943a1237dc04',
+        content: '-',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 'b35e806d-38c6-4654-becb-003c0c5bf95a',
+        codeCompletionMiniGameId: 'ffc83078-6467-496d-aef8-943a1237dc04',
+        content: '=',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '5f25ddf0-0445-4d56-8ec1-1269ccfc21a1',
+        codeCompletionMiniGameId: 'ffc83078-6467-496d-aef8-943a1237dc04',
+        content: '<-',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ],
+    //end Code Completion - 1;
   ];
 
 // Módulo 1: Variáveis e Tipos de Dados em JavaScript
 export const module1MiniGames: MiniGame[] = [
+  /**
+   * JavaScript
+   */
+
   // Level 1: O que é o javascript
   //
   ...([
@@ -460,4 +679,156 @@ export const module1MiniGames: MiniGame[] = [
   //
   ...([] as MiniGame[]),
   //end Level 3;
+
+  /**
+   * Python
+   */
+  // Level 1.1 Introdução ao Python
+  ...([
+    {
+      id: 'ce7b34b4-5f6d-4d65-9177-13210c792fde',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: null,
+      type: 'MARKDOWN',
+      levelId: levels[26].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      markdownMiniGameId: module1MarkdownMiniGames[0].id,
+      orderNumber: 0,
+    },
+    {
+      id: '3bb2b126-268d-43aa-8fdd-5b061484fc43',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: '5f545f25-9a55-43d9-83f3-3edb56701997',
+      trueFalseMiniGameId: null,
+      type: 'CODE_ORDERING',
+      levelId: levels[26].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 1,
+    },
+    {
+      id: '1e6bd0cb-13b3-4493-8032-d7872116cf42',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      type: 'TRUE_FALSE',
+      trueFalseMiniGameId: '8ea5fc07-bda7-4ef1-a7d9-0375eb3960e5',
+      levelId: levels[26].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      markdownMiniGameId: null,
+      orderNumber: 2,
+    },
+    {
+      id: '992f1963-b315-4d26-a23f-696ebcd74f09',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: '4ae36f65-5950-4c60-a9b0-1de902fb6488',
+      markdownMiniGameId: null,
+      type: 'TRUE_FALSE',
+      levelId: levels[26].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 3,
+    },
+    {
+      id: '5aa3dc7c-54fd-4b88-978d-4a492cf7eec0',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: '809b9e29-5578-4efc-981b-ed1c5036e41b',
+      markdownMiniGameId: null,
+      type: 'TRUE_FALSE',
+      levelId: levels[26].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 4,
+    },
+    {
+      id: '9b948d01-5aae-4207-84d2-6e9fa46284d5',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: '1cbbdc17-bd52-44ae-8bbc-28763e976950',
+      markdownMiniGameId: null,
+      type: 'TRUE_FALSE',
+      levelId: levels[26].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 5,
+    },
+  ] as MiniGame[]),
+
+  ...([
+    {
+      id: '8e07d542-3d07-4fe9-9029-1816772e85ed',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: null,
+      markdownMiniGameId: '0964fab1-3956-4035-b299-2ff1083cab78',
+      type: 'MARKDOWN',
+      levelId: levels[27].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 0,
+    },
+    {
+      id: '8b608810-3c42-4bf4-a3d4-4f1720a59973',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: '6a70aef5-9089-49eb-bb10-dec806917424',
+      markdownMiniGameId: null,
+      type: 'TRUE_FALSE',
+      levelId: levels[27].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 1,
+    },
+    {
+      id: '8ae32219-feab-4a6f-a85c-3bae2e0e439f',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: '08b0a628-c20f-49fb-b818-58668f10e344',
+      markdownMiniGameId: null,
+      type: 'TRUE_FALSE',
+      levelId: levels[27].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 2,
+    },
+    {
+      id: 'ae0b48bf-7ec6-49dd-935f-a424f3d0b691',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: '4f092c07-c6b9-4e58-8167-f7e9813a9532',
+      trueFalseMiniGameId: null,
+      type: 'CODE_ORDERING',
+      levelId: levels[27].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 3,
+    },
+    {
+      id: 'cf8fd007-4f00-4ae9-b894-77e9691f556c',
+      codeCompletionMiniGameId: null,
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: '62cba724-448c-4dbc-9aba-8450377d123f',
+      markdownMiniGameId: null,
+      type: 'TRUE_FALSE',
+      levelId: levels[27].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 4,
+    },
+    {
+      id: '1ba5e9eb-8ffc-43dc-a8ab-d4d7c299e487',
+      codeCompletionMiniGameId: 'ffc83078-6467-496d-aef8-943a1237dc04',
+      codeOrderingMiniGameId: null,
+      trueFalseMiniGameId: null,
+      markdownMiniGameId: null,
+      type: 'CODE_COMPLETION',
+      levelId: levels[27].id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      orderNumber: 5,
+    },
+  ] as MiniGame[]),
 ];

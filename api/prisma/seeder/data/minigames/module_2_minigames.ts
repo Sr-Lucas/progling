@@ -15,9 +15,18 @@ export const module2MarkDownMiniGames: MarkdownMiniGame[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+  {
+    id: 'b7438ad7-e4ad-46de-927e-dc69a33ac408',
+    markdown: module2Mds[1],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 export const module2CodeCompletionMiniGames: CodeCompletionMiniGame[] = [
+  /**
+   * JavaScript
+   */
   {
     id: '6256133f-a0cb-4fec-b25c-520595ddf884',
     code: `\n const age = 18;\n\n _20_ (age < 18) {\n   console.log('Você é menor de idade.');\n }\n\n`,
@@ -30,10 +39,36 @@ export const module2CodeCompletionMiniGames: CodeCompletionMiniGame[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+
+  /**
+   * Python
+   */
+  {
+    id: 'b9fef292-a02a-495b-9bc1-2a479a8b1eb1',
+    code: `\n const age = 18;\n\n _20_ (age < 18):\n   console.log('Você é menor de idade.');\n\n`,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '91c350ef-8784-4270-ad95-f17b8ec8daf0',
+    code: `\n const age = 18;\n\n if (age < 18):\n   console.log('Você é menor de idade.');\n _20_:\n   console.log('Você é maior de idade.');\n\n`,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '9a391560-2d48-4089-b564-d19bef94d5c9',
+    code: `\n const age = 18;\n\n if (age < 18):\n   console.log('Você é menor de idade.');\n elif (age > 18):\n   console.log('Você é maior de idade.');\n _20_:\n   console.log('Você tem 18 anos.');\n\n`,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 export const module2CodeCompletionMiniGameOptions: CodeCompletionMiniGameOption[] =
   [
+    /**
+     * Javascript
+     */
+
     // Code Completion - 1 (6256133f-a0cb-4fec-b25c-520595ddf884)
     ...[
       {
@@ -123,9 +158,153 @@ export const module2CodeCompletionMiniGameOptions: CodeCompletionMiniGameOption[
       },
     ],
     //end Code Completion - 2;
+
+    /**
+     * Python
+     */
+
+    // Code Completion - 1 (b9fef292-a02a-495b-9bc1-2a479a8b1eb1)
+    ...[
+      {
+        id: '1f507b24-824c-4f46-8e94-66948be79b05',
+        codeCompletionMiniGameId: 'b9fef292-a02a-495b-9bc1-2a479a8b1eb1',
+        content: 'elif',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 'f7c54437-3fb7-46a8-8525-a31dba240a43',
+        codeCompletionMiniGameId: 'b9fef292-a02a-495b-9bc1-2a479a8b1eb1',
+        content: 'else',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 'f74da997-ef74-490f-9935-0035830d9721',
+        codeCompletionMiniGameId: 'b9fef292-a02a-495b-9bc1-2a479a8b1eb1',
+        content: 'while',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '5f885054-a24f-49aa-be3a-59ee9371e2e4',
+        codeCompletionMiniGameId: 'b9fef292-a02a-495b-9bc1-2a479a8b1eb1',
+        content: 'or',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '0ff1abed-125b-4657-82c7-3b6848e4d682',
+        codeCompletionMiniGameId: 'b9fef292-a02a-495b-9bc1-2a479a8b1eb1',
+        content: 'if',
+        isCorrect: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ],
+    //end Code Completion - 1;
+
+    // Code Completion - 2 (91c350ef-8784-4270-ad95-f17b8ec8daf0)
+
+    ...[
+      {
+        id: '526eea41-62ad-4b60-a26a-4c0f576233d7',
+        codeCompletionMiniGameId: '91c350ef-8784-4270-ad95-f17b8ec8daf0',
+        content: 'elif',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '21b5aa17-279a-4d1b-a4a0-e86d4ee94fb6',
+        codeCompletionMiniGameId: '91c350ef-8784-4270-ad95-f17b8ec8daf0',
+        content: 'else',
+        isCorrect: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 'd0cfc832-2e1b-4eaa-b4af-ec50a281b53b',
+        codeCompletionMiniGameId: '91c350ef-8784-4270-ad95-f17b8ec8daf0',
+        content: 'while',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '19dbf3a1-0354-4156-bd3a-e290592e1d8c',
+        codeCompletionMiniGameId: '91c350ef-8784-4270-ad95-f17b8ec8daf0',
+        content: 'or',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '92071dc2-26f4-4ea5-8642-904d2ceee8df',
+        codeCompletionMiniGameId: '91c350ef-8784-4270-ad95-f17b8ec8daf0',
+        content: 'if',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ],
+    //end Code Completion - 2;
+
+    // Code Completion - 3 (9a391560-2d48-4089-b564-d19bef94d5c9)
+
+    ...[
+      {
+        id: 'd8afcd6a-b648-4d64-85a4-bf1905a0ada9',
+        codeCompletionMiniGameId: '9a391560-2d48-4089-b564-d19bef94d5c9',
+        content: 'elif',
+        isCorrect: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '04837e78-5aaf-4116-9aff-265267afddce',
+        codeCompletionMiniGameId: '9a391560-2d48-4089-b564-d19bef94d5c9',
+        content: 'else',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 'bffc5f24-9eb8-4f6d-841e-2178a3eaa174',
+        codeCompletionMiniGameId: '9a391560-2d48-4089-b564-d19bef94d5c9',
+        content: 'while',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '03c0b3a5-a269-4848-9fb4-ae49c761d830',
+        codeCompletionMiniGameId: '9a391560-2d48-4089-b564-d19bef94d5c9',
+        content: 'or',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '15f20a5a-4e91-4e9d-8160-252bc8c8e7da',
+        codeCompletionMiniGameId: '9a391560-2d48-4089-b564-d19bef94d5c9',
+        content: 'if',
+        isCorrect: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ],
+    //end Code Completion - 3;
   ];
 
 export const module2TrueFalseMiniGames: TrueFalseMiniGame[] = [
+  /**
+   * Javascript
+   */
   {
     id: 'e427c00c-000c-4c1d-ba1e-d8571a916ffb',
     correctAnswer: true,
@@ -150,9 +329,40 @@ export const module2TrueFalseMiniGames: TrueFalseMiniGame[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+
+  /**
+   * Python
+   */
+  {
+    id: '4ea1c5a7-4baf-46b7-931d-e205fb0a25d4',
+    correctAnswer: true,
+    question:
+      'Condicionais são usadas para executar um bloco de código se uma condição for verdadeira.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: 'cde7097b-096a-4bed-a820-00c0cfd98feb',
+    correctAnswer: true,
+    question:
+      'Condicionais falsas executam um bloco de código precedido por `else`.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '035310fd-410f-42be-83fa-f1724b1e0231',
+    correctAnswer: false,
+    question: '`elif` não é uma palavra reservada válida em Python.',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 export const module2MiniGames: MiniGame[] = [
+  /**
+   * JavaScript
+   */
+
   // Level 1: Declarações condicionais (if, else if, else)
   //
   {
@@ -240,4 +450,94 @@ export const module2MiniGames: MiniGame[] = [
     orderNumber: 0,
   },
   // end Level 1;
+
+  /**
+   * Python
+   */
+
+  // Level 1: Declarações condicionais (if, elif, else)
+  {
+    id: 'baaa3c74-0e8e-49b8-bdcf-00dc044da226',
+    codeCompletionMiniGameId: null,
+    trueFalseMiniGameId: null,
+    codeOrderingMiniGameId: null,
+    markdownMiniGameId: 'b7438ad7-e4ad-46de-927e-dc69a33ac408',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    levelId: levels[28].id,
+    type: 'MARKDOWN',
+    orderNumber: 0,
+  },
+  {
+    id: '399ee3aa-9bdb-4c3e-bffa-ed0963f8ee3b',
+    codeCompletionMiniGameId: null,
+    trueFalseMiniGameId: '4ea1c5a7-4baf-46b7-931d-e205fb0a25d4',
+    codeOrderingMiniGameId: null,
+    markdownMiniGameId: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    levelId: levels[28].id,
+    type: 'TRUE_FALSE',
+    orderNumber: 1,
+  },
+  {
+    id: '08e4ab6f-fb05-4847-86fb-64b95ec9ae2b',
+    codeCompletionMiniGameId: 'b9fef292-a02a-495b-9bc1-2a479a8b1eb1',
+    trueFalseMiniGameId: null,
+    codeOrderingMiniGameId: null,
+    markdownMiniGameId: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    levelId: levels[28].id,
+    type: 'CODE_COMPLETION',
+    orderNumber: 2,
+  },
+  {
+    id: '4172ab26-0aa6-4fb6-9958-e26e1b1c0217',
+    codeCompletionMiniGameId: '91c350ef-8784-4270-ad95-f17b8ec8daf0',
+    trueFalseMiniGameId: null,
+    codeOrderingMiniGameId: null,
+    markdownMiniGameId: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    levelId: levels[28].id,
+    type: 'CODE_COMPLETION',
+    orderNumber: 3,
+  },
+  {
+    id: '7935a456-7574-489b-84e0-28af14c60151',
+    codeCompletionMiniGameId: '9a391560-2d48-4089-b564-d19bef94d5c9',
+    trueFalseMiniGameId: null,
+    codeOrderingMiniGameId: null,
+    markdownMiniGameId: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    levelId: levels[28].id,
+    type: 'CODE_COMPLETION',
+    orderNumber: 4,
+  },
+  {
+    id: 'd71e12d9-647f-4426-a7bf-a33a61e4261c',
+    codeCompletionMiniGameId: null,
+    trueFalseMiniGameId: 'cde7097b-096a-4bed-a820-00c0cfd98feb',
+    codeOrderingMiniGameId: null,
+    markdownMiniGameId: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    levelId: levels[28].id,
+    type: 'TRUE_FALSE',
+    orderNumber: 5,
+  },
+  {
+    id: '42f5b031-bcff-463a-b390-c67e40d49cc2',
+    codeCompletionMiniGameId: null,
+    trueFalseMiniGameId: '035310fd-410f-42be-83fa-f1724b1e0231',
+    codeOrderingMiniGameId: null,
+    markdownMiniGameId: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    levelId: levels[28].id,
+    type: 'TRUE_FALSE',
+    orderNumber: 6,
+  },
 ];

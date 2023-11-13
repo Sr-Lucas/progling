@@ -120,4 +120,84 @@ Além disso, quando você declara uma variável com \`let\`, ela não é inicial
 
 Em geral, é recomendável usar \`let\` em vez de \`var\`, pois o escopo de bloco proporcionado por \`let\` é mais seguro e alinha-se melhor com as melhores práticas de programação moderna. O uso de \`var\` está se tornando menos comum em código JavaScript atual.
 `,
+  `
+  # Python
+
+Python é uma linguagem de programação de alto nível amplamente utilizada em diversos campos, incluindo desenvolvimento web, análise de dados, automação e inteligência artificial. Sua simplicidade e legibilidade tornam Python uma escolha popular entre programadores de todos os níveis de experiência.
+
+## Características Principais:
+
+- **Linguagem Interpretada:** Python é uma linguagem interpretada, o que significa que o código fonte é executado linha a linha, sem a necessidade de compilação prévia.
+
+- **Tipagem Dinâmica:** Python é uma linguagem de tipagem dinâmica, o que significa que as variáveis podem mudar de tipo durante a execução do programa.
+
+- **Orientação a Objetos:** Python suporta programação orientada a objetos, permitindo a criação de classes e objetos para modelar dados e funcionalidades.
+
+- **Multiplataforma:** Python é executado em várias plataformas, incluindo Windows, macOS e Linux, tornando-o uma escolha versátil para desenvolvimento.
+
+## Sintaxe Básica:
+
+\`\`\`python
+# Declaração de variáveis
+nome = "Maria"
+idade = 25
+
+# Função simples
+def saudacao():
+    print("Olá, mundo!")
+
+# Estrutura condicional
+if idade >= 18:
+    print("Você é maior de idade.")
+else:
+    print("Você é menor de idade.")
+
+# Estrutura de repetição
+for i in range(5):
+    print("Iteração", i)
+    \`\`\`
+
+# Ecossistema Python:
+* Bibliotecas e Frameworks: Python possui uma vasta coleção de bibliotecas, como NumPy e Pandas para análise de dados, e frameworks como Django e Flask para desenvolvimento web.
+* Jupyter Notebook: Uma ferramenta popular para desenvolvimento interativo e visualização de dados.
+* Comunidade Ativa: A comunidade Python é muito ativa e oferece suporte e recursos abundantes para programadores.
+* Python é uma linguagem poderosa e versátil, adequada para uma ampla gama de aplicações, desde desenvolvimento web até inteligência artificial. É uma linguagem de fácil aprendizado e é amplamente utilizada em todo o mundo.
+`,
+  `
+  # Variáveis e Constantes em Python
+
+Python é uma linguagem de programação de alto nível que permite o armazenamento e manipulação de dados por meio de variáveis e constantes. Variáveis são usadas para armazenar informações que podem ser modificadas durante a execução de um programa, enquanto as constantes são usadas para representar valores imutáveis. Vamos explorar esses conceitos em detalhes.
+
+## Variáveis em Python
+
+Uma **variável** é um espaço de memória usado para armazenar dados. Em Python, declarar uma variável é simples. Aqui estão as principais características das variáveis em Python:
+
+- **Declaração de Variáveis:** Para declarar uma variável em Python, você atribui um valor a um nome. Por exemplo:
+  \`\`\`python
+  nome = "Alice"
+  idade = 30
+  saldo_conta = 1000.50
+  \`\`\`
+
+Tipos de Dados: As variáveis em Python podem armazenar diferentes tipos de dados, como strings, números inteiros, números de ponto flutuante, booleanos, listas, dicionários e outros tipos complexos.
+
+Nomeação de Variáveis: Os nomes de variáveis devem começar com uma letra ou sublinhado (_), seguido de letras, números ou sublinhados. Não podem começar com números ou conter espaços.
+
+Dinamicamente Tipada: Python é uma linguagem de tipagem dinâmica, o que significa que o tipo de dado associado a uma variável pode mudar durante a execução do programa.
+
+Escopo de Variáveis: Variáveis podem ter escopo local (limitadas a uma função ou bloco de código) ou escopo global (acessíveis em todo o programa).
+  
+## Constantes em Python
+
+Em Python, não existem constantes no sentido estrito, como em algumas outras linguagens de programação onde você pode definir uma variável como constante e ela não pode ser modificada depois de ter sido atribuída um valor. Em Python, todas as variáveis podem ser reatribuídas com novos valores.
+
+No entanto, é uma convenção em Python usar letras maiúsculas para nomear variáveis que não devem ser alteradas. Isso serve como um sinal para outros programadores de que a variável deve ser tratada como uma constante e não ser modificada ao longo do programa. Por exemplo:
+
+\`\`\`python
+PI = 3.14159
+GRAVIDADE = 9.81
+\`\`\`
+
+Embora seja possível reatribuir um novo valor a essas variáveis, a convenção sugere que elas sejam tratadas como constantes. Lembre-se de que essa convenção é uma orientação e não uma restrição imposta pelo Python, o que significa que o interpretador Python não impedirá a reatribuição de valores a essas variáveis.
+`,
 ];

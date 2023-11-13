@@ -28,30 +28,45 @@ export class SeedDevelopment {
     });
 
     // CREATE programmingLanguages
+    console.log('Languages: --------------------------------------');
+    console.log(programmingLanguages);
+    console.log('Languages: --------------------------------------');
     await this.prisma.programmingLanguage.createMany({
       data: programmingLanguages,
       skipDuplicates: true,
     });
 
     // CREATE modules
+    console.log('Modules: --------------------------------------');
+    console.log(modules);
+    console.log('Modules: --------------------------------------');
     await this.prisma.module.createMany({
       data: modules,
       skipDuplicates: true,
     });
 
     // CREATE levels
+    console.log('Levels: --------------------------------------');
+    console.log(levels);
+    console.log('Levels: --------------------------------------');
     await this.prisma.level.createMany({
       data: levels,
       skipDuplicates: true,
     });
 
     // CREATE trueFalseMiniGames
+    console.log('TrueFalse: --------------------------------------');
+    console.log(trueFalseMiniGames);
+    console.log('TrueFalse: --------------------------------------');
     await this.prisma.trueFalseMiniGame.createMany({
       data: trueFalseMiniGames,
       skipDuplicates: true,
     });
 
     // CREATE codeCompletionMiniGames
+    console.log('CodeCompletion: --------------------------------------');
+    console.log(codeCompletionMiniGames);
+    console.log('CodeCompletion: --------------------------------------');
     await this.prisma.codeCompletionMiniGame.createMany({
       data: codeCompletionMiniGames,
       skipDuplicates: true,
