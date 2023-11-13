@@ -51,7 +51,6 @@ CREATE TABLE `Module` (
     `programmingLanguageId` VARCHAR(191) NOT NULL,
     `orderNumber` INTEGER NOT NULL DEFAULT 0,
 
-    UNIQUE INDEX `Module_orderNumber_key`(`orderNumber`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
