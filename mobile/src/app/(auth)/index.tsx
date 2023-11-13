@@ -55,7 +55,7 @@ export default function Auth() {
           </Text>
         </View>
 
-        <TouchableOpacity className="h-12 w-72 bg-white flex flex-row items-center justify-center rounded-lg mb-5">
+        {/* <TouchableOpacity className="h-12 w-72 bg-white flex flex-row items-center justify-center rounded-lg mb-5">
           <Image source={Images.google} className="h-6 w-6 absolute left-5" />
           <Text weight="medium">Google</Text>
         </TouchableOpacity>
@@ -63,7 +63,7 @@ export default function Auth() {
         <TouchableOpacity className="h-12 w-72 bg-white flex flex-row items-center justify-center rounded-lg mb-5">
           <Image source={Images.apple} className="h-6 w-6 absolute left-5" />
           <Text weight="medium">Apple</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <Link href={'/(auth)/sign-in'} asChild>
           <TouchableOpacity className="opacity-80 h-12 w-72 bg-white flex flex-row items-center justify-center rounded-lg">
